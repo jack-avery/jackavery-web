@@ -1,0 +1,5 @@
+---
+- name: Deploy containers to host
+  hosts: prod
+  roles:
+    - deploy

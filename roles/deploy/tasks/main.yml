@@ -1,0 +1,35 @@
+---
+- name: Load secrets
+  ansible.builtin.include_tasks: secrets.yml
+
+- name: Login to DockerHub
+  community.docker.docker_login:
+    username: "{{ dockerhub.username }}"
+    password: "{{ dockerhub.password }}"
+
+- name: Pull latest
+  shell: docker login && docker pull jackavery/jackavery-web:latest
+
+- name: Transfer docker-compose.yml
+  copy: src=docker-compose.yml dest=~/ mode=0777
+
+- name: Transfer nginx.conf
+  copy: src=nginx.conf dest=~/data/nginx/ mode=0777
+
+- name: Create back-end config directory
+  ansible.builtin.file:
+    path: /web/back
+    state: directory
+    mode: 0755
+
+- name: Create config.yml
+  ansible.builtin.template:
+    src: config.yml.j2
+    dest: /web/back/config.yml
+    mode: 0755
+
+- name: Compose down
+  shell: docker-compose down
+
+- name: Compose up
+  shell: docker-compose up -d --quiet-pull

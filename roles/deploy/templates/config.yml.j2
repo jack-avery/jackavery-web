@@ -1,0 +1,12 @@
+# define in group_vars/all.yml
+
+endpoints:
+  hosts:
+    hosts:
+{% for host in endpoints.hosts.hosts %}
+      - ip: "{{ host.ip }}"
+        port: {{ host.port }}
+        rcon_pass: "{{ host.rcon_pass }}"
+        include_password: {{ host.include_password }}
+{% endfor %}
+    refresh: {{ endpoints.hosts.refresh }}

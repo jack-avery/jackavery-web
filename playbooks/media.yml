@@ -1,0 +1,5 @@
+---
+- name: Copy media in role files to front-end
+  hosts: production
+  roles:
+    - media

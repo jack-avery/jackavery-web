@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <link rel="stylesheet" href="/css/style.css" />
+        <script src="/js/script.js"></script>
+        <meta charset="utf-8" />
+        <link rel="shortcut icon" href="/favicon.ico" />
+        <meta name="viewport" content="initial-scale=1, width=device-width" />
+        <link rel="manifest" href="/manifest.json" />
+        <title>jack avery</title>
+    </head>
+    <body>
+        <header>
+            <h1 class="pagetitle">jack avery</h1>
+            
+            <div class="iconbar">
+                <a target="_blank" href="https://github.com/jack-avery">
+                    <svg class="icon" viewBox="0 0 24 24">
+                        <path d="M12 1.27a11 11 0 00-3.48 21.46c.55.09.73-.28.73-.55v-1.84c-3.03.64-3.67-1.46-3.67-1.46-.55-1.29-1.28-1.65-1.28-1.65-.92-.65.1-.65.1-.65 1.1 0 1.73 1.1 1.73 1.1.92 1.65 2.57 1.2 3.21.92a2 2 0 01.64-1.47c-2.47-.27-5.04-1.19-5.04-5.5 0-1.1.46-2.1 1.2-2.84a3.76 3.76 0 010-2.93s.91-.28 3.11 1.1c1.8-.49 3.7-.49 5.5 0 2.1-1.38 3.02-1.1 3.02-1.1a3.76 3.76 0 010 2.93c.83.74 1.2 1.74 1.2 2.94 0 4.21-2.57 5.13-5.04 5.4.45.37.82.92.82 2.02v3.03c0 .27.1.64.73.55A11 11 0 0012 1.27"></path>
+                    </svg>
+                </a>
+                <a target="_blank" href="https://ko-fi.com/raspy">
+                    <svg class="icon" viewBox="0 0 24 24">
+                        <path d="M1 11h4v11H1zm15-7.75C16.65 2.49 17.66 2 18.7 2 20.55 2 22 3.45 22 5.3c0 2.27-2.91 4.9-6 7.7-3.09-2.81-6-5.44-6-7.7C10 3.45 11.45 2 13.3 2c1.04 0 2.05.49 2.7 1.25zM20 17h-7l-2.09-.73.33-.94L13 16h2.82c.65 0 1.18-.53 1.18-1.18 0-.49-.31-.93-.77-1.11L8.97 11H7v9.02L14 22l8.01-3c-.01-1.1-.9-2-2.01-2z"></path>
+                    </svg>
+                </a>
+            </div>
+            <div class="navbar">
+                <button class="navtab" onclick="tab('about')" id="aboutnav">about</button>
+                <button class="navtab" onclick="tab('projects')" id="projectsnav">projects</button>
+                <button class="navtab" onclick="window.location.href='/tf2'" id="tf2nav">tf2 servers</button>
+            </div>
+        </header>
+
+        <div class="vertical-divider"></div>
+
+        <div id="abouttab" class="tab">
+            <p>my name is jack <span class="tcolors">"raspy"</span> avery and i'm an avid python developer with additional experience in:</p>
+            
+            <ul>
+                <li>cybersecurity and penetration testing with TRAs</li>
+                <li>full-stack web development using react/materialui 5, django, and RDBMS (postgreSQL/mySQL)</li>
+                <li>CI/CD cloud deployment with AWS using ansible and docker</li>
+            </ul>
+
+            <p>
+            my projects are visible under the <a href="#projects">projects</a> tab.<br/>
+            i like to contribute to open-source projects.
+            i plan to continue creating fun and/or helpful open-source applications for people to use or experiment with.
+            </p>
+        </div>
+
+        <div id="projectstab" class="tab">
+            <h3><a target="_blank" href="https://github.com/jack-avery/rasbot">rasbot</a></h3>
+
+            <img src="media/img/projects/rasbot.png" />
+
+            <p>
+            <strong>rasbot</strong> is an <strong>open-source</strong>, <strong>self-hosted</strong> twitch bot alternative made in <strong>python</strong> with a modular design,
+            allowing users to extend the base design with their own python code using manifests for automatic dependency installation and updates.<br/>
+            currently, some <strong>osu!</strong> twitch streamers use rasbot for in-game integrations, such as:
+            </p>
+            <ul>
+                <li><a target="_blank" href="https://www.twitch.tv/raspy_on_osu">myself</a></li>
+                <li><a target="_blank" href="https://www.twitch.tv/lifeline">lifeline</a></li>
+                <li><a target="_blank" href="https://www.twitch.tv/umbre">umbre</a></li>
+            </ul>
+
+            <p><a target="_blank" href="https://discord.gg/qpyT4zx">rasbot official discord</a></p>
+
+            <div class="small-vertical-divider"></div>
+
+            <h3><a target="_blank" href="https://github.com/jack-avery/rinstagib">rInstagib</a></h3>
+
+            <iframe type="text/html" width="400" height="225" allow="fullscreen" src="https://www.youtube.com/embed/6GSMJ-zzzig"></iframe>
+
+            <p>
+            <strong>rInstagib</strong> is a <strong>custom gamemode</strong> for <strong>Team Fortress 2</strong>, emulating high-octane gameplay from <strong>Quake</strong>.<br/>
+            currently, i am administrating a small network of servers running this gamemode using
+            <a target="_blank" href="https://github.com/jack-avery/rinstagib-server/tree/prod">ansible playbooks</a>.
+            </p>
+
+            <p><a target="_blank" href="https://discord.gg/V5Z29SXtsY">rInstagib official discord</a></p>
+
+            <div class="small-vertical-divider"></div>
+
+            <h3><a target="_blank" href="https://uncletopia.com/">uncletopia</a></h3>
+
+            <img src="media/img/projects/uncletopia.png" />
+
+            <p>
+            <strong>uncletopia</strong> is one of the largest <strong>server networks</strong> for <strong>Team Fortress 2</strong>, providing an improved vanilla experience safe from cheaters.<br/>
+            currently, i am a community moderator, as well as aiding the lead developer in maintaining the servers'
+            <a target="_blank" href="https://github.com/leighmacdonald/uncletopia/">ansible playbooks</a>
+            and
+            <a target="_blank" href="https://github.com/leighmacdonald/uncletopia/tree/master/roles/sourcemod/files/addons/sourcemod/scripting">sourcemod plugins</a>.
+            </p>
+
+            <p><a target="_blank" href="https://discord.gg/caQKCWFMrN">uncletopia official discord</a></p>
+
+            <div class="small-vertical-divider"></div>
+
+            <h3><a target="_blank" href="https://github.com/jack-avery/r2loctool">r2loctool</a></h3>
+
+            <p>
+            <strong>r2loctool</strong> is a localization tool for <strong>Risk of Rain 2</strong> to replace the pickup tooltips with the more informative entries from the logbook,
+            <strong>no mod loader (e.g. r2modman) required</strong>.
+            </p>
+
+            <div class="small-vertical-divider"></div>
+
+            <h3><a target="_blank" href="https://github.com/jack-avery/utdemofinder">utdemofinder</a></h3>
+
+            <p>
+            <strong>utdemofinder</strong> is a utility tool for <strong>uncletopia</strong> moderators to provide a simple user interface for moderators
+            to search for SourceTV demos for specific users, including games played with other users.
+            </p>
+
+            <div class="small-vertical-divider"></div>
+
+            <h3><a target="_blank" href="https://steamcommunity.com/sharedfiles/filedetails/?id=2898451893">noita playable starts</a></h3>
+
+            <p>
+            <strong>playable starts</strong>
+            <a target="_blank" href="https://github.com/jack-avery/playable-starts">(github source)</a>
+            is a mod for <strong>noita</strong> that prevents the player from spawning with a majority of "unplayable" loadouts.
+            </p>
+        </div>
+
+        <div class="vertical-divider"></div>
+
+        <footer>
+            <p id="c">
+                hosted on a <span class="tcolors">raspberry pi 400</span><br/>
+                <a target="_blank" href="https://github.com/jack-avery/jackavery-web">website source code</a>
+            </p>
+        </footer>
+    </body>
+</html>

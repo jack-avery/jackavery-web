@@ -1,0 +1,42 @@
+---
+- name: Delete old build
+  ansible.builtin.file:
+    path: ~/build
+    state: absent
+
+- name: Create build directory
+  ansible.builtin.file:
+    path: ~/build
+    state: directory
+    mode: "0755"
+
+- name: Copy build sources
+  ansible.builtin.synchronize:
+    src: ./
+    dest: ~/build/
+    archive: false
+    recursive: true
+    rsync_opts:
+      - "--exclude=node_modules"
+
+- name: Login to DockerHub
+  community.docker.docker_login:
+    username: "{{ dockerhub.username }}"
+    password: "{{ dockerhub.password }}"
+
+- name: Build image & upload
+  community.docker.docker_image:
+    name: jackavery/jackavery-web
+    tag: latest
+    source: build
+    force_tag: true
+    push: true
+    force_source: true
+    build:
+      nocache: true
+      pull: true
+      rm: true
+      dockerfile: Dockerfile
+      platform: linux/arm64/v8
+      path: ~/build/
+    state: present

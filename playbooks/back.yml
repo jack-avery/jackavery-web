@@ -1,0 +1,5 @@
+---
+- name: Build Rust binary and create image
+  hosts: prod
+  roles:
+    - back

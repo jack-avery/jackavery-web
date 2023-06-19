@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <link rel="stylesheet" href="./css/style.css" />
+        <script src="./js/404.js"></script>
+        <meta charset="utf-8" />
+        <link rel="shortcut icon" href="/favicon.ico" />
+        <meta name="viewport" content="initial-scale=1, width=device-width" />
+        <link rel="manifest" href="/manifest.json" />
+        <title>404 Not Found</title>
+    </head>
+    <body>
+        <header>
+            <h1 class="tcolors pagetitle">404</h1>
+
+            <div class="navbar">
+                <button class="navtab" onclick="window.location.href='/index.html'" id="aboutnav">go home...</button>
+            </div>
+        </header>
+
+        <div class="vertical-divider"></div>
+
+        <div id="abouttab" class="tab">
+            <p>
+            there's nothing here...
+            </p>
+
+            <iframe id="404video" type="text/html" width="400" height="225" allow="fullscreen" src=""></iframe>
+
+            <p>
+            have a random song.
+            </p>
+
+            <div class="navbar">
+                <button class="promptbutton" onclick="getNext()" id="prompt">give me another one!</button>
+            </div>
+        </div>
+
+        <div class="vertical-divider"></div>
+
+        <footer>
+            <p id="c">
+                hosted on a <span class="tcolors">raspberry pi 400</span><br/>
+                <a target="_blank" href="https://github.com/jack-avery/jackavery-web">website source code</a>
+            </p>
+        </footer>
+    </body>
+</html>

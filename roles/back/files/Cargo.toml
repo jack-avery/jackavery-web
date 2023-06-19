@@ -1,0 +1,29 @@
+[package]
+name = "raspyverse-back"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+futures = "0.3.28"
+lazy_static = "1.4.0"
+log = "0.4.19"
+regex = "1.8.4"
+rocket = { version = "=0.5.0-rc.3", features = ["json"] }
+serde = "1.0.164"
+serde_json = "1.0.96"
+serde_yaml = "0.9.21"
+thiserror = "1.0.40"
+tokio = { version = "1.28.2", features = [
+  "rt",
+  "rt-multi-thread",
+  "macros",
+  "time",
+  "net",
+] }
+sourcon = { git = "https://github.com/crescentrose/sourcon.git", rev = "d4b5786" }
+
+[[bin]]
+name = "main"
+path = "main.rs"

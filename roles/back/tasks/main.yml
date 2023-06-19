@@ -1,0 +1,35 @@
+---
+- name: Create build directory
+  ansible.builtin.file:
+    path: ~/build/raspyverse-back
+    state: directory
+    mode: "0755"
+
+- name: Copy build sources
+  ansible.builtin.synchronize:
+    src: "{{ role_path }}/files"
+    dest: ~/build/raspyverse-back
+    archive: false
+    recursive: true
+    rsync_opts:
+      - "--exclude=target"
+      - "--exclude=Cargo.lock"
+
+- name: Prune space before building
+  community.docker.docker_prune:
+    images: true
+    containers: true
+
+- name: Build image
+  community.docker.docker_image:
+    name: raspyverse-back
+    tag: latest
+    source: build
+    force_tag: true
+    force_source: true
+    build:
+      pull: true
+      dockerfile: Dockerfile
+      platform: linux/arm64/v8
+      path: ~/build/raspyverse-back/files
+    state: present

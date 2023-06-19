@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  nginx:
+    image: "jackavery/jackavery-web:latest"
+    restart: unless-stopped
+    volumes:
+      - ./data/nginx:/etc/nginx/conf.d
+      - ./data/certbot/conf:/etc/letsencrypt
+      - ./data/certbot/www:/var/www/certbot
+      - /web/media:/usr/share/nginx/html/media
+      - /web/fastdl:/usr/share/nginx/html/fastdl
+      - /web/log:/var/log/nginx
+    network_mode: "host"
+    command: "/bin/sh -c 'nginx -g \"daemon off;\"'"
+  rocket:
+    image: "raspyverse-back:latest"
+    restart: unless-stopped
+    volumes:
+      - /web/back/config.yml:/app/config.yml
+    ports:
+      - "8000:8000"
+  certbot:
+    image: "certbot/certbot:arm32v6-latest"
+    restart: unless-stopped
+    volumes:
+      - ./data/certbot/conf:/etc/letsencrypt
+      - ./data/certbot/www:/var/www/certbot
+    network_mode: "host"
+    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"

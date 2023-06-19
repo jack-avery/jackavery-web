@@ -1,0 +1,16 @@
+# ?
+.vscode
+
+# secrets
+.become_pass.sh
+.vault_pass.sh
+
+# rust output and .lock
+roles/back/files/target
+roles/back/files/Cargo.lock
+
+# local config.yml, for testing
+roles/back/files/config.yml
+
+# these could eventually include larger files, so i'm gitignoring it
+roles/media/files
