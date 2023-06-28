@@ -103,8 +103,8 @@ td
 .navbar
 {
     padding: 5px 0;
-    height: 24px;
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
 }
 
@@ -122,6 +122,8 @@ button
 {
     float: left;
     display: flex;
+    height: 24px;
+    margin: 1px 1px;
 }
 
 @keyframes navtab-select
