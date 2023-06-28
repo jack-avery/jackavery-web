@@ -28,11 +28,11 @@ html
 body
 {
     width: 90%;
-    max-width: 1040px;
+    max-width: 1080px;
     border-radius: 20px;
     background-color: rgb(14, 14, 14);
     background-size: 50vh 100vh;
-    padding: 20px;
+    padding-bottom: 10px;
     animation: body-fadein 0.75s ease forwards;
 }
 
@@ -52,14 +52,14 @@ body
 .vertical-divider
 {
     height: 1px;
-    margin: 5px 20px;
+    margin: 20px 20px;
     background-color: rgb(153, 153, 153)
 }
 
 .small-vertical-divider
 {
     height: 1px;
-    margin: 5px 20%;
+    margin: 20px 20%;
     background-color: rgb(153, 153, 153)
 }
 
@@ -196,6 +196,7 @@ button
     text-align:center;
     color:white;
     font-family: 'Source Code Pro', monospace;
+    margin: 0px 10px;
 }
 
 a
@@ -203,6 +204,7 @@ a
     color: hsl(240, 50%, 67%);
     font-weight: bold;
     transition: 0.5s;
+    margin: 0px 0px;
     text-decoration: none;
 }
 
