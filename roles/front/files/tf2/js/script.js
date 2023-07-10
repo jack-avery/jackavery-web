@@ -44,12 +44,12 @@ const listingsbody = `
 <tbody>
     <tr>
         <th>players</th>
-        <th>//</th>
-        <th>connect</th>
+        <th class="overflow">//</th>
+        <th class="overflow">connect</th>
         <th>//</th>
         <th>hostname</th>
-        <th>//</th>
-        <th>current map</th>
+        <th class="overflow">//</th>
+        <th class="overflow">current map</th>
     </tr>
     $listings
 </tbody>
@@ -58,12 +58,12 @@ const listingsbody = `
 const baselisting = `
 <tr>
     <td $occupied>$players/$maxplayers</td>
-    <td>//</td>
-    <td><button class="promptbutton" id="$connect" onclick="getConnectString('$connect')">copy</button></td>
+    <td class="overflow">//</td>
+    <td class="overflow"><button class="promptbutton" id="$connect" onclick="getConnectString('$connect')">copy</button></td>
     <td>//</td>
     <td $protected>$hostname</td>
-    <td>//</td>
-    <td>$map</td>
+    <td class="overflow">//</td>
+    <td class="overflow">$map</td>
 </tr>
 `
 
