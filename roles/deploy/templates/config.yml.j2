@@ -1,6 +1,8 @@
 # define in group_vars/all.yml
 
 endpoints:
+  rasbot:
+    webhook: "{{ endpoints.rasbot.webhook }}"
   hosts:
     hosts:
 {% for host in endpoints.hosts.hosts %}
