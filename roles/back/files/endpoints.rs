@@ -3,15 +3,16 @@ use serde::Serialize;
 use serde_yaml;
 
 pub mod hosts;
+pub mod rasbot;
 
 #[derive(Debug, Clone, Serialize)]
-pub struct ErrorMessage {
+pub struct BasicMessage {
     code: u16,
     message: String,
 }
 
-pub fn gen_error(code: u16, message: String) -> Json<ErrorMessage> {
-    Json(ErrorMessage { code, message })
+pub fn gen_msg(code: u16, message: String) -> Json<BasicMessage> {
+    Json(BasicMessage { code, message })
 }
 
 //
@@ -28,4 +29,5 @@ pub async fn init() {
     };
 
     hosts::init(cfg.clone()).await;
+    rasbot::init(cfg.clone()).await;
 }

@@ -1,4 +1,4 @@
-use crate::endpoints::{gen_error, ErrorMessage};
+use crate::endpoints::{gen_msg, BasicMessage};
 
 use serde::Serialize;
 use regex::Regex;
@@ -126,9 +126,9 @@ pub async fn get_host_info<'a>() -> Result<Vec<HostInfo>, Box<dyn Error + 'a>> {
 }
 
 #[get("/hosts")]
-pub async fn get_hosts() -> Result<Json<Vec<HostInfo>>, Json<ErrorMessage>> {
+pub async fn get_hosts() -> Result<Json<Vec<HostInfo>>, Json<BasicMessage>> {
     match get_host_info().await {
         Ok(r) => Ok(Json(r)),
-        Err(e) => Err(gen_error(500, format!("failed: {}", e.to_string())))
+        Err(e) => Err(gen_msg(500, format!("failed: {}", e.to_string())))
     }
 }

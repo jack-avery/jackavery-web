@@ -5,10 +5,11 @@ mod endpoints;
 
 use endpoints::init;
 use endpoints::hosts::get_hosts;
+use endpoints::rasbot::rasbot_notify;
 
 #[launch]
 async fn rocket() -> _ {
     init().await;
 
-    rocket::build().mount("/api", routes![get_hosts])
+    rocket::build().mount("/api", routes![get_hosts, rasbot_notify])
 }
