@@ -67,6 +67,17 @@ const baselisting = `
 </tr>
 `
 
+const errorlisting = `
+<tbody>
+    <tr>
+        <th>an error occurred getting server info</th>
+    </tr>
+    <tr>
+        <td>error info printed to console</td>
+    </tr>
+</tbody>
+`
+
 function getConnectString(connect) {
     navigator.clipboard.writeText(connect);
 
@@ -77,10 +88,10 @@ function getConnectString(connect) {
 }
 
 async function serverRefresh() {
+    container = document.getElementById("serverlistcontainer");
     servers = fetch("https://jackavery.ca/api/hosts")
     .then(response => response.json())
     .then(data => {
-        container = document.getElementById("serverlistcontainer");
         let listings = "";
         let table = listingsbody;
         // construct server listings
@@ -115,5 +126,6 @@ async function serverRefresh() {
     })
     .catch(err => {
         console.log(err);
+        container.innerHTML = errorlisting;
     })
 }
