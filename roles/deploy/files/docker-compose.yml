@@ -13,13 +13,13 @@ services:
       - /web/log:/var/log/nginx
     network_mode: "host"
     command: "/bin/sh -c 'nginx -g \"daemon off;\"'"
-  # rocket:
-  #   image: "raspyverse-back:latest"
-  #   restart: unless-stopped
-  #   volumes:
-  #     - /web/back/config.yml:/app/config.yml
-  #   ports:
-  #     - "8000:8000"
+  rocket:
+    image: "raspyverse-back:latest"
+    restart: unless-stopped
+    volumes:
+      - /web/back/config.yml:/app/config.yml
+    ports:
+      - "8000:8000"
   certbot:
     image: "certbot/certbot:arm32v6-latest"
     restart: unless-stopped
