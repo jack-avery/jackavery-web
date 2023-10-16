@@ -18,14 +18,14 @@
 
 - name: Create back-end config directory
   ansible.builtin.file:
-    path: /web/back
+    path: ~/back
     state: directory
     mode: 0755
 
 - name: Create config.yml
   ansible.builtin.template:
     src: config.yml.j2
-    dest: /web/back/config.yml
+    dest: ~/back/config.yml
     mode: 0755
 
 - name: Compose down

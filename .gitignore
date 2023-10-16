@@ -2,7 +2,6 @@
 .vscode
 
 # secrets
-.become_pass.sh
 .vault_pass.sh
 
 # rust output and .lock
