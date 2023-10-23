@@ -13,8 +13,8 @@ use std::time::Duration;
 
 #[derive(Debug, Clone, Serialize)]
 pub struct HostInfo {
-    players: u8,
-    maxplayers: u8,
+    players: usize,
+    maxplayers: usize,
     connect: String,
     hostname: String,
     map: String,
@@ -40,7 +40,7 @@ lazy_static! {
     // TODO: include all info, and not just the stuff i want
     static ref HOSTNAME_RE: Regex = Regex::new(r"hostname: (.+)").unwrap();
     static ref MAP_RE: Regex = Regex::new(r"map     : (.+) at").unwrap();
-    static ref PLAYERS_RE: Regex = Regex::new(r"players : (\d+) humans, 0 bots \((\d+)").unwrap();
+    static ref PLAYERS_RE: Regex = Regex::new(r"players : (\d+) humans, (\d+) bots \((\d+)").unwrap();
     // idk if there's a better way to match everything except "
     static ref PASSWORD_RE: Regex = Regex::new(r#"sv_password" = "([\w\d`~!@#$%^&*()\-_=+,<.>/?;:'\[{\]}\\| ]+)""#).unwrap();
 }
@@ -94,12 +94,12 @@ pub async fn refresh_host<'a>(host: &str, port: &i64, rcon_pass: &str, include_p
     let p = c.command("sv_password").await?;
 
     let is_pass_protected: bool;
-    let captures = &PASSWORD_RE.captures(p.body());
 
-    match captures {
-        Some(r) => {
+    let password = &PASSWORD_RE.captures(p.body());
+    match password {
+        Some(m) => {
             if *include_password {
-                connect = format!("{}; password {}", connect, &r[1]);
+                connect = format!("{}; password {}", connect, &m[1]);
             }
             is_pass_protected = true;
         },
@@ -109,12 +109,56 @@ pub async fn refresh_host<'a>(host: &str, port: &i64, rcon_pass: &str, include_p
     };
     connect = format!("connect {}", connect);
 
+    let players: usize;
+    let maxplayers: usize;
+    let player_re = &PLAYERS_RE.captures(&status);
+    match player_re {
+        Some(m) => {
+            players = m[1].parse::<usize>().unwrap();
+            let bots = m[2].parse::<usize>().unwrap();
+            let _maxplayers = m[3].parse::<usize>().unwrap();
+            
+            if bots > 0 {
+                maxplayers = _maxplayers - bots;
+            } else {
+                maxplayers = _maxplayers;
+            }
+        },
+        None => {
+            // failed to get player info? assume empty server?
+            players = 0;
+            maxplayers = 24;
+        }
+    }
+
+    let hostname: String;
+    let hostname_re = &HOSTNAME_RE.captures(&status);
+    match hostname_re {
+        Some(m) => {
+            hostname = m[1].to_string()
+        },
+        None => {
+            hostname = "could not resolve".to_string();
+        }
+    }
+
+    let map: String;
+    let map_re = &MAP_RE.captures(&status);
+    match map_re {
+        Some(m) => {
+            map = m[1].to_string()
+        },
+        None => {
+            map = "could not resolve".to_string();
+        }
+    }
+
     Ok(HostInfo {
-        players: PLAYERS_RE.captures(&status).unwrap()[1].parse::<u8>().unwrap(),
-        maxplayers: PLAYERS_RE.captures(&status).unwrap()[2].parse::<u8>().unwrap(),
+        players,
+        maxplayers,
         connect,
-        hostname: HOSTNAME_RE.captures(&status).unwrap()[1].to_string(),
-        map: MAP_RE.captures(&status).unwrap()[1].to_string(),
+        hostname,
+        map,
         is_pass_protected,
     })
 }
