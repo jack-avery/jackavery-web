@@ -14,7 +14,7 @@ services:
     network_mode: "host"
     command: "/bin/sh -c 'nginx -g \"daemon off;\"'"
   rocket:
-    image: "raspyverse-back:latest"
+    image: "jackavery-web-back:latest"
     restart: unless-stopped
     volumes:
       - ./back/config.yml:/app/config.yml

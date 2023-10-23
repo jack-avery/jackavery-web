@@ -94,8 +94,10 @@ async function serverRefresh() {
     .then(data => {
         let listings = "";
         let table = listingsbody;
+        let servers = data.hosts;
+
         // construct server listings
-        for (const serverinfo of data) {
+        for (const serverinfo of servers) {
             let server = baselisting;
 
             // set playercount to be colorful if server is occupied

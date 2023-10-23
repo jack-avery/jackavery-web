@@ -1,14 +1,14 @@
 ---
 - name: Create build directory
   ansible.builtin.file:
-    path: ~/build/raspyverse-back
+    path: ~/build/back
     state: directory
     mode: "0755"
 
 - name: Copy build sources
   ansible.builtin.synchronize:
-    src: "{{ role_path }}/files"
-    dest: ~/build/raspyverse-back
+    src: "{{ role_path }}/files/"
+    dest: ~/build/back
     archive: false
     recursive: true
     rsync_opts:
@@ -20,9 +20,25 @@
     images: true
     containers: true
 
+- name: Build rocket.rs binary
+  community.docker.docker_container:
+    name: "jackavery-web-back-build"
+    image: "rust:1.70"
+    state: started
+    auto_remove: true
+    volumes:
+      - /home/web/build/back:/build
+    command: '/build/build.sh'
+
+- name: Wait for container to close
+  wait_for:
+    path: /home/web/build/back/.lock
+    state: absent
+    delay: 10
+
 - name: Build image
   community.docker.docker_image:
-    name: raspyverse-back
+    name: jackavery-web-back
     tag: latest
     source: build
     force_tag: true
@@ -31,5 +47,5 @@
       pull: true
       dockerfile: Dockerfile
       platform: linux/arm64/v8
-      path: ~/build/raspyverse-back/files
+      path: ~/build/back
     state: present
