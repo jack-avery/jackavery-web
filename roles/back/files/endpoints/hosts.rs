@@ -14,7 +14,7 @@ use itertools::EitherOrBoth::{Both, Left, Right};
 
 use std::sync::Arc;
 use std::error::Error;
-use std::time::Duration;
+use std::time::{Duration, Instant};
 
 #[derive(Debug, Clone, Serialize)]
 pub struct HostInfo {
@@ -33,12 +33,24 @@ pub struct HostSettings {
     include_password: bool,
 }
 
+#[derive(Debug, Clone, Serialize)]
+pub struct HostEndpointResponse {
+    age: u64,
+    hosts: Vec<HostInfo>,
+}
+
 lazy_static! {
     // cached host info
     static ref HOST_INFO: Arc<Mutex<Vec<HostInfo>>> = {
         #[allow(unused_mut)] // compiler whines otherwise but we need this mutable
         let mut m: Vec<HostInfo> = Vec::new();
         Arc::new(Mutex::new(m))
+    };
+    // time since last refresh (for "age")
+    static ref LAST_REFRESH: Arc<Mutex<Instant>> = {
+        #[allow(unused_mut)] // compiler whines otherwise but we need this mutable
+        let mut i: Instant = Instant::now();
+        Arc::new(Mutex::new(i))
     };
 
     // regexes to scrape resulting status information
@@ -101,6 +113,10 @@ pub async fn init(config: serde_yaml::Value) {
 
                 let mut hosts_info = HOST_INFO.lock().await;
                 *hosts_info = new_hosts_info;
+
+                let mut last_refresh = LAST_REFRESH.lock().await;
+                *last_refresh = Instant::now();
+
                 dbg!("hosts: refreshed");
             }
         }
@@ -185,14 +201,18 @@ pub async fn refresh_host<'a>(host: &str, port: &i64, rcon_pass: &str, include_p
     })
 }
 
-pub async fn get_host_info<'a>() -> Result<Vec<HostInfo>, Box<dyn Error + 'a>> {
+pub async fn get_host_info<'a>() -> Result<HostEndpointResponse, Box<dyn Error + 'a>> {
     // return current value
     let hostinfo = HOST_INFO.lock().await.clone();
-    Ok(hostinfo)
+
+    let last_refresh = LAST_REFRESH.lock().await.clone();
+    let age = Instant::now().duration_since(last_refresh).as_secs();
+
+    Ok(HostEndpointResponse{age, hosts: hostinfo})
 }
 
 #[get("/hosts")]
-pub async fn get_hosts() -> Result<Json<Vec<HostInfo>>, Json<BasicMessage>> {
+pub async fn get_hosts() -> Result<Json<HostEndpointResponse>, Json<BasicMessage>> {
     match get_host_info().await {
         Ok(r) => Ok(Json(r)),
         Err(e) => Err(gen_msg(500, format!("failed: {}", e.to_string())))
