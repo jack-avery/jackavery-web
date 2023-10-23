@@ -7,7 +7,12 @@ use lazy_static::lazy_static;
 use serde_yaml;
 use sourcon::client::Client;
 
-use std::sync::{Arc, Mutex};
+use futures::lock::Mutex;
+
+use itertools::Itertools;
+use itertools::EitherOrBoth::{Both, Left, Right};
+
+use std::sync::Arc;
 use std::error::Error;
 use std::time::Duration;
 
@@ -68,16 +73,33 @@ pub async fn init(config: serde_yaml::Value) {
 
                 // create a new vec to populate
                 let mut new_hosts_info: Vec<HostInfo> = Vec::new();
-                for h in hosts.iter() {
-                    match refresh_host(&h.ip, &h.port, &h.rcon_pass, &h.include_password).await {
-                        Ok(info) => new_hosts_info.push(info),
-                        // TODO: use old data instead of giving up??
-                        Err(_) => println!("getting info for {} failed", &h.ip),
-                    };
+                let hosts_info = HOST_INFO.lock().await.clone();
+ 
+                for it in hosts.iter().zip_longest(hosts_info) {
+                    match it {
+                        Both(h, old_info) => {
+                            match refresh_host(&h.ip, &h.port, &h.rcon_pass, &h.include_password).await {
+                                Ok(info) => new_hosts_info.push(info),
+                                Err(err) => {
+                                    dbg!(err);
+                                    new_hosts_info.push(old_info)
+                                }
+                            };
+                        },
+                        Left(h) => {
+                            match refresh_host(&h.ip, &h.port, &h.rcon_pass, &h.include_password).await {
+                                Ok(info) => new_hosts_info.push(info),
+                                Err(_) => println!("getting info for {} failed", &h.ip),
+                            };
+                        },
+                        Right(old_host) => {
+                            // this should never happen?
+                            new_hosts_info.push(old_host)
+                        }
+                    }
                 }
 
-                // replace hosts_info with new info
-                let mut hosts_info = HOST_INFO.lock().unwrap();
+                let mut hosts_info = HOST_INFO.lock().await;
                 *hosts_info = new_hosts_info;
                 dbg!("hosts: refreshed");
             }
@@ -165,7 +187,7 @@ pub async fn refresh_host<'a>(host: &str, port: &i64, rcon_pass: &str, include_p
 
 pub async fn get_host_info<'a>() -> Result<Vec<HostInfo>, Box<dyn Error + 'a>> {
     // return current value
-    let hostinfo = HOST_INFO.lock().unwrap().clone();
+    let hostinfo = HOST_INFO.lock().await.clone();
     Ok(hostinfo)
 }
 

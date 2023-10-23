@@ -25,6 +25,7 @@ tokio = { version = "1.28.2", features = [
 sourcon = { git = "https://github.com/crescentrose/sourcon.git", rev = "d4b5786" }
 webhook = "2.1.2"
 urlencoding = "2.1.2"
+itertools = "0.11.0"
 
 [[bin]]
 name = "main"
