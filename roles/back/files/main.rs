@@ -3,8 +3,8 @@ extern crate rocket;
 
 mod endpoints;
 
-use endpoints::init;
 use endpoints::hosts::get_hosts;
+use endpoints::init;
 use endpoints::rasbot::rasbot_notify;
 
 #[launch]

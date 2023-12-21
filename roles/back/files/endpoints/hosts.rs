@@ -1,19 +1,19 @@
-use crate::endpoints::{gen_msg, BasicMessage};
+use crate::endpoints::BasicMessage;
 
-use serde::Serialize;
+use lazy_static::lazy_static;
 use regex::Regex;
 use rocket::serde::json::Json;
-use lazy_static::lazy_static;
+use serde::Serialize;
 use serde_yaml;
 use sourcon::client::Client;
 
 use futures::lock::Mutex;
 
-use itertools::Itertools;
 use itertools::EitherOrBoth::{Both, Left, Right};
+use itertools::Itertools;
 
-use std::sync::Arc;
 use std::error::Error;
+use std::sync::Arc;
 use std::time::{Duration, Instant};
 
 #[derive(Debug, Clone, Serialize)]
@@ -62,71 +62,77 @@ lazy_static! {
     static ref PASSWORD_RE: Regex = Regex::new(r#"sv_password" = "([\w\d`~!@#$%^&*()\-_=+,<.>/?;:'\[{\]}\\| ]+)""#).unwrap();
 }
 
-pub async fn init(config: serde_yaml::Value) {
-    // parse config
-    // TODO: probably make this better. probably.
-    let rate: u64 = config["endpoints"]["hosts"]["refresh"].as_u64().unwrap();
+pub async fn init(config: &serde_yaml::Value) {
+    let rate: u64 = match config.get("refresh") {
+        Some(v) => v.as_u64().unwrap_or(10),
+        None => 10,
+    };
     let mut hosts: Vec<HostSettings> = Vec::new();
-    for item in config["endpoints"]["hosts"]["hosts"].as_sequence().unwrap() {
+    for item in config["hosts"].as_sequence().unwrap() {
         let host = item.as_mapping().unwrap();
-        hosts.push( HostSettings {
+        hosts.push(HostSettings {
             ip: host.get("ip").unwrap().as_str().unwrap().to_string(),
             port: host.get("port").unwrap().as_i64().unwrap(),
             rcon_pass: host.get("rcon_pass").unwrap().as_str().unwrap().to_string(),
             include_password: host.get("include_password").unwrap().as_bool().unwrap(),
         });
     }
-    tokio::task::spawn(
-        async move {
-            loop {
-                // wait REFRESH_RATE seconds between refreshes
-                tokio::time::sleep(Duration::from_secs(rate)).await;
-                dbg!("hosts: refreshing");
+    tokio::task::spawn(async move {
+        loop {
+            // wait REFRESH_RATE seconds between refreshes
+            tokio::time::sleep(Duration::from_secs(rate)).await;
+            dbg!("hosts: refreshing");
 
-                // create a new vec to populate
-                let mut new_hosts_info: Vec<HostInfo> = Vec::new();
-                let hosts_info = HOST_INFO.lock().await.clone();
- 
-                for it in hosts.iter().zip_longest(hosts_info) {
-                    match it {
-                        Both(h, old_info) => {
-                            match refresh_host(&h.ip, &h.port, &h.rcon_pass, &h.include_password).await {
-                                Ok(info) => new_hosts_info.push(info),
-                                Err(err) => {
-                                    dbg!(err);
-                                    new_hosts_info.push(old_info)
-                                }
-                            };
-                        },
-                        Left(h) => {
-                            match refresh_host(&h.ip, &h.port, &h.rcon_pass, &h.include_password).await {
-                                Ok(info) => new_hosts_info.push(info),
-                                Err(_) => println!("getting info for {} failed", &h.ip),
-                            };
-                        },
-                        Right(old_host) => {
-                            // this should never happen?
-                            new_hosts_info.push(old_host)
-                        }
+            // create a new vec to populate
+            let mut new_hosts_info: Vec<HostInfo> = Vec::new();
+            let hosts_info = HOST_INFO.lock().await.clone();
+
+            for it in hosts.iter().zip_longest(hosts_info) {
+                match it {
+                    Both(h, old_info) => {
+                        match refresh_host(&h.ip, &h.port, &h.rcon_pass, &h.include_password).await
+                        {
+                            Ok(info) => new_hosts_info.push(info),
+                            Err(err) => {
+                                dbg!(err);
+                                new_hosts_info.push(old_info)
+                            }
+                        };
+                    }
+                    Left(h) => {
+                        match refresh_host(&h.ip, &h.port, &h.rcon_pass, &h.include_password).await
+                        {
+                            Ok(info) => new_hosts_info.push(info),
+                            Err(_) => println!("getting info for {} failed", &h.ip),
+                        };
+                    }
+                    Right(old_host) => {
+                        // this should never happen?
+                        new_hosts_info.push(old_host)
                     }
                 }
-
-                let mut hosts_info = HOST_INFO.lock().await;
-                *hosts_info = new_hosts_info;
-
-                let mut last_refresh = LAST_REFRESH.lock().await;
-                *last_refresh = Instant::now();
-
-                dbg!("hosts: refreshed");
             }
+
+            let mut hosts_info = HOST_INFO.lock().await;
+            *hosts_info = new_hosts_info;
+
+            let mut last_refresh = LAST_REFRESH.lock().await;
+            *last_refresh = Instant::now();
+
+            dbg!("hosts: refreshed");
         }
-    );
+    });
 }
 
-pub async fn refresh_host<'a>(host: &str, port: &i64, rcon_pass: &str, include_password: &bool) -> Result<HostInfo, Box<dyn Error + 'a>> {
+pub async fn refresh_host<'a>(
+    host: &str,
+    port: &i64,
+    rcon_pass: &str,
+    include_password: &bool,
+) -> Result<HostInfo, Box<dyn Error + 'a>> {
     let mut connect = format!("{}:{}", host, port);
 
-    let mut c = Client::connect(&connect, &rcon_pass).await?;
+    let mut c = Client::connect(&connect, rcon_pass).await?;
     let s = c.command("status").await?;
     let status = s.body();
     let p = c.command("sv_password").await?;
@@ -140,28 +146,28 @@ pub async fn refresh_host<'a>(host: &str, port: &i64, rcon_pass: &str, include_p
                 connect = format!("{}; password {}", connect, &m[1]);
             }
             is_pass_protected = true;
-        },
+        }
         None => {
             is_pass_protected = false;
-        },
+        }
     };
     connect = format!("connect {}", connect);
 
     let players: usize;
     let maxplayers: usize;
-    let player_re = &PLAYERS_RE.captures(&status);
+    let player_re = &PLAYERS_RE.captures(status);
     match player_re {
         Some(m) => {
             players = m[1].parse::<usize>().unwrap();
             let bots = m[2].parse::<usize>().unwrap();
             let _maxplayers = m[3].parse::<usize>().unwrap();
-            
+
             if bots > 0 {
                 maxplayers = _maxplayers - bots;
             } else {
                 maxplayers = _maxplayers;
             }
-        },
+        }
         None => {
             // failed to get player info? assume empty server?
             players = 0;
@@ -169,27 +175,17 @@ pub async fn refresh_host<'a>(host: &str, port: &i64, rcon_pass: &str, include_p
         }
     }
 
-    let hostname: String;
-    let hostname_re = &HOSTNAME_RE.captures(&status);
-    match hostname_re {
-        Some(m) => {
-            hostname = m[1].to_string()
-        },
-        None => {
-            hostname = "could not resolve".to_string();
-        }
-    }
+    let hostname_re = &HOSTNAME_RE.captures(status);
+    let hostname: String = match hostname_re {
+        Some(m) => m[1].to_string(),
+        None => "could not resolve".to_string(),
+    };
 
-    let map: String;
-    let map_re = &MAP_RE.captures(&status);
-    match map_re {
-        Some(m) => {
-            map = m[1].to_string()
-        },
-        None => {
-            map = "could not resolve".to_string();
-        }
-    }
+    let map_re = &MAP_RE.captures(status);
+    let map: String = match map_re {
+        Some(m) => m[1].to_string(),
+        None => "could not resolve".to_string(),
+    };
 
     Ok(HostInfo {
         players,
@@ -205,16 +201,19 @@ pub async fn get_host_info<'a>() -> Result<HostEndpointResponse, Box<dyn Error +
     // return current value
     let hostinfo = HOST_INFO.lock().await.clone();
 
-    let last_refresh = LAST_REFRESH.lock().await.clone();
+    let last_refresh = *LAST_REFRESH.lock().await;
     let age = Instant::now().duration_since(last_refresh).as_secs();
 
-    Ok(HostEndpointResponse{age, hosts: hostinfo})
+    Ok(HostEndpointResponse {
+        age,
+        hosts: hostinfo,
+    })
 }
 
 #[get("/hosts")]
 pub async fn get_hosts() -> Result<Json<HostEndpointResponse>, Json<BasicMessage>> {
     match get_host_info().await {
         Ok(r) => Ok(Json(r)),
-        Err(e) => Err(gen_msg(500, format!("failed: {}", e.to_string())))
+        Err(e) => Err(BasicMessage::new(500, format!("failed: {}", e))),
     }
 }

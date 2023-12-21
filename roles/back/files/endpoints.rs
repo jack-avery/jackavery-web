@@ -1,6 +1,5 @@
 use rocket::serde::json::Json;
 use serde::Serialize;
-use serde_yaml;
 
 pub mod hosts;
 pub mod rasbot;
@@ -11,8 +10,10 @@ pub struct BasicMessage {
     message: String,
 }
 
-pub fn gen_msg(code: u16, message: String) -> Json<BasicMessage> {
-    Json(BasicMessage { code, message })
+impl BasicMessage {
+    fn new(code: u16, message: String) -> Json<BasicMessage> {
+        Json(BasicMessage { code, message })
+    }
 }
 
 //
@@ -20,14 +21,28 @@ pub fn gen_msg(code: u16, message: String) -> Json<BasicMessage> {
 pub async fn init() {
     let cfg_file = match std::fs::File::open("config.yml") {
         Ok(file) => file,
-        Err(_) => panic!("missing config.yml")
+        Err(_) => panic!("missing config.yml"),
     };
 
     let cfg: serde_yaml::Value = match serde_yaml::from_reader(cfg_file) {
         Ok(cfg) => cfg,
-        Err(_) => panic!("could not parse config.yml")
+        Err(_) => panic!("could not parse config.yml"),
     };
 
-    hosts::init(cfg.clone()).await;
-    rasbot::init(cfg.clone()).await;
+    if cfg["endpoints"]["hosts"]
+        .get("enabled")
+        .unwrap_or(&serde_yaml::Value::Bool(false))
+        .as_bool()
+        .unwrap_or(false)
+    {
+        hosts::init(&cfg["endpoints"]["hosts"]).await;
+    }
+    if cfg["endpoints"]["rasbot"]
+        .get("enabled")
+        .unwrap_or(&serde_yaml::Value::Bool(false))
+        .as_bool()
+        .unwrap_or(false)
+    {
+        rasbot::init(&cfg["endpoints"]["rasbot"]).await;
+    }
 }

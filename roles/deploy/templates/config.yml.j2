@@ -2,8 +2,10 @@
 
 endpoints:
   rasbot:
+    enabled: {{ endpoints.rasbot.enabled }}
     webhook: "{{ endpoints.rasbot.webhook }}"
   hosts:
+    enabled: {{ endpoints.hosts.enabled }}
     hosts:
 {% for host in endpoints.hosts.hosts %}
       - ip: "{{ host.ip }}"
