@@ -1,8 +1,0 @@
----
-- name: Copy media 
-  ansible.posix.synchronize:
-    src: ./
-    dest: /web/media
-    delete: true
-    recursive: true
-    archive: false

@@ -3,7 +3,7 @@
   ansible.builtin.file:
     path: ~/build/back
     state: directory
-    mode: "0755"
+    mode: 0755
 
 - name: Copy build sources
   ansible.builtin.synchronize:
@@ -12,8 +12,8 @@
     archive: false
     recursive: true
     rsync_opts:
-      - "--exclude=target"
-      - "--exclude=Cargo.lock"
+      - --exclude=target
+      - --exclude=config.yml
 
 - name: Prune space before building
   community.docker.docker_prune:
@@ -22,13 +22,13 @@
 
 - name: Build rocket.rs binary
   community.docker.docker_container:
-    name: "jackavery-web-back-build"
-    image: "rust:1.70"
+    name: jackavery-web-back-build
+    image: rust:1.70
     state: started
     auto_remove: true
     volumes:
       - /home/web/build/back:/build
-    command: '/build/build.sh'
+    command: /build/build.sh
 
 - name: Wait for container to close
   wait_for:

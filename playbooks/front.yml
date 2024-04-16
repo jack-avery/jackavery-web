@@ -1,5 +1,0 @@
----
-- name: Build front-end image and upload to DockerHub
-  hosts: dev
-  roles:
-    - front

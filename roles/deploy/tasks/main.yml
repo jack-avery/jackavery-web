@@ -2,19 +2,27 @@
 - name: Load secrets
   ansible.builtin.include_tasks: secrets.yml
 
-- name: Login to DockerHub
-  community.docker.docker_login:
-    username: "{{ dockerhub.username }}"
-    password: "{{ dockerhub.password }}"
+- name: Delete old web content
+  file:
+    path: /home/web/data/web
+    state: absent
 
-- name: Pull latest
-  shell: docker login && docker pull jackavery/jackavery-web:latest
+- name: Create web folder
+  file:
+    path: /home/web/data/web
+    state: directory
+    mode: 0755
+
+- name: Transfer web content
+  ansible.posix.synchronize:
+    src: "{{ role_path }}/files/web"
+    dest: /home/web/data
 
 - name: Transfer docker-compose.yml
-  copy: src=docker-compose.yml dest=~/ mode=0777
+  copy: src=docker-compose.yml dest=~/ mode=0755
 
 - name: Transfer nginx.conf
-  copy: src=nginx.conf dest=~/data/nginx/ mode=0777
+  copy: src=nginx.conf dest=~/data/nginx.conf mode=0755
 
 - name: Create back-end config directory
   ansible.builtin.file:
