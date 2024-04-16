@@ -2,15 +2,10 @@
 
 personal website for me.
 
-## host
-jackavery.ca is hosted on a [raspberry pi 400](https://www.raspberrypi.com/products/raspberry-pi-400/) behind [cloudflare](https://cloudflare.com).
-
-as such, **all build directives in this repository are targeting the ARM64v8 architecture**.
-
 ## front-end
 raw HTML, CSS, JS.
 nginx container.
-see `roles/front/files`.
+see `roles/deploy/files/web`.
 
 ## back-end
 [rocket.rs](https://rocket.rs/) binary.
