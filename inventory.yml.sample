@@ -1,18 +1,7 @@
 all:
   children:
-    dev:
-      hosts:
-        localhost:
-          ansible_connection: local
-          ansible_host: 127.0.0.1
-
     prod:
       hosts:
         localhost:
           ansible_connection: local
           ansible_host: 127.0.0.1
-
-  vars:
-    dockerhub:
-      username: abcd
-      password: WXYZ
