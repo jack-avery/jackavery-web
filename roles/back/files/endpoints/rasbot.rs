@@ -3,6 +3,7 @@ use crate::endpoints::BasicMessage;
 use rocket::serde::json::Json;
 
 use lazy_static::lazy_static;
+use serde::Deserialize;
 use std::{
     error::Error,
     sync::{Arc, Mutex},
@@ -16,6 +17,12 @@ lazy_static! {
     static ref ICON_INFO: &'static str = "https://cdn.discordapp.com/attachments/488850419301220352/1127803740531990588/47289484.png";
     static ref ICON_ERR: &'static str = "https://cdn.discordapp.com/attachments/488850419301220352/1127803837948907530/47289484.png";
     static ref WEBHOOK_URL: Arc<Mutex<String>> = Arc::new(Mutex::new(String::new()));
+}
+
+#[derive(Debug, Clone, Deserialize)]
+pub struct Notify {
+    mode: String,
+    message: String
 }
 
 pub async fn init(config: &serde_yaml::Value) {
@@ -59,20 +66,22 @@ async fn webhook_send(
     Ok(())
 }
 
-#[get("/rasbot_notify/<mode>/<text>")]
-pub async fn rasbot_notify(
-    mode: &str,
-    text: &str,
-) -> Result<Json<BasicMessage>, Json<BasicMessage>> {
-    match mode {
-        "info" => match info(text).await {
+#[post("/rasbot_notify", format = "json", data = "<notif>")]
+pub async fn rasbot_notify(notif: Json<Notify>) -> Result<Json<BasicMessage>, Json<BasicMessage>> {
+    let message: &String = &notif.message;
+    if message.len() > 1024 {
+        return Err(BasicMessage::new(400, "failed: message too long".to_string()));
+    };
+
+    match notif.mode.as_str() {
+        "info" => match info(&notif.message).await {
             Ok(_) => Ok(BasicMessage::new(200, "ok".to_string())),
             Err(e) => Err(BasicMessage::new(500, format!("failed: {}", e))),
         },
-        "err" => match err(text).await {
+        "err" => match err(&notif.message).await {
             Ok(_) => Ok(BasicMessage::new(200, "ok".to_string())),
             Err(e) => Err(BasicMessage::new(500, format!("failed: {}", e))),
         },
-        _ => Err(BasicMessage::new(500, "failed: bad mode".to_string())),
+        _ => Err(BasicMessage::new(400, "failed: bad mode".to_string())),
     }
 }
