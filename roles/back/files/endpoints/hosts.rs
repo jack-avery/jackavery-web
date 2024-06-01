@@ -58,8 +58,7 @@ lazy_static! {
     static ref HOSTNAME_RE: Regex = Regex::new(r"hostname: (.+)").unwrap();
     static ref MAP_RE: Regex = Regex::new(r"map     : (.+) at").unwrap();
     static ref PLAYERS_RE: Regex = Regex::new(r"players : (\d+) humans, (\d+) bots \((\d+)").unwrap();
-    // idk if there's a better way to match everything except "
-    static ref PASSWORD_RE: Regex = Regex::new(r#"sv_password" = "([\w\d`~!@#$%^&*()\-_=+,<.>/?;:'\[{\]}\\| ]+)""#).unwrap();
+    static ref PASSWORD_RE: Regex = Regex::new(r#"sv_password" = "([^\"]+)""#).unwrap();
 }
 
 pub async fn init(config: &serde_yaml::Value) {
