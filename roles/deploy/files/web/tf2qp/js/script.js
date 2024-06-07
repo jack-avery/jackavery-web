@@ -8,20 +8,13 @@ var increase_range;
 var toggle_uncletopia;
 var toggle_skial;
 
-var search;
+var find_game_button;
 
 var lookup;
 var info;
 
 window.onload = function() {
     handleURLChange();
-
-    let ticket = localStorage.getItem('ticket');
-
-    if (!ticket) {
-        let ticket = get_ticket();
-        localStorage.setItem('ticket', ticket);
-    }
 
     toggle_crits = document.getElementById("crits");
     toggle_spread = document.getElementById("spread");
@@ -33,7 +26,7 @@ window.onload = function() {
     toggle_uncletopia = document.getElementById("uncletopia");
     toggle_skial = document.getElementById("skial");
 
-    search = document.getElementById("search");
+    find_game_button = document.getElementById("find_game");
 
     lookup = {
         "crits": toggle_crits,
@@ -127,7 +120,7 @@ function update_form() {
             allow_search = true;
         }
     }
-    search.disabled = !allow_search;
+    find_game_button.disabled = !allow_search;
 
     save_preferences();
 }

@@ -1,9 +1,9 @@
-#search {
+#find_game {
     border-color: green;
     color: white;
 }
 
-#search:disabled {
+#find_game:disabled {
     border-color: red;
     color: grey;
 }
