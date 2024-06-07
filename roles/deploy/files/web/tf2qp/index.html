@@ -31,7 +31,7 @@
             <div class="navbar">
                 <button class="navtab" onclick="window.location.href='/index.html'">jackavery.ca</button>
                 <button class="navtab" onclick="tab('about')" id="aboutnav">home</button>
-                <button class="navtab" onclick="tab('why')" id="whynav">why?</button>
+                <button class="navtab" onclick="tab('faq')" id="faqnav">faq</button>
             </div>
         </header>
 
@@ -114,16 +114,57 @@
             <button id="find_game" onclick="find_game()" disabled>find a game!</button>
         </div>
 
-        <div id="whytab" class="tab">
+        <div id="faqtab" class="tab">
+            <h3>1. why?</h3>
             <p>
                 for many years the playability of Team Fortress 2 has been in jeopardy due to a rampant cheating problem.
-                <br/>
+                <br>
+                <br>
                 in shounic's video
                 <a target="_blank" href="https://www.youtube.com/watch?v=TvH7syo376E">#SaveTF2 #FixTF2 - Possible Disaster?</a>,
                 two of things he suggests as solutions is the return to the legacy <strong>quickplay</strong> system,
                 or an implementation of a <strong>community server matchmaking website</strong>.
-                <br/>
+                <br>
+                <br>
                 this is my answer: the best of both worlds.
+            </p>
+            <div class="small-vertical-divider"></div>
+            <h3>2. what servers are here?</h3>
+            <p>
+                servers with "casual-like" gameplay.
+                most importantly, <strong>a rotating map pool</strong>, so no 24/7 2fort or similar.
+                no, i will not be adding support for this, use the server browser.
+            </p>
+            <div class="small-vertical-divider"></div>
+            <h3>3. how does this work?</h3>
+            <p>
+                i maintain a list of servers and some metadata about them.
+                the website updates what it knows about the servers every few seconds.
+                <br>
+                when you ask this website for a game, it will filter through the
+                server list using your parameters and give you a server (or servers)
+                to join.
+                <br>
+                i host this website out of pocket. if you want to support me, please
+                consider <strong>donating</strong> using the ko-fi link at the top of the page.
+                <a target="_blank" href="https://ko-fi.com/raspy">(or click here)</a>
+                <br>
+                if you want to contribute to the functionality of this project, this website is open source.
+                <a target="_blank" href="https://github.com/jack-avery/jackavery-web">(github link)</a>
+            </p>
+            <div class="small-vertical-divider"></div>
+            <h3>4. i host a server that qualifies. how can i get it added?</h3>
+            <p>
+                contact me through my business email at
+                <strong><span class="tcolors">jack.avery.business@gmail.com</span></strong>
+                and we can discuss the terms of having your server added to the list.
+            </p>
+            <div class="small-vertical-divider"></div>
+            <h3>5. i don't want my server in this list. can you remove it?</h3>
+            <p>
+                contact me through my business email at
+                <strong><span class="tcolors">jack.avery.business@gmail.com</span></strong>
+                and i will remove your server from the list.
             </p>
         </div>
 
@@ -132,7 +173,7 @@
         <footer>
             <p id="c">
                 <a target="_blank" href="https://github.com/jack-avery/jackavery-web">website source code</a>
-                <br/>
+                <br>
                 <a target="_blank" href="/legal/PRIVACY.pdf">privacy policy</a>
             </p>
         </footer>
