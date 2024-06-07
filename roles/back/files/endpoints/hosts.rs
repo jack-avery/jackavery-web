@@ -17,7 +17,7 @@ use std::sync::Arc;
 use std::time::{Duration, Instant};
 
 #[derive(Debug, Clone, Serialize)]
-pub struct HostInfo {
+struct HostInfo {
     players: usize,
     maxplayers: usize,
     connect: String,
@@ -26,7 +26,7 @@ pub struct HostInfo {
     is_pass_protected: bool,
 }
 
-pub struct HostSettings {
+struct HostSettings {
     ip: String,
     port: i64,
     rcon_pass: String,
@@ -123,7 +123,7 @@ pub async fn init(config: &serde_yaml::Value) {
     });
 }
 
-pub async fn refresh_host<'a>(
+async fn refresh_host<'a>(
     host: &str,
     port: &i64,
     rcon_pass: &str,

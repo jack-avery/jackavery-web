@@ -1,0 +1,9 @@
+#search {
+    border-color: green;
+    color: white;
+}
+
+#search:disabled {
+    border-color: red;
+    color: grey;
+}

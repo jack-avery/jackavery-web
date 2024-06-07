@@ -6,6 +6,10 @@
     --color-secondary: hsl(320, 100%, 85%);
 }
 
+::-webkit-scrollbar { 
+    display: none; 
+}
+
 /* Background/Body */
 @keyframes bgscroll
 {
@@ -125,7 +129,8 @@ header {
     flex-wrap: wrap;
 }
 
-button
+button,
+select
 {
     margin: 0 2px;
     width: auto;
@@ -210,7 +215,9 @@ ul,
 li,
 th,
 td,
-button
+button,
+label,
+select
 {
     color:white;
     font-family: 'Source Code Pro', monospace;
