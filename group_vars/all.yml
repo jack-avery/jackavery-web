@@ -1,5 +1,7 @@
 hosts: # jackavery.ca/api/hosts
   enabled: true
+  refresh_rate: 5
+  timeout_dur: 2
   hosts:
     ## UNCLETOPIA
     # Uncletopia: NA East
@@ -8,5 +10,3 @@ hosts: # jackavery.ca/api/hosts
       region: nae
       crits: false
       spread: false
-  refresh_rate: 5
-  timeout_dur: 2

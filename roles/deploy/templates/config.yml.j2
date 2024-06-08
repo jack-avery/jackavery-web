@@ -3,6 +3,8 @@ rasbot:
   webhook: "{{ rasbot.webhook }}"
 hosts:
   enabled: {{ hosts.enabled }}
+  refresh_rate: {{ hosts.refresh_rate }}
+  timeout_dur: {{ hosts.timeout_dur }}
   hosts:
 {% for host in hosts.hosts %}
     - ip: "{{ host.ip }}"
@@ -11,5 +13,3 @@ hosts:
       crits: {{ host.crits }}
       spread: {{ host.spread }}
 {% endfor %}
-  refresh_rate: {{ hosts.refresh_rate }}
-  timeout_dur: {{ hosts.timeout_dur }}
