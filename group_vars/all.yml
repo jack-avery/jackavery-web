@@ -1,0 +1,13 @@
+hosts: # jackavery.ca/api/hosts
+  enabled: true
+  hosts:
+    ## UNCLETOPIA
+    # Uncletopia: NA East
+    - ip: nyc-1.us.uncletopia.com:27015
+      network: uncletopia
+      region: nae
+      crits: false
+      spread: false
+      info: null
+  refresh_rate: 5
+  timeout_dur: 2

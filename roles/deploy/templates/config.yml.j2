@@ -1,16 +1,16 @@
-# define in group_vars/all.yml
-
-endpoints:
-  rasbot:
-    enabled: {{ endpoints.rasbot.enabled }}
-    webhook: "{{ endpoints.rasbot.webhook }}"
+rasbot:
+  enabled: {{ rasbot.enabled }}
+  webhook: "{{ rasbot.webhook }}"
+hosts:
+  enabled: {{ hosts.enabled }}
   hosts:
-    enabled: {{ endpoints.hosts.enabled }}
-    hosts:
-{% for host in endpoints.hosts.hosts %}
-      - ip: "{{ host.ip }}"
-        port: {{ host.port }}
-        rcon_pass: "{{ host.rcon_pass }}"
-        include_password: {{ host.include_password }}
+{% for host in hosts.hosts %}
+    - ip: "{{ host.ip }}"
+      network: "{{ host.network }}"
+      region: "{{ host.region }}"
+      crits: {{ host.crits }}
+      spread: {{ host.spread }}
+      info: null
 {% endfor %}
-    refresh: {{ endpoints.hosts.refresh }}
+  refresh_rate: {{ hosts.refresh_rate }}
+  timeout_dur: {{ hosts.timeout_dur }}
