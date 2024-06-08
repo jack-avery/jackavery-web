@@ -19,14 +19,20 @@ lazy_static! {
     static ref WEBHOOK_URL: Arc<Mutex<String>> = Arc::new(Mutex::new(String::new()));
 }
 
+#[derive(Clone, Deserialize)]
+pub struct RasbotConfig {
+    pub enabled: bool,
+    pub webhook: String
+}
+
 #[derive(Debug, Clone, Deserialize)]
 pub struct Notify {
     mode: String,
     message: String
 }
 
-pub async fn init(config: &serde_yaml::Value) {
-    let url: &str = config["webhook"].as_str().unwrap();
+pub async fn init(config: RasbotConfig) {
+    let url: &str = &config.webhook;
     let mut webhook_url = WEBHOOK_URL.lock().unwrap();
     *webhook_url = url.to_string();
 }

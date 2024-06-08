@@ -1,5 +1,7 @@
 use rocket::serde::json::Json;
-use serde::Serialize;
+use serde::{Serialize, Deserialize};
+
+use crate::endpoints::{rasbot::RasbotConfig, hosts::HostsConfig};
 
 pub mod hosts;
 pub mod rasbot;
@@ -16,33 +18,28 @@ impl BasicMessage {
     }
 }
 
+#[derive(Deserialize)]
+struct Config {
+    rasbot: RasbotConfig,
+    hosts: HostsConfig
+}
+
 //
 
 pub async fn init() {
-    let cfg_file = match std::fs::File::open("config.yml") {
-        Ok(file) => file,
+    let cfg_bytes = match std::fs::read("config.yml") {
+        Ok(bytes) => bytes,
         Err(_) => panic!("missing config.yml"),
     };
+    let cfg_str = std::str::from_utf8(&cfg_bytes)
+        .expect("failed to utf8decode config");
 
-    let cfg: serde_yaml::Value = match serde_yaml::from_reader(cfg_file) {
-        Ok(cfg) => cfg,
-        Err(_) => panic!("could not parse config.yml"),
-    };
+    let cfg: Config = serde_yaml::from_str(cfg_str).expect("failed to parse config");
 
-    if cfg["endpoints"]["hosts"]
-        .get("enabled")
-        .unwrap_or(&serde_yaml::Value::Bool(false))
-        .as_bool()
-        .unwrap_or(false)
-    {
-        hosts::init(&cfg["endpoints"]["hosts"]).await;
+    if cfg.hosts.enabled {
+        hosts::init(cfg.hosts.clone()).await;
     }
-    if cfg["endpoints"]["rasbot"]
-        .get("enabled")
-        .unwrap_or(&serde_yaml::Value::Bool(false))
-        .as_bool()
-        .unwrap_or(false)
-    {
-        rasbot::init(&cfg["endpoints"]["rasbot"]).await;
+    if cfg.rasbot.enabled {
+        rasbot::init(cfg.rasbot.clone()).await;
     }
 }
