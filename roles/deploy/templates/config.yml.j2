@@ -10,7 +10,6 @@ hosts:
       region: "{{ host.region }}"
       crits: {{ host.crits }}
       spread: {{ host.spread }}
-      info: null
 {% endfor %}
   refresh_rate: {{ hosts.refresh_rate }}
   timeout_dur: {{ hosts.timeout_dur }}
