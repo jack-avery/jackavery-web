@@ -16,6 +16,14 @@ let VIDEOS = [
     "Q7eJg7hRvqE", // Valve Orchestra - Upgrade Station (Unused?)
     "RBRlXsSXzCg", // Valve Orchestra - Red Bread (Expiration Date Intro)
     "FEiTgU-hM5k", // Keith Power - This Is What You Are (Warframe OST)
+    "7Kle8FixygY", // Aaron Cherof - Precipice (Minecraft OST, Tanger Remix)
+    "kK81m-A3qpU", // Lena Raine - Otherside (Minecraft OST)
+    "PZAM-_5h4QE", // 65daysofstatic - Supermoon (No Man's Sky OST)
+    "rbxL5BVEkRs", // Lemon Demon (Neil Cicierega) - Touch-Tone Telephone
+    "hPMnIymc3Cs", // Lemon Demon (Neil Cicierega) - Spiral of Ants
+    "_LUFMHvvNt4", // Exyl - Together Forever (ft. Rythm)
+    "vatcanQQJvQ", // xi - Blue Zenith
+    "vZyenjZseXA", // Virtual Riot - Idols
 ]
 
 let PROMPTS = [
