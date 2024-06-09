@@ -7,6 +7,7 @@ var increase_range;
 
 var toggle_uncletopia;
 var toggle_skial;
+var toggle_swishcast;
 
 var search_button;
 var im_feeling_lucky_button;
@@ -31,6 +32,7 @@ window.onload = function() {
 
     toggle_uncletopia = document.getElementById("uncletopia");
     toggle_skial = document.getElementById("skial");
+    toggle_swishcast = document.getElementById("swishcast");
 
     search_button = document.getElementById("search");
     im_feeling_lucky_button = document.getElementById("im_feeling_lucky");
@@ -64,6 +66,18 @@ window.onload = function() {
                 "eune",
                 "as",
                 "oce"
+            ]
+        },
+        "skial": {
+            "regions": [
+                "naw",
+                "nac",
+                "nae"
+            ]
+        },
+        "swishcast": {
+            "regions": [
+                "euw"
             ]
         }
     }
