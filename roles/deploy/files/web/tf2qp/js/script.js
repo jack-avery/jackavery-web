@@ -51,7 +51,9 @@ window.onload = function() {
         "wider": increase_range,
         "ip_mode": server_list_ip_mode,
 
-        "uncletopia": toggle_uncletopia
+        "uncletopia": toggle_uncletopia,
+        "skial": toggle_skial,
+        "swishcast": toggle_swishcast
     }
 
     // networks info
