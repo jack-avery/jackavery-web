@@ -38,7 +38,7 @@
         <h3>expect missing or broken functionality!</h3>
         <p>
             this page contains features actively in development.<br>
-            it's currently a <strong>rough prototype</strong>.<br>
+            it's currently a <strong>functional prototype</strong>.<br>
             how did you get here? did <i>they</i> send you?
         </p>
 
@@ -69,8 +69,9 @@
 
             <label>population:
             <select name="population" id="population" value="0" onchange="update_form()">
+                <option value="2">all</option>
+                <option value="1">not full</option>
                 <option value="0">allow empty</option>
-                <option value="1">populated only</option>
             </select>
             </label>
             <br>
@@ -112,7 +113,16 @@
 
             <p>at least one server network must be selected to start searching</p>
             <br>
-            <button id="find_game" onclick="find_games()" disabled>find a game!</button>
+            <button id="search" class="search" onclick="search(populate_server_list)" disabled>search</button>
+            <button id="im_feeling_lucky" class="search" onclick="search(im_feeling_lucky)" disabled>i'm feeling lucky</button>
+            <br>
+            <label><input type="checkbox" id="ip_mode" onclick="update_form()">only show IP addresses (for favorites)</label>
+            <br>
+            <br>
+            <p class="error" id="error_text"></p>
+            <div class="small-vertical-divider"></div>
+            <div id="server_list">
+            </div>
         </div>
 
         <div id="faqtab" class="tab">
@@ -139,19 +149,26 @@
             <div class="small-vertical-divider"></div>
             <h3>3. how does this work?</h3>
             <p>
-                i maintain a list of servers and some metadata about them.
+                i maintain a
+                <a target="_blank" href="https://github.com/jack-avery/jackavery-web/blob/main/group_vars/all.yml">list of servers</a>
+                and some metadata about them.
                 the website updates what it knows about the servers every few seconds.
+                <br>
                 <br>
                 when you ask this website for a game, it will filter through the
                 server list using your parameters and give you a server (or servers)
                 to join.
                 <br>
-                i host this website out of pocket. if you want to support me, please
-                consider <strong>donating</strong> using the ko-fi link at the top of the page.
-                <a target="_blank" href="https://ko-fi.com/raspy">(or click here)</a>
                 <br>
-                if you want to contribute to the functionality of this project, this website is open source.
-                <a target="_blank" href="https://github.com/jack-avery/jackavery-web">(github link)</a>
+                i host this website out of pocket. if you want to support me, please
+                consider <strong>donating</strong> to
+                <a target="_blank" href="https://ko-fi.com/raspy">my ko-fi</a>.
+                <br>
+                if you want to contribute to the functionality of this project,
+                <a target="_blank" href="https://github.com/jack-avery/jackavery-web">this website</a>
+                and
+                <a target="_blank" href="https://github.com/jack-avery/rsourcequery">the query library</a>
+                are both open source.
             </p>
             <div class="small-vertical-divider"></div>
             <h3>4. i host a server that qualifies. how can i get it added?</h3>

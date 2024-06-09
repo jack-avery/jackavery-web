@@ -6,6 +6,10 @@
     --color-secondary: hsl(320, 100%, 85%);
 }
 
+.error {
+    color: red;
+}
+
 ::-webkit-scrollbar { 
     display: none; 
 }

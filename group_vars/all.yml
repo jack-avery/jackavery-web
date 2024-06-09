@@ -43,21 +43,21 @@ hosts: # jackavery.ca/api/hosts
       crits: false
       spread: false
     # All Maps
-    - ip: nyc-1.us.uncletopia.com:27025
+    - ip: atl-1.us.uncletopia.com:27025
       network: uncletopia
       region: NAEast
       has_community_maps: false
       crits: false
       spread: false
     # All Maps+
-    - ip: nyc-1.us.uncletopia.com:27035
+    - ip: atl-1.us.uncletopia.com:27035
       network: uncletopia
       region: NAEast
       has_community_maps: true
       crits: false
       spread: false
     # Rototion
-    - ip: nyc-1.us.uncletopia.com:27045
+    - ip: atl-1.us.uncletopia.com:27045
       network: uncletopia
       region: NAEast
       has_community_maps: false

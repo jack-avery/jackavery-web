@@ -51,6 +51,8 @@ pub struct HostConfig {
 
 #[derive(Debug, Clone, Serialize)]
 pub struct HostsEndpointResponse {
+    code: u16,
+    matches: usize,
     hosts: Vec<HostInfo>,
 }
 
@@ -207,7 +209,7 @@ pub async fn get_host_info<'a>(
     regions: Vec<Region>,
     networks: Vec<&str>,
     allow_community_maps: bool,
-    allow_empty: bool,
+    pop_pref: Preference,
     crits_pref: Preference,
     spread_pref: Preference,
 ) -> Result<HostsEndpointResponse, Box<dyn Error + 'a>> {
@@ -217,34 +219,42 @@ pub async fn get_host_info<'a>(
             regions.contains(&h.region) && // region
             networks.contains(&h.network.as_str()) && // network
             (!h.has_community_maps || allow_community_maps) && // maps
-            (h.players != 0 || allow_empty) && // populated
+            (
+                match pop_pref {
+                    Preference::None => true, // no pref
+                    Preference::Enabled => h.players != 0 && h.players < h.maxplayers, // not full, not empty
+                    Preference::Disabled => h.players < h.maxplayers, // not full
+                }
+            ) &&
             (
                 match crits_pref {
-                    Preference::None => true,
-                    Preference::Enabled => h.crits,
-                    Preference::Disabled => !h.crits,
+                    Preference::None => true, // no pref
+                    Preference::Enabled => h.crits, // yes random crits
+                    Preference::Disabled => !h.crits, // no random crits
                 }
             ) &&
             (
                 match spread_pref {
-                    Preference::None => true,
-                    Preference::Enabled => h.spread,
-                    Preference::Disabled => !h.spread,
+                    Preference::None => true, // no pref
+                    Preference::Enabled => h.spread, // yes random spread
+                    Preference::Disabled => !h.spread, // no random spread
                 }
             )
         ).cloned().collect_vec();
 
     Ok(HostsEndpointResponse{
+        code: 200,
+        matches: hosts.len(),
         hosts
     })
 }
 
-#[get("/hosts/<region_str>/<extend>/<allow_community_maps>/<allow_empty>/<crits_pref>/<spread_pref>/<networks_str>")]
+#[get("/hosts/<region_str>/<extend>/<allow_community_maps>/<pop_pref>/<crits_pref>/<spread_pref>/<networks_str>")]
 pub async fn get_hosts(
     region_str: &str,
     extend: bool,
     allow_community_maps: bool,
-    allow_empty: bool,
+    pop_pref: u8,
     crits_pref: u8,
     spread_pref: u8,
     networks_str: &str
@@ -265,7 +275,7 @@ pub async fn get_hosts(
         regions,
         networks,
         allow_community_maps,
-        allow_empty,
+        pop_pref.into(),
         crits_pref.into(),
         spread_pref.into()
     ).await {

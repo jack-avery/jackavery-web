@@ -1,9 +1,23 @@
-#find_game {
+#im_feeling_lucky:enabled {
+    border-color: magenta;
+}
+
+.search {
     border-color: green;
     color: white;
 }
 
-#find_game:disabled {
+.search:disabled {
     border-color: red;
     color: grey;
+}
+
+#server_list {
+    background-color: rgb(33, 33, 33);
+    margin: 10px 40px;
+    padding: 20px 0px;
+}
+
+span.full_or_empty {
+    color: rgb(255, 188, 188);
 }
