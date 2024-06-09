@@ -31,6 +31,8 @@ struct HostInfo {
     network: String,
     region: Region,
     has_community_maps: bool,
+    crits: bool,
+    spread: bool,
     players: u8,
     maxplayers: u8,
     hostname: String,
@@ -55,6 +57,23 @@ pub struct HostsEndpointResponse {
 lazy_static! {
     // cached host info
     static ref HOST_INFO: Arc<Mutex<Vec<HostInfo>>> = Arc::new(Mutex::new(Vec::new()));
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub enum Preference {
+    None,
+    Enabled,
+    Disabled,
+}
+
+impl From<u8> for Preference {
+    fn from(value: u8) -> Self {
+        match value {
+            0u8 => Self::Disabled,
+            1u8 => Self::Enabled,
+            _ => Self::None
+        }
+    }
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
@@ -175,6 +194,8 @@ async fn refresh_host<'a>(
         network: host.network.clone(),
         region: host.region.clone(),
         has_community_maps: host.has_community_maps,
+        crits: host.crits,
+        spread: host.spread,
         players: info.players,
         maxplayers: info.maxplayers,
         hostname: info.hostname,
@@ -186,15 +207,31 @@ pub async fn get_host_info<'a>(
     regions: Vec<Region>,
     networks: Vec<&str>,
     allow_community_maps: bool,
-    allow_empty: bool
+    allow_empty: bool,
+    crits_pref: Preference,
+    spread_pref: Preference,
 ) -> Result<HostsEndpointResponse, Box<dyn Error + 'a>> {
     let host_info: Vec<HostInfo> = HOST_INFO.lock().await.clone();
     let hosts: Vec<HostInfo> = host_info.iter()
         .filter(|h|
-            regions.contains(&h.region) &&
-            networks.contains(&h.network.as_str()) &&
-            (!h.has_community_maps || allow_community_maps) &&
-            (h.players != 0 || allow_empty)
+            regions.contains(&h.region) && // region
+            networks.contains(&h.network.as_str()) && // network
+            (!h.has_community_maps || allow_community_maps) && // maps
+            (h.players != 0 || allow_empty) && // populated
+            (
+                match crits_pref {
+                    Preference::None => true,
+                    Preference::Enabled => h.crits,
+                    Preference::Disabled => !h.crits,
+                }
+            ) &&
+            (
+                match spread_pref {
+                    Preference::None => true,
+                    Preference::Enabled => h.spread,
+                    Preference::Disabled => !h.spread,
+                }
+            )
         ).cloned().collect_vec();
 
     Ok(HostsEndpointResponse{
@@ -202,12 +239,14 @@ pub async fn get_host_info<'a>(
     })
 }
 
-#[get("/hosts/<region_str>/<extend>/<allow_community_maps>/<allow_empty>/<networks_str>")]
+#[get("/hosts/<region_str>/<extend>/<allow_community_maps>/<allow_empty>/<crits_pref>/<spread_pref>/<networks_str>")]
 pub async fn get_hosts(
     region_str: &str,
     extend: bool,
     allow_community_maps: bool,
     allow_empty: bool,
+    crits_pref: u8,
+    spread_pref: u8,
     networks_str: &str
 ) -> Result<Json<HostsEndpointResponse>, Json<BasicMessage>> {
     let region: Result<Region, WebsiteError> = region_str.try_into();
@@ -226,7 +265,9 @@ pub async fn get_hosts(
         regions,
         networks,
         allow_community_maps,
-        allow_empty
+        allow_empty,
+        crits_pref.into(),
+        spread_pref.into()
     ).await {
         Ok(r) => Ok(Json(r)),
         Err(e) => Err(BasicMessage::new(500, format!("failed: {}", e))),
