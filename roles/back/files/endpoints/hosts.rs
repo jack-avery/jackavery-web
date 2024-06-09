@@ -90,34 +90,6 @@ pub enum Region {
     Oceania
 }
 
-impl Region {
-    pub fn prepare(self, extend: bool) -> Vec<Region> {
-        if extend {
-            match self {
-                Region::NAWest => vec![Region::NAWest, Region::NACentral, Region::NAEast],
-                Region::NACentral => vec![Region::NAWest, Region::NACentral, Region::NAEast],
-                Region::NAEast => vec![Region::NAWest, Region::NACentral, Region::NAEast],
-                Region::SouthAmerica => vec![Region::SouthAmerica, Region::NACentral],
-                Region::EUWest => vec![Region::EUWest, Region::EUNorthEast],
-                Region::EUNorthEast => vec![Region::EUWest, Region::EUNorthEast],
-                Region::Asia => vec![Region::Asia, Region::Oceania],
-                Region::Oceania => vec![Region::Oceania, Region::Asia],
-            }
-        } else {
-            match self {
-                Region::NAWest => vec![Region::NAWest, Region::NACentral],
-                Region::NACentral => vec![Region::NAWest, Region::NACentral, Region::NAEast],
-                Region::NAEast => vec![Region::NACentral, Region::NAEast],
-                Region::SouthAmerica => vec![Region::SouthAmerica],
-                Region::EUWest => vec![Region::EUWest],
-                Region::EUNorthEast => vec![Region::EUNorthEast],
-                Region::Asia => vec![Region::Asia],
-                Region::Oceania => vec![Region::Oceania],
-            }
-        }
-    }
-}
-
 impl TryInto<Region> for &str {
     type Error = WebsiteError;
 
@@ -249,22 +221,28 @@ pub async fn get_host_info<'a>(
     })
 }
 
-#[get("/hosts/<region_str>/<extend>/<allow_community_maps>/<pop_pref>/<crits_pref>/<spread_pref>/<networks_str>")]
+#[get("/hosts/<regions_str>/<allow_community_maps>/<pop_pref>/<crits_pref>/<spread_pref>/<networks_str>")]
 pub async fn get_hosts(
-    region_str: &str,
-    extend: bool,
+    regions_str: &str,
     allow_community_maps: bool,
     pop_pref: u8,
     crits_pref: u8,
     spread_pref: u8,
     networks_str: &str
 ) -> Result<Json<HostsEndpointResponse>, Json<BasicMessage>> {
-    let region: Result<Region, WebsiteError> = region_str.try_into();
-    if region.is_err() {
-        return Err(BasicMessage::new(400, format!("{}", region.unwrap_err())));
+    if regions_str.len() > 32 {
+        return Err(BasicMessage::new(400, "regions string too long".to_string()));
     }
-    let region: Region = region.unwrap();
-    let regions: Vec<Region> = region.prepare(extend);
+    let regions_list: Vec<&str> = regions_str.split(':').collect();
+
+    let mut regions: Vec<Region> = Vec::new();
+    for region in regions_list {
+        let region: Result<Region, WebsiteError> = region.try_into();
+        if region.is_err() {
+            return Err(BasicMessage::new(400, format!("{}", region.unwrap_err())));
+        }
+        regions.push(region.unwrap());
+    }
 
     if networks_str.len() > 128 {
         return Err(BasicMessage::new(400, "networks string too long".to_string()));

@@ -35,11 +35,10 @@
             </div>
         </header>
 
-        <h3>expect missing or broken functionality!</h3>
         <p>
             this page contains features actively in development.<br>
-            it's currently a <strong>functional prototype</strong>.<br>
-            how did you get here? did <i>they</i> send you?
+            it's currently a <strong>first release</strong>.<br>
+            if some things break, please let me know!
         </p>
 
         <div class="header-divider"></div>
@@ -68,7 +67,7 @@
             <br>
 
             <label>population:
-            <select name="population" id="population" value="0" onchange="update_form()">
+            <select name="population" id="population" value="1" onchange="update_form()">
                 <option value="2">all</option>
                 <option value="1">not full</option>
                 <option value="0">allow empty</option>
@@ -84,22 +83,15 @@
             </label>
             <br>
 
-            <label>region:
-            <select name="region" id="region" onchange="update_form()">
-                <option value="naw">NA West</option>
-                <option value="nac">NA Central</option>
-                <option value="nae">NA East</option>
-                <option value="sa">South America</option>
-                <option value="euw">EU West</option>
-                <option value="eune">EU Northeast</option>
-                <option value="as">Asia</option>
-                <option value="oce">Oceania</option>
-            </select>
-            </label>
-            <br>
-
-            <label><input type="checkbox" id="wider" onclick="update_form()">extend search range</label>
-
+            <p>regions:</p>
+            <label><input type="checkbox" id="naw" onclick="update_form()">NA West</label><br>
+            <label><input type="checkbox" id="nac" onclick="update_form()">NA Central</label><br>
+            <label><input type="checkbox" id="nae" onclick="update_form()">NA East</label><br>
+            <label><input type="checkbox" id="sa" onclick="update_form()">South America</label><br>
+            <label><input type="checkbox" id="euw" onclick="update_form()">EU West</label><br>
+            <label><input type="checkbox" id="eune" onclick="update_form()">EU Northeast</label><br>
+            <label><input type="checkbox" id="as" onclick="update_form()">Asia</label><br>
+            <label><input type="checkbox" id="oce" onclick="update_form()">Oceania</label><br>
             <br>
             <br>
 
