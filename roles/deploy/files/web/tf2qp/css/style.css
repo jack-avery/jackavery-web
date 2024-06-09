@@ -19,7 +19,14 @@
 }
 
 a.join {
-    color: green;
+    color: rgb(128, 255, 128);
+    background-color: rgba(0, 128, 0, 0.1);
+}
+
+a.join:hover {
+    background-color: rgba(0, 128, 0, 0.5);
+    transition: 0.5s;
+    cursor: pointer;
 }
 
 span.full_or_empty {
