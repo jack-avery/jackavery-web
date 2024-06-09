@@ -142,7 +142,7 @@ pub async fn init(config: HostsConfig) {
     // copy config into mutable environment
     tokio::task::spawn(async move {
         loop {
-            dbg!("hosts: refreshing");
+            println!("hosts: refreshing");
 
             let mut new_hosts_info: Vec<HostInfo> = Vec::new();
             let old_hosts_info: Vec<HostInfo> = HOST_INFO.lock().await.clone();
@@ -154,7 +154,7 @@ pub async fn init(config: HostsConfig) {
                         {
                             Ok(info) => new_hosts_info.push(info),
                             Err(err) => {
-                                dbg!("{}", err);
+                                eprintln!("getting info for {} failed: {}", host.ip, err);
                                 new_hosts_info.push(old_info)
                             }
                         };
@@ -163,7 +163,7 @@ pub async fn init(config: HostsConfig) {
                         match refresh_host(host, &timeout_dur).await
                         {
                             Ok(info) => new_hosts_info.push(info),
-                            Err(_) => println!("getting info for {} failed", host.ip),
+                            Err(err) => eprintln!("getting info for {} failed: {}", host.ip, err),
                         };
                     }
                     Right(old_host) => {
@@ -177,7 +177,7 @@ pub async fn init(config: HostsConfig) {
             *hosts_info = new_hosts_info;
             std::mem::drop(hosts_info); // manually unlock
 
-            dbg!("hosts: refreshed");
+            println!("hosts: refreshed");
             tokio::time::sleep(refresh_rate).await;
         }
     });

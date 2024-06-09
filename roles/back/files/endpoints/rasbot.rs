@@ -53,7 +53,6 @@ async fn webhook_send(
     let webhook_url: String = WEBHOOK_URL.lock().unwrap().clone();
     let client: WebhookClient = WebhookClient::new(&webhook_url);
     let text_de: std::borrow::Cow<'_, str> = decode(text).expect("UTF-8");
-    dbg!(&webhook_url, &text_de);
     client
         .send(|message| {
             message
