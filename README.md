@@ -8,10 +8,9 @@ nginx container.
 see `roles/deploy/files/web`.
 
 ## back-end
-[rocket.rs](https://rocket.rs/) binary.
-debian container.
+[rocket.rs](https://rocket.rs/) binary. alpine container.
 see `roles/back/files`.
-configured in `all.secret.yml`, see `roles/deploy/config.yml.j2` for sample.
+configured in `all.secret.yml` & `all.yml`, see `roles/deploy/config.yml.j2` for sample.
 
 ### pre-commit
 there is a pre-commit hook that you should enable to ensure you don't commit any unencrypted secret:
