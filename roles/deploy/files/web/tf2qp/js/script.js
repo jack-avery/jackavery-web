@@ -183,18 +183,23 @@ function search(callback) {
     });
 }
 
-var ENTRIES_IP_MODE = `<p>click on an IP address to copy the connect info</p><br><p>%ENTRIES</p>`
-var ENTRY_IP_MODE = `<a onclick="navigator.clipboard.writeText('%IP')">%IP</a><br>`
+var ENTRIES_IP_MODE = `<p>click on an IP address to copy the address</p><br><p>%ENTRIES</p>`
+var ENTRY_IP_MODE = `<a onclick="navigator.clipboard.writeText('%IP')">%IP</a> - %HOSTNAME<br>`
 
 var ENTRIES = `<p>click on an IP address to copy the connect info</p><br>%ENTRIES`
 var ENTRY = `
-<h3>%HOSTNAME (%NETWORK)</h3>
+<h3><span class="grey">(%NETWORK)</span> %HOSTNAME</h3>
 <p>
 <a onclick="navigator.clipboard.writeText('connect %IP')">%IP</a> <a class="join" href="steam://connect/%IP">(join)</a><br>
 %STATUS<br>
 </p>
 <div class="small-vertical-divider"></div>
 `
+
+function change_ip_mode() {
+    populate_server_list();
+    save_preferences();
+}
 
 // populate the list. if "ip mode" is enabled it only shows IP addresses
 function populate_server_list() {
@@ -206,7 +211,9 @@ function populate_server_list() {
         let entry_list = '';
         for (host in query_servers.hosts) {
             host = query_servers.hosts[host];
-            entry_list += ENTRY_IP_MODE.replaceAll("%IP", host.ip);
+            entry_list += ENTRY_IP_MODE
+                .replaceAll("%IP", host.ip)
+                .replaceAll("%HOSTNAME", host.hostname);
         }
         server_list_div.innerHTML = ENTRIES_IP_MODE.replaceAll("%ENTRIES", entry_list);
     } else {

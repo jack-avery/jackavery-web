@@ -25,3 +25,7 @@ a.join {
 span.full_or_empty {
     color: rgb(255, 188, 188);
 }
+
+span.grey {
+    color: rgb(144, 144, 144);
+}
