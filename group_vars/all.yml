@@ -3,10 +3,407 @@ hosts: # jackavery.ca/api/hosts
   refresh_rate: 5
   timeout_dur: 2
   hosts:
-    ## UNCLETOPIA
-    # Uncletopia: NA East
+    ##UT:NAEast
+    # NYC
+    # All Maps
     - ip: nyc-1.us.uncletopia.com:27015
       network: uncletopia
-      region: nae
+      region: NAEast
+      has_community_maps: false
+      crits: false
+      spread: false
+    # All Maps+
+    - ip: nyc-1.us.uncletopia.com:27025
+      network: uncletopia
+      region: NAEast
+      has_community_maps: true
+      crits: false
+      spread: false
+    # Fixed
+    - ip: nyc-1.us.uncletopia.com:27035
+      network: uncletopia
+      region: NAEast
+      has_community_maps: false
+      crits: false
+      spread: false
+    # Rototion
+    - ip: nyc-1.us.uncletopia.com:27045
+      network: uncletopia
+      region: NAEast
+      has_community_maps: false
+      crits: false
+      spread: false
+
+    # ATL
+    # All Maps
+    - ip: atl-1.us.uncletopia.com:27015
+      network: uncletopia
+      region: NAEast
+      has_community_maps: false
+      crits: false
+      spread: false
+    # All Maps
+    - ip: nyc-1.us.uncletopia.com:27025
+      network: uncletopia
+      region: NAEast
+      has_community_maps: false
+      crits: false
+      spread: false
+    # All Maps+
+    - ip: nyc-1.us.uncletopia.com:27035
+      network: uncletopia
+      region: NAEast
+      has_community_maps: true
+      crits: false
+      spread: false
+    # Rototion
+    - ip: nyc-1.us.uncletopia.com:27045
+      network: uncletopia
+      region: NAEast
+      has_community_maps: false
+      crits: false
+      spread: false
+    
+    # Chicago 1
+    # All Maps
+    - ip: chi-1.us.uncletopia.com:27015
+      network: uncletopia
+      region: NAEast
+      has_community_maps: false
+      crits: false
+      spread: false
+    # All Maps
+    - ip: chi-1.us.uncletopia.com:27025
+      network: uncletopia
+      region: NAEast
+      has_community_maps: false
+      crits: false
+      spread: false
+    # All Maps
+    - ip: chi-1.us.uncletopia.com:27035
+      network: uncletopia
+      region: NAEast
+      has_community_maps: false
+      crits: false
+      spread: false
+    # All Maps+
+    - ip: chi-1.us.uncletopia.com:27045
+      network: uncletopia
+      region: NAEast
+      has_community_maps: true
+      crits: false
+      spread: false
+    # Chicago 2
+    # All Maps+
+    - ip: chi-2.us.uncletopia.com:27015
+      network: uncletopia
+      region: NAEast
+      has_community_maps: true
+      crits: false
+      spread: false
+    # Stopwatch
+    - ip: chi-2.us.uncletopia.com:27025
+      network: uncletopia
+      region: NAEast
+      has_community_maps: true
+      crits: false
+      spread: false
+    # Rototion
+    - ip: chi-2.us.uncletopia.com:27035
+      network: uncletopia
+      region: NAEast
+      has_community_maps: true
+      crits: false
+      spread: false
+    # 5CP
+    - ip: chi-2.us.uncletopia.com:27045
+      network: uncletopia
+      region: NAEast
+      has_community_maps: true
+      crits: false
+      spread: false
+    
+    ##UT:NACentral
+    # Dallas
+    # All Maps
+    - ip: dal-1.us.uncletopia.com:27015
+      network: uncletopia
+      region: NACentral
+      has_community_maps: false
+      crits: false
+      spread: false
+    # All Maps
+    - ip: dal-1.us.uncletopia.com:27025
+      network: uncletopia
+      region: NACentral
+      has_community_maps: false
+      crits: false
+      spread: false
+    # All Maps+
+    - ip: dal-1.us.uncletopia.com:27035
+      network: uncletopia
+      region: NACentral
+      has_community_maps: true
+      crits: false
+      spread: false
+    # Fixed
+    - ip: dal-1.us.uncletopia.com:27045
+      network: uncletopia
+      region: NACentral
+      has_community_maps: false
+      crits: false
+      spread: false
+    
+    ##UT:NAWest
+    # Los Angeles
+    # All Maps
+    - ip: lax-1.us.uncletopia.com:27015
+      network: uncletopia
+      region: NAWest
+      has_community_maps: false
+      crits: false
+      spread: false
+    # LA2 is missing?
+    # All Maps+
+    - ip: lax-1.us.uncletopia.com:27035
+      network: uncletopia
+      region: NAWest
+      has_community_maps: true
+      crits: false
+      spread: false
+    # Rototion
+    - ip: lax-1.us.uncletopia.com:27045
+      network: uncletopia
+      region: NAWest
+      has_community_maps: false
+      crits: false
+      spread: false
+    
+    # Seattle
+    # All Maps
+    - ip: sea-1.us.uncletopia.com:27045
+      network: uncletopia
+      region: NAWest
+      has_community_maps: false
+      crits: false
+      spread: false
+    # All Maps+
+    - ip: sea-1.us.uncletopia.com:27045
+      network: uncletopia
+      region: NAWest
+      has_community_maps: true
+      crits: false
+      spread: false
+    # All Maps+
+    - ip: sea-1.us.uncletopia.com:27045
+      network: uncletopia
+      region: NAWest
+      has_community_maps: true
+      crits: false
+      spread: false
+    # Rototion
+    - ip: sea-1.us.uncletopia.com:27045
+      network: uncletopia
+      region: NAWest
+      has_community_maps: false
+      crits: false
+      spread: false
+    
+    ##UT:SouthAmerica
+    # Sao Paulo
+    # All Maps+
+    - ip: sao-1.br.uncletopia.com:27015
+      network: uncletopia
+      region: SouthAmerica
+      has_community_maps: true
+      crits: false
+      spread: false
+
+    ##UT:EUWest
+    # Frankfurt
+    # All Maps
+    - ip: frk-1.de.uncletopia.com:27015
+      network: uncletopia
+      region: EUWest
+      has_community_maps: false
+      crits: false
+      spread: false
+    # All Maps
+    - ip: frk-1.de.uncletopia.com:27025
+      network: uncletopia
+      region: EUWest
+      has_community_maps: false
+      crits: false
+      spread: false
+    # All Maps+
+    - ip: frk-1.de.uncletopia.com:27035
+      network: uncletopia
+      region: EUWest
+      has_community_maps: true
+      crits: false
+      spread: false
+    # All Maps+
+    - ip: frk-1.de.uncletopia.com:27045
+      network: uncletopia
+      region: EUWest
+      has_community_maps: true
+      crits: false
+      spread: false
+    # Rototion
+    - ip: frk-1.de.uncletopia.com:27055
+      network: uncletopia
+      region: EUWest
+      has_community_maps: false
+      crits: false
+      spread: false
+    # Fixed
+    - ip: frk-1.de.uncletopia.com:27065
+      network: uncletopia
+      region: EUWest
+      has_community_maps: false
+      crits: false
+      spread: false
+    # Stopwatch
+    - ip: frk-1.de.uncletopia.com:27075
+      network: uncletopia
+      region: EUWest
+      has_community_maps: true
+      crits: false
+      spread: false
+    # 5CP
+    - ip: frk-1.de.uncletopia.com:27085
+      network: uncletopia
+      region: EUWest
+      has_community_maps: true
+      crits: false
+      spread: false
+    
+    # London
+    # All Maps
+    - ip: lon-1.uk.uncletopia.com:27015
+      network: uncletopia
+      region: EUWest
+      has_community_maps: false
+      crits: false
+      spread: false
+    # All Maps
+    - ip: lon-1.uk.uncletopia.com:27025
+      network: uncletopia
+      region: EUWest
+      has_community_maps: false
+      crits: false
+      spread: false
+    # All Maps
+    - ip: lon-1.uk.uncletopia.com:27035
+      network: uncletopia
+      region: EUWest
+      has_community_maps: false
+      crits: false
+      spread: false
+    # All Maps+
+    - ip: lon-1.uk.uncletopia.com:27045
+      network: uncletopia
+      region: EUWest
+      has_community_maps: true
+      crits: false
+      spread: false
+    # All Maps+
+    - ip: lon-1.uk.uncletopia.com:27055
+      network: uncletopia
+      region: EUWest
+      has_community_maps: true
+      crits: false
+      spread: false
+    # All Maps+
+    - ip: lon-1.uk.uncletopia.com:27065
+      network: uncletopia
+      region: EUWest
+      has_community_maps: true
+      crits: false
+      spread: false
+    # All Maps+
+    - ip: lon-1.uk.uncletopia.com:27075
+      network: uncletopia
+      region: EUWest
+      has_community_maps: true
+      crits: false
+      spread: false
+    # Rototion
+    - ip: lon-1.uk.uncletopia.com:27085
+      network: uncletopia
+      region: EUWest
+      has_community_maps: false
+      crits: false
+      spread: false
+
+    ##UT:EUNorthEast
+    # Warsaw
+    # All Maps
+    - ip: waw-1.pl.uncletopia.com:27035
+      network: uncletopia
+      region: EUNorthEast
+      has_community_maps: false
+      crits: false
+      spread: false
+    # All Maps+
+    - ip: waw-1.pl.uncletopia.com:27045
+      network: uncletopia
+      region: EUNorthEast
+      has_community_maps: true
+      crits: false
+      spread: false
+    # All Maps+
+    - ip: waw-1.pl.uncletopia.com:27055
+      network: uncletopia
+      region: EUNorthEast
+      has_community_maps: true
+      crits: false
+      spread: false
+    # Rototion
+    - ip: waw-1.pl.uncletopia.com:27065
+      network: uncletopia
+      region: EUNorthEast
+      has_community_maps: false
+      crits: false
+      spread: false
+
+    ##UT:Asia
+    # Hong Kong
+    # All Maps+
+    - ip: hgk-1.hk.uncletopia.com:27015
+      network: uncletopia
+      region: Asia
+      has_community_maps: true
+      crits: false
+      spread: false
+
+    ##UT:Oceania
+    # Sydney
+    # All Maps
+    - ip: syd-1.au.uncletopia.com:27015
+      network: uncletopia
+      region: Oceania
+      has_community_maps: false
+      crits: false
+      spread: false
+    # All Maps
+    - ip: syd-1.au.uncletopia.com:27025
+      network: uncletopia
+      region: Oceania
+      has_community_maps: false
+      crits: false
+      spread: false
+    # All Maps+
+    - ip: syd-1.au.uncletopia.com:27035
+      network: uncletopia
+      region: Oceania
+      has_community_maps: true
+      crits: false
+      spread: false
+    # Rototion
+    - ip: syd-1.au.uncletopia.com:27045
+      network: uncletopia
+      region: Oceania
+      has_community_maps: false
       crits: false
       spread: false

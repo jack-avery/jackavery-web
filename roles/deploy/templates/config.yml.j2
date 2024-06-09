@@ -10,6 +10,7 @@ hosts:
     - ip: "{{ host.ip }}"
       network: "{{ host.network }}"
       region: "{{ host.region }}"
+      has_community_maps: {{ host.has_community_maps }}
       crits: {{ host.crits }}
       spread: {{ host.spread }}
 {% endfor %}

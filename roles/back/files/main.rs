@@ -2,6 +2,7 @@
 extern crate rocket;
 
 mod endpoints;
+mod error;
 
 use endpoints::hosts::get_hosts;
 use endpoints::init;
