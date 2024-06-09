@@ -442,3 +442,20 @@ hosts: # jackavery.ca/api/hosts
       has_community_maps: true
       crits: true
       spread: false
+
+    ##OPRAH:NAEast
+    # Payload
+    - ip: 108.181.63.51:27015
+      network: oprah
+      region: NAEast
+      has_community_maps: true
+      crits: false
+      spread: false
+    
+    # Hybrid
+    - ip: 108.181.63.51:27016
+      network: oprah
+      region: NAEast
+      has_community_maps: true
+      crits: false
+      spread: false

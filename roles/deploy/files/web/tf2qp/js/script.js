@@ -15,6 +15,7 @@ var toggle_oce;
 var toggle_uncletopia;
 var toggle_skial;
 var toggle_swishcast;
+var toggle_oprah;
 
 var search_button;
 var im_feeling_lucky_button;
@@ -48,6 +49,7 @@ window.onload = function() {
     toggle_uncletopia = document.getElementById("uncletopia");
     toggle_skial = document.getElementById("skial");
     toggle_swishcast = document.getElementById("swishcast");
+    toggle_oprah = document.getElementById("oprah");
 
     search_button = document.getElementById("search");
     im_feeling_lucky_button = document.getElementById("im_feeling_lucky");
@@ -76,7 +78,8 @@ window.onload = function() {
 
         "uncletopia": toggle_uncletopia,
         "skial": toggle_skial,
-        "swishcast": toggle_swishcast
+        "swishcast": toggle_swishcast,
+        "oprah": toggle_oprah,
     }
 
     regions_list = [
@@ -94,7 +97,8 @@ window.onload = function() {
     networks_list = [
         "uncletopia",
         "skial",
-        "swishcast"
+        "swishcast",
+        "oprah"
     ]
 
     load_preferences();
