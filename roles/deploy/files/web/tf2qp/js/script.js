@@ -215,9 +215,9 @@ var ENTRY_IP_MODE = `<a onclick="navigator.clipboard.writeText('%IP')">%IP</a> -
 
 var ENTRIES = `<p>click on an IP address to copy the connect info</p><br>%ENTRIES`
 var ENTRY = `
-<h3><span class="grey">(%NETWORK)</span> %HOSTNAME</h3>
+<h3><a class="join" href="steam://connect/%IP">(join)</a> %HOSTNAME</h3>
 <p>
-<a onclick="navigator.clipboard.writeText('connect %IP')">%IP</a> <a class="join" href="steam://connect/%IP">(join)</a><br>
+<a onclick="navigator.clipboard.writeText('connect %IP')">%IP</a><br>
 %STATUS<br>
 </p>
 <div class="small-vertical-divider"></div>
@@ -256,7 +256,6 @@ function populate_server_list() {
             entry_list += ENTRY
                 .replaceAll("%IP", host.ip)
                 .replaceAll("%HOSTNAME", host.hostname)
-                .replaceAll("%NETWORK", host.network)
                 .replaceAll("%STATUS", status)
         }
         server_list_div.innerHTML = ENTRIES.replaceAll("%ENTRIES", entry_list);
