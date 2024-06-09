@@ -3,13 +3,11 @@
 personal website for me.
 
 ## front-end
-raw HTML, CSS, JS.
-nginx container.
-see `roles/deploy/files/web`.
+raw HTML, CSS, JS. nginx container. see `roles/deploy/files/web`.
 
 ## back-end
-[rocket.rs](https://rocket.rs/) binary. alpine container.
-see `roles/back/files`.
+[rocket.rs](https://rocket.rs/) binary. debian container. see `roles/back/files`.
+
 configured in `all.secret.yml` & `all.yml`, see `roles/deploy/config.yml.j2` for sample.
 
 ### pre-commit
