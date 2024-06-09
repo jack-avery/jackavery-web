@@ -1,5 +1,5 @@
-var toggle_crits;
-var toggle_spread;
+var crits_pref;
+var spread_pref;
 var toggle_population;
 var toggle_maps;
 var select_region;
@@ -16,8 +16,8 @@ var info;
 window.onload = function() {
     handleURLChange();
 
-    toggle_crits = document.getElementById("crits");
-    toggle_spread = document.getElementById("spread");
+    crits_pref = document.getElementById("crits");
+    spread_pref = document.getElementById("spread");
     toggle_population = document.getElementById("population");
     toggle_maps = document.getElementById("maps");
     select_region = document.getElementById("region");
@@ -29,15 +29,14 @@ window.onload = function() {
     find_game_button = document.getElementById("find_game");
 
     lookup = {
-        "crits": toggle_crits,
-        "spread": toggle_spread,
+        "crits": crits_pref,
+        "spread": spread_pref,
         "population": toggle_population,
         "maps": toggle_maps,
         "region": select_region,
         "wider": increase_range,
 
-        "uncletopia": toggle_uncletopia,
-        "skial": toggle_skial
+        "uncletopia": toggle_uncletopia
     }
 
     info = {
@@ -53,15 +52,6 @@ window.onload = function() {
                 "eune",
                 "as",
                 "oce"
-            ]
-        },
-        "skial": {
-            "crits": true,
-            "spread": true,
-            "maps": true,
-            "regions": [
-                "naw",
-                "nae"
             ]
         }
     }
@@ -125,6 +115,30 @@ function update_form() {
     save_preferences();
 }
 
-function find_game() {
-    alert("wip");
+function find_games() {
+    let crits = crits_pref.value;
+    let spread = spread_pref.value;
+    let allow_empty = toggle_population.value == '0';
+    let allow_community_maps = toggle_maps == '1';
+
+    let region = select_region.value;
+    let extend = increase_range.checked;
+
+    let networks = '';
+    for (network in info) {
+        if (lookup[network].checked) {
+            networks += network
+        }
+    }
+
+    let query_url = `https://jackavery.ca/api/hosts/${region}/${extend}/${allow_community_maps}/${allow_empty}/${crits}/${spread}/${networks}`
+
+    //TODO: add favorites export and "I'm feeling lucky"
+    // fetch(query_url)
+    // .then(response => response.json())
+    // .then(
+    //     return response
+    // )
+
+    window.open(query_url, '_blank').focus();
 }
