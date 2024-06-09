@@ -154,12 +154,13 @@ function search(callback) {
     let region = select_region.value;
     let extend = increase_range.checked;
 
-    let networks = '';
+    let networks_list = [];
     for (net in info) {
         if (lookup[net].checked) {
-            networks += net;
+            networks_list.push(net);
         }
     }
+    let networks = networks_list.join(":");
 
     let query_url = `https://jackavery.ca/api/hosts/${region}/${extend}/${allow_community_maps}/${pop}/${crits}/${spread}/${networks}`;
     fetch(query_url)
