@@ -181,21 +181,21 @@ hosts: # jackavery.ca/api/hosts
     
     # Seattle
     # All Maps
-    - ip: 74.91.117.2:27045
+    - ip: 74.91.117.2:27015
       network: uncletopia
       region: NAWest
       has_community_maps: false
       crits: false
       spread: false
     # All Maps+
-    - ip: 74.91.117.2:27045
+    - ip: 74.91.117.2:27025
       network: uncletopia
       region: NAWest
       has_community_maps: true
       crits: false
       spread: false
     # All Maps+
-    - ip: 74.91.117.2:27045
+    - ip: 74.91.117.2:27035
       network: uncletopia
       region: NAWest
       has_community_maps: true
