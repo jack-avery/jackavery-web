@@ -173,7 +173,7 @@ var ENTRIES = `<p>click on an IP address to copy the connect info</p><br>%ENTRIE
 var ENTRY = `
 <h3>%HOSTNAME (%NETWORK)</h3>
 <p>
-<a onclick="navigator.clipboard.writeText('connect %IP')">%IP</a><br>
+<a onclick="navigator.clipboard.writeText('connect %IP')">%IP</a> <a class="join" href="steam://connect/%IP">(join)</a><br>
 %STATUS<br>
 </p>
 <div class="small-vertical-divider"></div>
@@ -215,7 +215,5 @@ function populate_server_list() {
 // search & join a random server
 function im_feeling_lucky() {
     let server_ip = query_servers.hosts[Math.floor(Math.random() * query_servers.matches)]["ip"];
-    let entry_list = '';
-    entry_list += ENTRY_IP_MODE.replaceAll("%IP", server_ip);
-    server_list_div.innerHTML = ENTRIES_IP_MODE.replaceAll("%ENTRIES", entry_list);
+    window.open(`steam://connect/${server_ip}`, '_blank').focus();
 }

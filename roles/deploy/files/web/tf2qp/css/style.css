@@ -18,6 +18,10 @@
     padding: 20px 0px;
 }
 
+a.join {
+    color: green;
+}
+
 span.full_or_empty {
     color: rgb(255, 188, 188);
 }

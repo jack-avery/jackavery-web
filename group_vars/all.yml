@@ -6,28 +6,28 @@ hosts: # jackavery.ca/api/hosts
     ##UT:NAEast
     # NYC
     # All Maps
-    - ip: nyc-1.us.uncletopia.com:27015
+    - ip: 74.91.123.17:27015
       network: uncletopia
       region: NAEast
       has_community_maps: false
       crits: false
       spread: false
     # All Maps+
-    - ip: nyc-1.us.uncletopia.com:27025
+    - ip: 74.91.123.17:27025
       network: uncletopia
       region: NAEast
       has_community_maps: true
       crits: false
       spread: false
     # Fixed
-    - ip: nyc-1.us.uncletopia.com:27035
+    - ip: 74.91.123.17:27035
       network: uncletopia
       region: NAEast
       has_community_maps: false
       crits: false
       spread: false
     # Rototion
-    - ip: nyc-1.us.uncletopia.com:27045
+    - ip: 74.91.123.17:27045
       network: uncletopia
       region: NAEast
       has_community_maps: false
@@ -36,28 +36,28 @@ hosts: # jackavery.ca/api/hosts
 
     # ATL
     # All Maps
-    - ip: atl-1.us.uncletopia.com:27015
+    - ip: 74.91.112.148:27015
       network: uncletopia
       region: NAEast
       has_community_maps: false
       crits: false
       spread: false
     # All Maps
-    - ip: atl-1.us.uncletopia.com:27025
+    - ip: 74.91.112.148:27025
       network: uncletopia
       region: NAEast
       has_community_maps: false
       crits: false
       spread: false
     # All Maps+
-    - ip: atl-1.us.uncletopia.com:27035
+    - ip: 74.91.112.148:27035
       network: uncletopia
       region: NAEast
       has_community_maps: true
       crits: false
       spread: false
     # Rototion
-    - ip: atl-1.us.uncletopia.com:27045
+    - ip: 74.91.112.148:27045
       network: uncletopia
       region: NAEast
       has_community_maps: false
@@ -66,28 +66,28 @@ hosts: # jackavery.ca/api/hosts
     
     # Chicago 1
     # All Maps
-    - ip: chi-1.us.uncletopia.com:27015
+    - ip: 104.153.108.63:27015
       network: uncletopia
       region: NAEast
       has_community_maps: false
       crits: false
       spread: false
     # All Maps
-    - ip: chi-1.us.uncletopia.com:27025
+    - ip: 104.153.108.63:27025
       network: uncletopia
       region: NAEast
       has_community_maps: false
       crits: false
       spread: false
     # All Maps
-    - ip: chi-1.us.uncletopia.com:27035
+    - ip: 104.153.108.63:27035
       network: uncletopia
       region: NAEast
       has_community_maps: false
       crits: false
       spread: false
     # All Maps+
-    - ip: chi-1.us.uncletopia.com:27045
+    - ip: 104.153.108.63:27045
       network: uncletopia
       region: NAEast
       has_community_maps: true
@@ -95,28 +95,28 @@ hosts: # jackavery.ca/api/hosts
       spread: false
     # Chicago 2
     # All Maps+
-    - ip: chi-2.us.uncletopia.com:27015
+    - ip: 66.85.14.157:27015
       network: uncletopia
       region: NAEast
       has_community_maps: true
       crits: false
       spread: false
     # Stopwatch
-    - ip: chi-2.us.uncletopia.com:27025
+    - ip: 66.85.14.157:27025
       network: uncletopia
       region: NAEast
       has_community_maps: true
       crits: false
       spread: false
     # Rototion
-    - ip: chi-2.us.uncletopia.com:27035
+    - ip: 66.85.14.157:27035
       network: uncletopia
       region: NAEast
       has_community_maps: true
       crits: false
       spread: false
     # 5CP
-    - ip: chi-2.us.uncletopia.com:27045
+    - ip: 66.85.14.157:27045
       network: uncletopia
       region: NAEast
       has_community_maps: true
@@ -126,28 +126,28 @@ hosts: # jackavery.ca/api/hosts
     ##UT:NACentral
     # Dallas
     # All Maps
-    - ip: dal-1.us.uncletopia.com:27015
+    - ip: 74.91.114.138:27015
       network: uncletopia
       region: NACentral
       has_community_maps: false
       crits: false
       spread: false
     # All Maps
-    - ip: dal-1.us.uncletopia.com:27025
+    - ip: 74.91.114.138:27025
       network: uncletopia
       region: NACentral
       has_community_maps: false
       crits: false
       spread: false
     # All Maps+
-    - ip: dal-1.us.uncletopia.com:27035
+    - ip: 74.91.114.138:27035
       network: uncletopia
       region: NACentral
       has_community_maps: true
       crits: false
       spread: false
     # Fixed
-    - ip: dal-1.us.uncletopia.com:27045
+    - ip: 74.91.114.138:27045
       network: uncletopia
       region: NACentral
       has_community_maps: false
@@ -157,7 +157,7 @@ hosts: # jackavery.ca/api/hosts
     ##UT:NAWest
     # Los Angeles
     # All Maps
-    - ip: lax-1.us.uncletopia.com:27015
+    - ip: 64.94.100.50:27015
       network: uncletopia
       region: NAWest
       has_community_maps: false
@@ -165,14 +165,14 @@ hosts: # jackavery.ca/api/hosts
       spread: false
     # LA2 is missing?
     # All Maps+
-    - ip: lax-1.us.uncletopia.com:27035
+    - ip: 64.94.100.50:27035
       network: uncletopia
       region: NAWest
       has_community_maps: true
       crits: false
       spread: false
     # Rototion
-    - ip: lax-1.us.uncletopia.com:27045
+    - ip: 64.94.100.50:27045
       network: uncletopia
       region: NAWest
       has_community_maps: false
@@ -181,28 +181,28 @@ hosts: # jackavery.ca/api/hosts
     
     # Seattle
     # All Maps
-    - ip: sea-1.us.uncletopia.com:27045
+    - ip: 74.91.117.2:27045
       network: uncletopia
       region: NAWest
       has_community_maps: false
       crits: false
       spread: false
     # All Maps+
-    - ip: sea-1.us.uncletopia.com:27045
+    - ip: 74.91.117.2:27045
       network: uncletopia
       region: NAWest
       has_community_maps: true
       crits: false
       spread: false
     # All Maps+
-    - ip: sea-1.us.uncletopia.com:27045
+    - ip: 74.91.117.2:27045
       network: uncletopia
       region: NAWest
       has_community_maps: true
       crits: false
       spread: false
     # Rototion
-    - ip: sea-1.us.uncletopia.com:27045
+    - ip: 74.91.117.2:27045
       network: uncletopia
       region: NAWest
       has_community_maps: false
@@ -212,7 +212,7 @@ hosts: # jackavery.ca/api/hosts
     ##UT:SouthAmerica
     # Sao Paulo
     # All Maps+
-    - ip: sao-1.br.uncletopia.com:27015
+    - ip: 5.188.225.147:27015
       network: uncletopia
       region: SouthAmerica
       has_community_maps: true
@@ -222,56 +222,56 @@ hosts: # jackavery.ca/api/hosts
     ##UT:EUWest
     # Frankfurt
     # All Maps
-    - ip: frk-1.de.uncletopia.com:27015
+    - ip: 135.125.189.220:27015
       network: uncletopia
       region: EUWest
       has_community_maps: false
       crits: false
       spread: false
     # All Maps
-    - ip: frk-1.de.uncletopia.com:27025
+    - ip: 135.125.189.220:27025
       network: uncletopia
       region: EUWest
       has_community_maps: false
       crits: false
       spread: false
     # All Maps+
-    - ip: frk-1.de.uncletopia.com:27035
+    - ip: 135.125.189.220:27035
       network: uncletopia
       region: EUWest
       has_community_maps: true
       crits: false
       spread: false
     # All Maps+
-    - ip: frk-1.de.uncletopia.com:27045
+    - ip: 135.125.189.220:27045
       network: uncletopia
       region: EUWest
       has_community_maps: true
       crits: false
       spread: false
     # Rototion
-    - ip: frk-1.de.uncletopia.com:27055
+    - ip: 135.125.189.220:27055
       network: uncletopia
       region: EUWest
       has_community_maps: false
       crits: false
       spread: false
     # Fixed
-    - ip: frk-1.de.uncletopia.com:27065
+    - ip: 135.125.189.220:27065
       network: uncletopia
       region: EUWest
       has_community_maps: false
       crits: false
       spread: false
     # Stopwatch
-    - ip: frk-1.de.uncletopia.com:27075
+    - ip: 135.125.189.220:27075
       network: uncletopia
       region: EUWest
       has_community_maps: true
       crits: false
       spread: false
     # 5CP
-    - ip: frk-1.de.uncletopia.com:27085
+    - ip: 135.125.189.220:27085
       network: uncletopia
       region: EUWest
       has_community_maps: true
@@ -280,56 +280,56 @@ hosts: # jackavery.ca/api/hosts
     
     # London
     # All Maps
-    - ip: lon-1.uk.uncletopia.com:27015
+    - ip: 51.195.189.144:27015
       network: uncletopia
       region: EUWest
       has_community_maps: false
       crits: false
       spread: false
     # All Maps
-    - ip: lon-1.uk.uncletopia.com:27025
+    - ip: 51.195.189.144:27025
       network: uncletopia
       region: EUWest
       has_community_maps: false
       crits: false
       spread: false
     # All Maps
-    - ip: lon-1.uk.uncletopia.com:27035
+    - ip: 51.195.189.144:27035
       network: uncletopia
       region: EUWest
       has_community_maps: false
       crits: false
       spread: false
     # All Maps+
-    - ip: lon-1.uk.uncletopia.com:27045
+    - ip: 51.195.189.144:27045
       network: uncletopia
       region: EUWest
       has_community_maps: true
       crits: false
       spread: false
     # All Maps+
-    - ip: lon-1.uk.uncletopia.com:27055
+    - ip: 51.195.189.144:27055
       network: uncletopia
       region: EUWest
       has_community_maps: true
       crits: false
       spread: false
     # All Maps+
-    - ip: lon-1.uk.uncletopia.com:27065
+    - ip: 51.195.189.144:27065
       network: uncletopia
       region: EUWest
       has_community_maps: true
       crits: false
       spread: false
     # All Maps+
-    - ip: lon-1.uk.uncletopia.com:27075
+    - ip: 51.195.189.144:27075
       network: uncletopia
       region: EUWest
       has_community_maps: true
       crits: false
       spread: false
     # Rototion
-    - ip: lon-1.uk.uncletopia.com:27085
+    - ip: 51.195.189.144:27085
       network: uncletopia
       region: EUWest
       has_community_maps: false
@@ -339,28 +339,28 @@ hosts: # jackavery.ca/api/hosts
     ##UT:EUNorthEast
     # Warsaw
     # All Maps
-    - ip: waw-1.pl.uncletopia.com:27035
+    - ip: 146.59.52.20:27035
       network: uncletopia
       region: EUNorthEast
       has_community_maps: false
       crits: false
       spread: false
     # All Maps+
-    - ip: waw-1.pl.uncletopia.com:27045
+    - ip: 146.59.52.20:27045
       network: uncletopia
       region: EUNorthEast
       has_community_maps: true
       crits: false
       spread: false
     # All Maps+
-    - ip: waw-1.pl.uncletopia.com:27055
+    - ip: 146.59.52.20:27055
       network: uncletopia
       region: EUNorthEast
       has_community_maps: true
       crits: false
       spread: false
     # Rototion
-    - ip: waw-1.pl.uncletopia.com:27065
+    - ip: 146.59.52.20:27065
       network: uncletopia
       region: EUNorthEast
       has_community_maps: false
@@ -370,7 +370,7 @@ hosts: # jackavery.ca/api/hosts
     ##UT:Asia
     # Hong Kong
     # All Maps+
-    - ip: hgk-1.hk.uncletopia.com:27015
+    - ip: 5.188.230.68:27015
       network: uncletopia
       region: Asia
       has_community_maps: true
@@ -380,28 +380,28 @@ hosts: # jackavery.ca/api/hosts
     ##UT:Oceania
     # Sydney
     # All Maps
-    - ip: syd-1.au.uncletopia.com:27015
+    - ip: 103.212.224.85:27015
       network: uncletopia
       region: Oceania
       has_community_maps: false
       crits: false
       spread: false
     # All Maps
-    - ip: syd-1.au.uncletopia.com:27025
+    - ip: 103.212.224.85:27025
       network: uncletopia
       region: Oceania
       has_community_maps: false
       crits: false
       spread: false
     # All Maps+
-    - ip: syd-1.au.uncletopia.com:27035
+    - ip: 103.212.224.85:27035
       network: uncletopia
       region: Oceania
       has_community_maps: true
       crits: false
       spread: false
     # Rototion
-    - ip: syd-1.au.uncletopia.com:27045
+    - ip: 103.212.224.85:27045
       network: uncletopia
       region: Oceania
       has_community_maps: false
