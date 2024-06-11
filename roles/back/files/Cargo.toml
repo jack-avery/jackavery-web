@@ -23,7 +23,7 @@ tokio = { version = "1.28.2", features = [
   "net",
 ] }
 sourcon = { git = "https://github.com/crescentrose/sourcon.git", rev = "d4b5786" }
-rsourcequery = { git = "https://github.com/jack-avery/rsourcequery.git", rev = "9a0a569" }
+rsourcequery = { git = "https://github.com/jack-avery/rsourcequery.git", rev = "cef64b2" }
 webhook = "2.1.2"
 urlencoding = "2.1.2"
 itertools = "0.11.0"
