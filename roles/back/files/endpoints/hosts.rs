@@ -1,7 +1,7 @@
 use crate::endpoints::BasicMessage;
 use crate::error::WebsiteError;
 
-use rsourcequery::info::{ServerInfo, query};
+use rsourcequery::info::{query_timeout_duration, ServerInfo};
 
 use lazy_static::lazy_static;
 
@@ -161,7 +161,7 @@ async fn refresh_host<'a>(
     host: &HostConfig,
     timeout_dur: &Duration
 ) -> Result<HostInfo, Box<dyn Error + 'a>> {
-    let info: ServerInfo = query(&host.ip, Some(*timeout_dur)).await?;
+    let info: ServerInfo = query_timeout_duration(&host.ip, *timeout_dur).await?;
 
     Ok(HostInfo {
         ip: host.ip.clone(),
