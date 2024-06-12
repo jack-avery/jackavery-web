@@ -471,7 +471,7 @@ const ENTRY = `
 </tr>
 `
 const CONNECT = `
-<a target="_blank" href="steam://connect/%IP"><button>Join!</button></a>
+<a target="_blank" href="steam://connect/%IP"><button class="join_button">Join!</button></a>
 `
 const CONNECT_FULL = `
 <button disabled>Full</button>
@@ -498,9 +498,9 @@ function populate_server_list() {
         let connect = CONNECT.replaceAll("%IP", host.ip);
         if (host.players >= host.maxplayers) {
             connect = CONNECT_FULL;
-            state = `class="full_or_empty"`
+            state = `class="full"`
         } else if (host.players == 0) {
-            state = `class="full_or_empty"`
+            state = `class="empty"`
         }
 
         entry_list += ENTRY

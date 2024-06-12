@@ -79,7 +79,7 @@ button:disabled {
 }
 
 .join_button {
-    color: #577E8F;
+    background-color: #577E8F;
 }
 
 #server_list {
@@ -90,8 +90,12 @@ button:disabled {
     padding: 5px 0px;
 }
 
-td.full_or_empty {
+td.empty {
     color: grey;
+}
+
+td.full {
+    color: #A7584B;
 }
 
 td.map {
