@@ -59,6 +59,15 @@
             </label>
             <br>
 
+            <label>alltalk:
+            <select name="alltalk" id="alltalk" value="1" onchange="update_form()">
+                <option value="2">no preference</option>
+                <option value="1">enabled</option>
+                <option value="0">disabled</option>
+            </select>
+            </label>
+            <br>
+
             <label>population:
             <select name="population" id="population" value="1" onchange="update_form()">
                 <option value="2">all</option>
@@ -90,7 +99,6 @@
             <p>supported networks:</p>
             <div id="networks_container"></div>
 
-            <br>
             <br>
 
             <p><span class="tcolors"><strong>at least one network and region must be selected to start searching!</strong></span></p>

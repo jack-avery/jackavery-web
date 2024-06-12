@@ -33,6 +33,7 @@ struct HostInfo {
     has_community_maps: bool,
     crits: bool,
     spread: bool,
+    alltalk: bool,
     players: u8,
     maxplayers: u8,
     hostname: String,
@@ -46,7 +47,8 @@ pub struct HostConfig {
     region: Region,
     has_community_maps: bool,
     crits: bool,
-    spread: bool
+    spread: bool,
+    alltalk: bool
 }
 
 #[derive(Debug, Clone, Serialize)]
@@ -170,6 +172,7 @@ async fn refresh_host<'a>(
         has_community_maps: host.has_community_maps,
         crits: host.crits,
         spread: host.spread,
+        alltalk: host.alltalk,
         players: info.players,
         maxplayers: info.maxplayers,
         hostname: info.hostname,
@@ -184,6 +187,7 @@ pub async fn get_host_info<'a>(
     pop_pref: Preference,
     crits_pref: Preference,
     spread_pref: Preference,
+    alltalk_pref: Preference
 ) -> Result<HostsEndpointResponse, Box<dyn Error + 'a>> {
     let host_info: Vec<HostInfo> = HOST_INFO.lock().await.clone();
     let hosts: Vec<HostInfo> = host_info.iter()
@@ -211,6 +215,13 @@ pub async fn get_host_info<'a>(
                     Preference::Enabled => h.spread, // yes random spread
                     Preference::Disabled => !h.spread, // no random spread
                 }
+            ) &&
+            (
+                match alltalk_pref {
+                    Preference::None => true, // no pref
+                    Preference::Enabled => h.alltalk, // yes alltalk
+                    Preference::Disabled => !h.alltalk, // no alltalk
+                }
             )
         ).cloned().collect_vec();
 
@@ -221,13 +232,14 @@ pub async fn get_host_info<'a>(
     })
 }
 
-#[get("/hosts/<regions_str>/<allow_community_maps>/<pop_pref>/<crits_pref>/<spread_pref>/<networks_str>")]
+#[get("/hosts/<regions_str>/<allow_community_maps>/<pop_pref>/<crits_pref>/<spread_pref>/<alltalk_pref>/<networks_str>")]
 pub async fn get_hosts(
     regions_str: &str,
     allow_community_maps: bool,
     pop_pref: u8,
     crits_pref: u8,
     spread_pref: u8,
+    alltalk_pref: u8,
     networks_str: &str
 ) -> Result<Json<HostsEndpointResponse>, Json<BasicMessage>> {
     if regions_str.len() > 32 {
@@ -255,7 +267,8 @@ pub async fn get_hosts(
         allow_community_maps,
         pop_pref.into(),
         crits_pref.into(),
-        spread_pref.into()
+        spread_pref.into(),
+        alltalk_pref.into()
     ).await {
         Ok(r) => Ok(Json(r)),
         Err(e) => Err(BasicMessage::new(500, format!("failed: {}", e))),

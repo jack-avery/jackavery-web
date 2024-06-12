@@ -1,6 +1,7 @@
 var crits_pref;
 var spread_pref;
 var population_pref;
+var alltalk_pref;
 var toggle_maps;
 
 var toggle_naw;
@@ -32,6 +33,7 @@ window.onload = function() {
     crits_pref = document.getElementById("crits");
     spread_pref = document.getElementById("spread");
     population_pref = document.getElementById("population");
+    alltalk_pref = document.getElementById("alltalk");
     toggle_maps = document.getElementById("maps");
 
     toggle_naw = document.getElementById("naw");
@@ -66,6 +68,7 @@ window.onload = function() {
         "crits": crits_pref,
         "spread": spread_pref,
         "population": population_pref,
+        "alltalk": alltalk_pref,
         "maps": toggle_maps,
 
         "ip_mode": server_list_ip_mode,
@@ -176,6 +179,7 @@ function search(callback) {
     let crits = crits_pref.value;
     let spread = spread_pref.value;
     let pop = population_pref.value;
+    let alltalk = alltalk_pref.value;
     let allow_community_maps = toggle_maps.value == '1';
 
     let regions = [];
@@ -194,7 +198,7 @@ function search(callback) {
     }
     networks = networks.join(":");
 
-    let query_url = `https://jackavery.ca/api/hosts/${regions}/${allow_community_maps}/${pop}/${crits}/${spread}/${networks}`;
+    let query_url = `https://jackavery.ca/api/hosts/${regions}/${allow_community_maps}/${pop}/${crits}/${spread}/${alltalk}/${networks}`;
     fetch(query_url)
     .then(response => response.json())
     .then(response => {

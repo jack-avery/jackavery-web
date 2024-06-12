@@ -12,6 +12,7 @@ hosts: # jackavery.ca/api/hosts
       has_community_maps: false
       crits: false
       spread: false
+      alltalk: false
     # All Maps+
     - ip: 74.91.123.17:27025
       network: uncletopia
@@ -19,6 +20,7 @@ hosts: # jackavery.ca/api/hosts
       has_community_maps: true
       crits: false
       spread: false
+      alltalk: false
     # Fixed
     - ip: 74.91.123.17:27035
       network: uncletopia
@@ -26,6 +28,7 @@ hosts: # jackavery.ca/api/hosts
       has_community_maps: false
       crits: false
       spread: false
+      alltalk: false
     # Rototion
     - ip: 74.91.123.17:27045
       network: uncletopia
@@ -33,6 +36,7 @@ hosts: # jackavery.ca/api/hosts
       has_community_maps: false
       crits: false
       spread: false
+      alltalk: false
 
     # ATL
     # All Maps
@@ -42,6 +46,7 @@ hosts: # jackavery.ca/api/hosts
       has_community_maps: false
       crits: false
       spread: false
+      alltalk: false
     # All Maps
     - ip: 74.91.112.148:27025
       network: uncletopia
@@ -49,6 +54,7 @@ hosts: # jackavery.ca/api/hosts
       has_community_maps: false
       crits: false
       spread: false
+      alltalk: false
     # All Maps+
     - ip: 74.91.112.148:27035
       network: uncletopia
@@ -56,6 +62,7 @@ hosts: # jackavery.ca/api/hosts
       has_community_maps: true
       crits: false
       spread: false
+      alltalk: false
     # Rototion
     - ip: 74.91.112.148:27045
       network: uncletopia
@@ -63,6 +70,7 @@ hosts: # jackavery.ca/api/hosts
       has_community_maps: false
       crits: false
       spread: false
+      alltalk: false
     
     # Chicago 1
     # All Maps
@@ -72,6 +80,7 @@ hosts: # jackavery.ca/api/hosts
       has_community_maps: false
       crits: false
       spread: false
+      alltalk: false
     # All Maps
     - ip: 104.153.108.63:27025
       network: uncletopia
@@ -79,6 +88,7 @@ hosts: # jackavery.ca/api/hosts
       has_community_maps: false
       crits: false
       spread: false
+      alltalk: false
     # All Maps
     - ip: 104.153.108.63:27035
       network: uncletopia
@@ -86,6 +96,7 @@ hosts: # jackavery.ca/api/hosts
       has_community_maps: false
       crits: false
       spread: false
+      alltalk: false
     # All Maps+
     - ip: 104.153.108.63:27045
       network: uncletopia
@@ -93,6 +104,7 @@ hosts: # jackavery.ca/api/hosts
       has_community_maps: true
       crits: false
       spread: false
+      alltalk: false
     # Chicago 2
     # All Maps+
     - ip: 66.85.14.157:27015
@@ -101,6 +113,7 @@ hosts: # jackavery.ca/api/hosts
       has_community_maps: true
       crits: false
       spread: false
+      alltalk: false
     # Stopwatch
     - ip: 66.85.14.157:27025
       network: uncletopia
@@ -108,6 +121,7 @@ hosts: # jackavery.ca/api/hosts
       has_community_maps: true
       crits: false
       spread: false
+      alltalk: false
     # Rototion
     - ip: 66.85.14.157:27035
       network: uncletopia
@@ -115,6 +129,7 @@ hosts: # jackavery.ca/api/hosts
       has_community_maps: true
       crits: false
       spread: false
+      alltalk: false
     # 5CP
     - ip: 66.85.14.157:27045
       network: uncletopia
@@ -122,6 +137,7 @@ hosts: # jackavery.ca/api/hosts
       has_community_maps: true
       crits: false
       spread: false
+      alltalk: false
     
     ##UT:NACentral
     # Dallas
@@ -132,6 +148,7 @@ hosts: # jackavery.ca/api/hosts
       has_community_maps: false
       crits: false
       spread: false
+      alltalk: false
     # All Maps
     - ip: 74.91.114.138:27025
       network: uncletopia
@@ -139,6 +156,7 @@ hosts: # jackavery.ca/api/hosts
       has_community_maps: false
       crits: false
       spread: false
+      alltalk: false
     # All Maps+
     - ip: 74.91.114.138:27035
       network: uncletopia
@@ -146,6 +164,7 @@ hosts: # jackavery.ca/api/hosts
       has_community_maps: true
       crits: false
       spread: false
+      alltalk: false
     # Fixed
     - ip: 74.91.114.138:27045
       network: uncletopia
@@ -153,6 +172,7 @@ hosts: # jackavery.ca/api/hosts
       has_community_maps: false
       crits: false
       spread: false
+      alltalk: false
     
     ##UT:NAWest
     # Los Angeles
@@ -163,6 +183,7 @@ hosts: # jackavery.ca/api/hosts
       has_community_maps: false
       crits: false
       spread: false
+      alltalk: false
     #TODO:missing?
     # All Maps+
     - ip: 64.94.100.50:27035
@@ -171,6 +192,7 @@ hosts: # jackavery.ca/api/hosts
       has_community_maps: true
       crits: false
       spread: false
+      alltalk: false
     # Rototion
     - ip: 64.94.100.50:27045
       network: uncletopia
@@ -178,6 +200,7 @@ hosts: # jackavery.ca/api/hosts
       has_community_maps: false
       crits: false
       spread: false
+      alltalk: false
     
     # Seattle
     # All Maps
@@ -187,6 +210,7 @@ hosts: # jackavery.ca/api/hosts
       has_community_maps: false
       crits: false
       spread: false
+      alltalk: false
     # All Maps+
     - ip: 74.91.117.2:27025
       network: uncletopia
@@ -194,6 +218,7 @@ hosts: # jackavery.ca/api/hosts
       has_community_maps: true
       crits: false
       spread: false
+      alltalk: false
     # All Maps+
     - ip: 74.91.117.2:27035
       network: uncletopia
@@ -201,6 +226,7 @@ hosts: # jackavery.ca/api/hosts
       has_community_maps: true
       crits: false
       spread: false
+      alltalk: false
     # Rototion
     - ip: 74.91.117.2:27045
       network: uncletopia
@@ -208,6 +234,7 @@ hosts: # jackavery.ca/api/hosts
       has_community_maps: false
       crits: false
       spread: false
+      alltalk: false
     
     ##UT:SouthAmerica
     # Sao Paulo
@@ -218,6 +245,7 @@ hosts: # jackavery.ca/api/hosts
       has_community_maps: true
       crits: false
       spread: false
+      alltalk: false
 
     ##UT:EUWest
     # Frankfurt
@@ -228,6 +256,7 @@ hosts: # jackavery.ca/api/hosts
       has_community_maps: false
       crits: false
       spread: false
+      alltalk: false
     # All Maps
     - ip: 135.125.189.220:27025
       network: uncletopia
@@ -235,6 +264,7 @@ hosts: # jackavery.ca/api/hosts
       has_community_maps: false
       crits: false
       spread: false
+      alltalk: false
     # All Maps+
     - ip: 135.125.189.220:27035
       network: uncletopia
@@ -242,6 +272,7 @@ hosts: # jackavery.ca/api/hosts
       has_community_maps: true
       crits: false
       spread: false
+      alltalk: false
     # All Maps+
     - ip: 135.125.189.220:27045
       network: uncletopia
@@ -249,6 +280,7 @@ hosts: # jackavery.ca/api/hosts
       has_community_maps: true
       crits: false
       spread: false
+      alltalk: false
     # Rototion
     - ip: 135.125.189.220:27055
       network: uncletopia
@@ -256,6 +288,7 @@ hosts: # jackavery.ca/api/hosts
       has_community_maps: false
       crits: false
       spread: false
+      alltalk: false
     # Fixed
     - ip: 135.125.189.220:27065
       network: uncletopia
@@ -263,6 +296,7 @@ hosts: # jackavery.ca/api/hosts
       has_community_maps: false
       crits: false
       spread: false
+      alltalk: false
     # Stopwatch
     - ip: 135.125.189.220:27075
       network: uncletopia
@@ -270,6 +304,7 @@ hosts: # jackavery.ca/api/hosts
       has_community_maps: true
       crits: false
       spread: false
+      alltalk: false
     # 5CP
     - ip: 135.125.189.220:27085
       network: uncletopia
@@ -277,6 +312,7 @@ hosts: # jackavery.ca/api/hosts
       has_community_maps: true
       crits: false
       spread: false
+      alltalk: false
     
     # London
     # All Maps
@@ -286,6 +322,7 @@ hosts: # jackavery.ca/api/hosts
       has_community_maps: false
       crits: false
       spread: false
+      alltalk: false
     # All Maps
     - ip: 51.195.189.144:27025
       network: uncletopia
@@ -293,6 +330,7 @@ hosts: # jackavery.ca/api/hosts
       has_community_maps: false
       crits: false
       spread: false
+      alltalk: false
     # All Maps
     - ip: 51.195.189.144:27035
       network: uncletopia
@@ -300,6 +338,7 @@ hosts: # jackavery.ca/api/hosts
       has_community_maps: false
       crits: false
       spread: false
+      alltalk: false
     # All Maps+
     - ip: 51.195.189.144:27045
       network: uncletopia
@@ -307,6 +346,7 @@ hosts: # jackavery.ca/api/hosts
       has_community_maps: true
       crits: false
       spread: false
+      alltalk: false
     # All Maps+
     - ip: 51.195.189.144:27055
       network: uncletopia
@@ -314,6 +354,7 @@ hosts: # jackavery.ca/api/hosts
       has_community_maps: true
       crits: false
       spread: false
+      alltalk: false
     # All Maps+
     - ip: 51.195.189.144:27065
       network: uncletopia
@@ -321,6 +362,7 @@ hosts: # jackavery.ca/api/hosts
       has_community_maps: true
       crits: false
       spread: false
+      alltalk: false
     # All Maps+
     - ip: 51.195.189.144:27075
       network: uncletopia
@@ -328,6 +370,7 @@ hosts: # jackavery.ca/api/hosts
       has_community_maps: true
       crits: false
       spread: false
+      alltalk: false
     # Rototion
     - ip: 51.195.189.144:27085
       network: uncletopia
@@ -335,6 +378,7 @@ hosts: # jackavery.ca/api/hosts
       has_community_maps: false
       crits: false
       spread: false
+      alltalk: false
 
     ##UT:EUNorthEast
     # Warsaw
@@ -345,6 +389,7 @@ hosts: # jackavery.ca/api/hosts
       has_community_maps: false
       crits: false
       spread: false
+      alltalk: false
     # All Maps+
     - ip: 146.59.52.20:27045
       network: uncletopia
@@ -352,6 +397,7 @@ hosts: # jackavery.ca/api/hosts
       has_community_maps: true
       crits: false
       spread: false
+      alltalk: false
     # All Maps+
     - ip: 146.59.52.20:27055
       network: uncletopia
@@ -359,6 +405,7 @@ hosts: # jackavery.ca/api/hosts
       has_community_maps: true
       crits: false
       spread: false
+      alltalk: false
     # Rototion
     - ip: 146.59.52.20:27065
       network: uncletopia
@@ -366,6 +413,7 @@ hosts: # jackavery.ca/api/hosts
       has_community_maps: false
       crits: false
       spread: false
+      alltalk: false
 
     ##UT:Asia
     # Hong Kong
@@ -376,6 +424,7 @@ hosts: # jackavery.ca/api/hosts
       has_community_maps: true
       crits: false
       spread: false
+      alltalk: false
 
     ##UT:Oceania
     # Sydney
@@ -386,6 +435,7 @@ hosts: # jackavery.ca/api/hosts
       has_community_maps: false
       crits: false
       spread: false
+      alltalk: false
     # All Maps
     - ip: 103.212.224.85:27025
       network: uncletopia
@@ -393,6 +443,7 @@ hosts: # jackavery.ca/api/hosts
       has_community_maps: false
       crits: false
       spread: false
+      alltalk: false
     # All Maps+
     - ip: 103.212.224.85:27035
       network: uncletopia
@@ -400,6 +451,7 @@ hosts: # jackavery.ca/api/hosts
       has_community_maps: true
       crits: false
       spread: false
+      alltalk: false
     # Rototion
     - ip: 103.212.224.85:27045
       network: uncletopia
@@ -407,6 +459,7 @@ hosts: # jackavery.ca/api/hosts
       has_community_maps: false
       crits: false
       spread: false
+      alltalk: false
 
     ##SKIAL:NAWest
     # LA 1
@@ -416,6 +469,7 @@ hosts: # jackavery.ca/api/hosts
       has_community_maps: false
       crits: false
       spread: false
+      alltalk: true
 
     ##SKIAL:NACentral
     # US 1
@@ -425,6 +479,7 @@ hosts: # jackavery.ca/api/hosts
       has_community_maps: false
       crits: false
       spread: false
+      alltalk: true
 
     ##SKIAL:NAEast
     # NY 1
@@ -434,6 +489,7 @@ hosts: # jackavery.ca/api/hosts
       has_community_maps: false
       crits: false
       spread: false
+      alltalk: true
 
     ##SWISHCAST:EUWest
     - ip: 57.129.13.51:27015
@@ -442,6 +498,7 @@ hosts: # jackavery.ca/api/hosts
       has_community_maps: true
       crits: true
       spread: false
+      alltalk: true
 
     ##OPRAH:NAEast
     # Payload
@@ -451,6 +508,7 @@ hosts: # jackavery.ca/api/hosts
       has_community_maps: true
       crits: false
       spread: false
+      alltalk: true
     
     # Hybrid
     - ip: 108.181.63.51:27016
@@ -459,6 +517,7 @@ hosts: # jackavery.ca/api/hosts
       has_community_maps: true
       crits: false
       spread: false
+      alltalk: true
 
     ##CASUALTF:EUWest
     # KOTH
@@ -468,12 +527,14 @@ hosts: # jackavery.ca/api/hosts
       has_community_maps: false
       crits: true
       spread: true
+      alltalk: false
     - ip: 51.38.70.79:27045
       network: casualtf
       region: EUWest
       has_community_maps: false
       crits: true
       spread: true
+      alltalk: false
     # PL/PLR
     - ip: 213.239.196.123:27055
       network: casualtf
@@ -481,12 +542,14 @@ hosts: # jackavery.ca/api/hosts
       has_community_maps: false
       crits: true
       spread: true
+      alltalk: false
     - ip: 51.38.70.79:27055
       network: casualtf
       region: EUWest
       has_community_maps: false
       crits: true
       spread: true
+      alltalk: false
     # CTF
     - ip: 213.239.196.123:27025
       network: casualtf
@@ -494,12 +557,14 @@ hosts: # jackavery.ca/api/hosts
       has_community_maps: false
       crits: true
       spread: true
+      alltalk: false
     - ip: 51.38.70.79:27025
       network: casualtf
       region: EUWest
       has_community_maps: false
       crits: true
       spread: true
+      alltalk: false
     # AD/CP
     - ip: 213.239.196.123:27035
       network: casualtf
@@ -507,12 +572,14 @@ hosts: # jackavery.ca/api/hosts
       has_community_maps: false
       crits: true
       spread: true
+      alltalk: false
     - ip: 51.38.70.79:27035
       network: casualtf
       region: EUWest
       has_community_maps: false
       crits: true
       spread: true
+      alltalk: false
 
     ##CASUALTF:Asia
     # KOTH
@@ -522,6 +589,7 @@ hosts: # jackavery.ca/api/hosts
       has_community_maps: false
       crits: true
       spread: true
+      alltalk: false
     # PL/PLR
     - ip: 51.79.160.48:27055
       network: casualtf
@@ -529,6 +597,7 @@ hosts: # jackavery.ca/api/hosts
       has_community_maps: false
       crits: true
       spread: true
+      alltalk: false
     # CTF
     - ip: 51.79.160.48:27025
       network: casualtf
@@ -536,6 +605,7 @@ hosts: # jackavery.ca/api/hosts
       has_community_maps: false
       crits: true
       spread: true
+      alltalk: false
     # AD/CP
     - ip: 51.79.160.48:27035
       network: casualtf
@@ -543,6 +613,7 @@ hosts: # jackavery.ca/api/hosts
       has_community_maps: false
       crits: true
       spread: true
+      alltalk: false
 
     ##CASUALTF:NAEast
     # KOTH
@@ -552,6 +623,7 @@ hosts: # jackavery.ca/api/hosts
       has_community_maps: false
       crits: true
       spread: true
+      alltalk: false
     # PL/PLR
     - ip: 74.91.123.136:27055
       network: casualtf
@@ -559,6 +631,7 @@ hosts: # jackavery.ca/api/hosts
       has_community_maps: false
       crits: true
       spread: true
+      alltalk: false
     # CTF
     - ip: 74.91.123.136:27025
       network: casualtf
@@ -566,6 +639,7 @@ hosts: # jackavery.ca/api/hosts
       has_community_maps: false
       crits: true
       spread: true
+      alltalk: false
     # AD/CP
     - ip: 74.91.123.136:27035
       network: casualtf
@@ -573,4 +647,5 @@ hosts: # jackavery.ca/api/hosts
       has_community_maps: false
       crits: true
       spread: true
+      alltalk: false
 
