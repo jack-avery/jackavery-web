@@ -12,10 +12,7 @@ var toggle_eune;
 var toggle_as;
 var toggle_oce;
 
-var toggle_uncletopia;
-var toggle_skial;
-var toggle_swishcast;
-var toggle_oprah;
+var networks_container;
 
 var search_button;
 var im_feeling_lucky_button;
@@ -46,10 +43,7 @@ window.onload = function() {
     toggle_as = document.getElementById("as");
     toggle_oce = document.getElementById("oce");
 
-    toggle_uncletopia = document.getElementById("uncletopia");
-    toggle_skial = document.getElementById("skial");
-    toggle_swishcast = document.getElementById("swishcast");
-    toggle_oprah = document.getElementById("oprah");
+    networks_container = document.getElementById("networks_container");
 
     search_button = document.getElementById("search");
     im_feeling_lucky_button = document.getElementById("im_feeling_lucky");
@@ -57,6 +51,15 @@ window.onload = function() {
 
     server_list_div = document.getElementById("server_list");
     server_list_ip_mode = document.getElementById("ip_mode");
+
+    // network internal IDs and their formal name
+    networks_list = {
+        "uncletopia": "uncletopia",
+        "skial": "skial",
+        "swishcast": "swishcast",
+        "oprah": "oprah's petrol station",
+        "casualtf": "casual.tf"
+    }
 
     // global lookup table for id and corresponding element
     lookup = {
@@ -75,11 +78,6 @@ window.onload = function() {
         "eune": toggle_eune,
         "as": toggle_as,
         "oce": toggle_oce,
-
-        "uncletopia": toggle_uncletopia,
-        "skial": toggle_skial,
-        "swishcast": toggle_swishcast,
-        "oprah": toggle_oprah,
     }
 
     regions_list = [
@@ -93,16 +91,23 @@ window.onload = function() {
         "oce"
     ]
 
-    // networks info
-    networks_list = [
-        "uncletopia",
-        "skial",
-        "swishcast",
-        "oprah"
-    ]
-
+    populate_network_list();
     load_preferences();
     update_form();
+}
+
+const NETWORK = `<label><input type="checkbox" id="%ID" onclick="update_form()">%NAME</label>`
+function populate_network_list() {
+    let networks = '';
+    for (network in networks_list) {
+        networks += NETWORK
+            .replaceAll("%ID", network)
+            .replaceAll("%NAME", networks_list[network])
+    }
+    networks_container.innerHTML = networks;
+    for (network in networks_list) {
+        lookup[network] = document.getElementById(network);
+    }
 }
 
 // load query parameters from storage
@@ -174,17 +179,17 @@ function search(callback) {
     let allow_community_maps = toggle_maps.value == '1';
 
     let regions = [];
-    for (i in regions_list) {
-        if (lookup[regions_list[i]].checked) {
-            regions.push(regions_list[i]);
+    for (region in regions_list) {
+        if (lookup[region].checked) {
+            regions.push(region);
         }
     }
     regions = regions.join(":");
 
     let networks = [];
-    for (i in networks_list) {
-        if (lookup[networks_list[i]].checked) {
-            networks.push(networks_list[i]);
+    for (network in networks_list) {
+        if (lookup[network].checked) {
+            networks.push(network);
         }
     }
     networks = networks.join(":");

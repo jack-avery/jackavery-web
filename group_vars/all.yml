@@ -163,7 +163,7 @@ hosts: # jackavery.ca/api/hosts
       has_community_maps: false
       crits: false
       spread: false
-    # LA2 is missing?
+    #TODO:missing?
     # All Maps+
     - ip: 64.94.100.50:27035
       network: uncletopia
@@ -459,3 +459,118 @@ hosts: # jackavery.ca/api/hosts
       has_community_maps: true
       crits: false
       spread: false
+
+    ##CASUALTF:EUWest
+    # KOTH
+    - ip: 213.239.196.123:27045
+      network: casualtf
+      region: EUWest
+      has_community_maps: false
+      crits: true
+      spread: true
+    - ip: 51.38.70.79:27045
+      network: casualtf
+      region: EUWest
+      has_community_maps: false
+      crits: true
+      spread: true
+    # PL/PLR
+    - ip: 213.239.196.123:27055
+      network: casualtf
+      region: EUWest
+      has_community_maps: false
+      crits: true
+      spread: true
+    - ip: 51.38.70.79:27055
+      network: casualtf
+      region: EUWest
+      has_community_maps: false
+      crits: true
+      spread: true
+    # CTF
+    - ip: 213.239.196.123:27025
+      network: casualtf
+      region: EUWest
+      has_community_maps: false
+      crits: true
+      spread: true
+    - ip: 51.38.70.79:27025
+      network: casualtf
+      region: EUWest
+      has_community_maps: false
+      crits: true
+      spread: true
+    # AD/CP
+    - ip: 213.239.196.123:27035
+      network: casualtf
+      region: EUWest
+      has_community_maps: false
+      crits: true
+      spread: true
+    - ip: 51.38.70.79:27035
+      network: casualtf
+      region: EUWest
+      has_community_maps: false
+      crits: true
+      spread: true
+
+    ##CASUALTF:Asia
+    # KOTH
+    - ip: 51.79.160.48:27045
+      network: casualtf
+      region: Asia
+      has_community_maps: false
+      crits: true
+      spread: true
+    # PL/PLR
+    - ip: 51.79.160.48:27055
+      network: casualtf
+      region: Asia
+      has_community_maps: false
+      crits: true
+      spread: true
+    # CTF
+    - ip: 51.79.160.48:27025
+      network: casualtf
+      region: Asia
+      has_community_maps: false
+      crits: true
+      spread: true
+    # AD/CP
+    - ip: 51.79.160.48:27035
+      network: casualtf
+      region: Asia
+      has_community_maps: false
+      crits: true
+      spread: true
+
+    ##CASUALTF:NAEast
+    # KOTH
+    - ip: 74.91.123.136:27045
+      network: casualtf
+      region: NAEast
+      has_community_maps: false
+      crits: true
+      spread: true
+    # PL/PLR
+    - ip: 74.91.123.136:27055
+      network: casualtf
+      region: NAEast
+      has_community_maps: false
+      crits: true
+      spread: true
+    # CTF
+    - ip: 74.91.123.136:27025
+      network: casualtf
+      region: NAEast
+      has_community_maps: false
+      crits: true
+      spread: true
+    # AD/CP
+    - ip: 74.91.123.136:27035
+      network: casualtf
+      region: NAEast
+      has_community_maps: false
+      crits: true
+      spread: true
+
