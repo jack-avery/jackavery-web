@@ -1,8 +1,9 @@
 var crits_pref;
 var spread_pref;
-var population_pref;
 var alltalk_pref;
 var toggle_maps;
+var toggle_full;
+var toggle_empty;
 
 var toggle_naw;
 var toggle_nac;
@@ -16,12 +17,226 @@ var toggle_oce;
 var networks_container;
 
 var search_button;
+var search_button_border;
 var im_feeling_lucky_button;
+var im_feeling_lucky_button_border;
 var error_text;
 
 var server_list_div;
-var server_list_ip_mode;
-var query_servers;
+var query_servers = {
+    "code": 200,
+    "matches": 16,
+    "hosts": [
+        {
+            "ip": "74.91.123.17:27015",
+            "network": "uncletopia",
+            "region": "NAEast",
+            "has_community_maps": false,
+            "crits": false,
+            "spread": false,
+            "alltalk": false,
+            "players": 0,
+            "maxplayers": 24,
+            "hostname": "Uncletopia | New York City | 1 | All Maps",
+            "map": "pd_watergate"
+        },
+        {
+            "ip": "74.91.123.17:27035",
+            "network": "uncletopia",
+            "region": "NAEast",
+            "has_community_maps": false,
+            "crits": false,
+            "spread": false,
+            "alltalk": false,
+            "players": 0,
+            "maxplayers": 24,
+            "hostname": "Uncletopia | New York City | 3 | Fixed",
+            "map": "koth_viaduct"
+        },
+        {
+            "ip": "74.91.123.17:27045",
+            "network": "uncletopia",
+            "region": "NAEast",
+            "has_community_maps": false,
+            "crits": false,
+            "spread": false,
+            "alltalk": false,
+            "players": 0,
+            "maxplayers": 24,
+            "hostname": "Uncletopia | New York City | 4 | Rototion",
+            "map": "cp_gorge"
+        },
+        {
+            "ip": "74.91.112.148:27015",
+            "network": "uncletopia",
+            "region": "NAEast",
+            "has_community_maps": false,
+            "crits": false,
+            "spread": false,
+            "alltalk": false,
+            "players": 2,
+            "maxplayers": 24,
+            "hostname": "Uncletopia | Atlanta | 1 | All Maps",
+            "map": "ctf_pelican_peak"
+        },
+        {
+            "ip": "74.91.112.148:27025",
+            "network": "uncletopia",
+            "region": "NAEast",
+            "has_community_maps": false,
+            "crits": false,
+            "spread": false,
+            "alltalk": false,
+            "players": 0,
+            "maxplayers": 24,
+            "hostname": "Uncletopia | Atlanta | 2 | All Maps",
+            "map": "koth_synthetic_rc6a"
+        },
+        {
+            "ip": "104.153.108.63:27015",
+            "network": "uncletopia",
+            "region": "NAEast",
+            "has_community_maps": false,
+            "crits": false,
+            "spread": false,
+            "alltalk": false,
+            "players": 20,
+            "maxplayers": 24,
+            "hostname": "Uncletopia | Chicago | 1 | All Maps",
+            "map": "pl_snowycoast"
+        },
+        {
+            "ip": "104.153.108.63:27015",
+            "network": "uncletopia",
+            "region": "NAEast",
+            "has_community_maps": false,
+            "crits": false,
+            "spread": false,
+            "alltalk": false,
+            "players": 22,
+            "maxplayers": 24,
+            "hostname": "Uncletopia | Chicago | 1 | All Maps",
+            "map": "koth_harvest_final"
+        },
+        {
+            "ip": "104.153.108.63:27025",
+            "network": "uncletopia",
+            "region": "NAEast",
+            "has_community_maps": false,
+            "crits": false,
+            "spread": false,
+            "alltalk": false,
+            "players": 8,
+            "maxplayers": 24,
+            "hostname": "Uncletopia | Chicago | 2 | All Maps",
+            "map": "pl_upward"
+        },
+        {
+            "ip": "104.153.108.63:27035",
+            "network": "uncletopia",
+            "region": "NAEast",
+            "has_community_maps": false,
+            "crits": false,
+            "spread": false,
+            "alltalk": false,
+            "players": 23,
+            "maxplayers": 24,
+            "hostname": "Uncletopia | Chicago | 3 | All Maps",
+            "map": "pl_barnblitz"
+        },
+        {
+            "ip": "74.91.114.138:27015",
+            "network": "uncletopia",
+            "region": "NACentral",
+            "has_community_maps": false,
+            "crits": false,
+            "spread": false,
+            "alltalk": false,
+            "players": 0,
+            "maxplayers": 24,
+            "hostname": "Uncletopia | Dallas | 1 | All Maps",
+            "map": "koth_lazarus"
+        },
+        {
+            "ip": "74.91.114.138:27025",
+            "network": "uncletopia",
+            "region": "NACentral",
+            "has_community_maps": false,
+            "crits": false,
+            "spread": false,
+            "alltalk": false,
+            "players": 0,
+            "maxplayers": 24,
+            "hostname": "Uncletopia | Dallas | 2 | All Maps",
+            "map": "ctf_landfall"
+        },
+        {
+            "ip": "74.91.123.136:27025",
+            "network": "casualtf",
+            "region": "NAEast",
+            "has_community_maps": false,
+            "crits": true,
+            "spread": true,
+            "alltalk": false,
+            "players": 0,
+            "maxplayers": 24,
+            "hostname": "Casual.TF - US Capture The Flag",
+            "map": "tc_hydro"
+        },
+        {
+            "ip": "74.91.123.136:27045",
+            "network": "casualtf",
+            "region": "NAEast",
+            "has_community_maps": false,
+            "crits": true,
+            "spread": true,
+            "alltalk": false,
+            "players": 0,
+            "maxplayers": 24,
+            "hostname": "Casual.TF - US King of The Hill",
+            "map": "koth_sawmill"
+        },
+        {
+            "ip": "74.91.123.136:27055",
+            "network": "casualtf",
+            "region": "NAEast",
+            "has_community_maps": false,
+            "crits": true,
+            "spread": true,
+            "alltalk": false,
+            "players": 0,
+            "maxplayers": 24,
+            "hostname": "Casual.TF - US Payload / Payload Race",
+            "map": "pl_enclosure_final"
+        },
+        {
+            "ip": "74.91.123.136:27025",
+            "network": "casualtf",
+            "region": "NAEast",
+            "has_community_maps": false,
+            "crits": true,
+            "spread": true,
+            "alltalk": false,
+            "players": 0,
+            "maxplayers": 24,
+            "hostname": "Casual.TF - US Capture The Flag",
+            "map": "tc_hydro"
+        },
+        {
+            "ip": "74.91.123.136:27035",
+            "network": "casualtf",
+            "region": "NAEast",
+            "has_community_maps": false,
+            "crits": true,
+            "spread": true,
+            "alltalk": false,
+            "players": 0,
+            "maxplayers": 24,
+            "hostname": "Casual.TF - US Capture Point / Attack Defend",
+            "map": "cp_metalworks"
+        }
+    ]
+};
 
 var lookup;
 var regions_list;
@@ -32,9 +247,10 @@ window.onload = function() {
 
     crits_pref = document.getElementById("crits");
     spread_pref = document.getElementById("spread");
-    population_pref = document.getElementById("population");
     alltalk_pref = document.getElementById("alltalk");
-    toggle_maps = document.getElementById("maps");
+    toggle_community_maps = document.getElementById("toggle_community_maps");
+    toggle_empty = document.getElementById("toggle_empty");
+    toggle_full = document.getElementById("toggle_full");
 
     toggle_naw = document.getElementById("naw");
     toggle_nac = document.getElementById("nac");
@@ -48,30 +264,30 @@ window.onload = function() {
     networks_container = document.getElementById("networks_container");
 
     search_button = document.getElementById("search");
+    search_button_border = document.getElementById("search_border");
     im_feeling_lucky_button = document.getElementById("im_feeling_lucky");
+    im_feeling_lucky_button_border = document.getElementById("lucky_border");
     error_text = document.getElementById("error_text");
 
     server_list_div = document.getElementById("server_list");
-    server_list_ip_mode = document.getElementById("ip_mode");
 
     // network internal IDs and their formal name
     networks_list = {
-        "uncletopia": "uncletopia",
-        "skial": "skial",
-        "swishcast": "swishcast",
-        "oprah": "oprah's petrol station",
-        "casualtf": "casual.tf"
+        "uncletopia": "Uncletopia",
+        "skial": "Skial",
+        "swishcast": "SwishCast",
+        "oprah": "Oprah's Petrol Station",
+        "casualtf": "Casual.TF"
     }
 
     // global lookup table for id and corresponding element
     lookup = {
         "crits": crits_pref,
         "spread": spread_pref,
-        "population": population_pref,
         "alltalk": alltalk_pref,
-        "maps": toggle_maps,
-
-        "ip_mode": server_list_ip_mode,
+        "maps": toggle_community_maps,
+        "toggle_empty": toggle_empty,
+        "toggle_full": toggle_full,
 
         "naw": toggle_naw,
         "nac": toggle_nac,
@@ -99,7 +315,7 @@ window.onload = function() {
     update_form();
 }
 
-const NETWORK = `<label><input type="checkbox" id="%ID" onclick="update_form()">%NAME</label>`
+const NETWORK = `<label><input type="checkbox" id="%ID" onclick="update_form()">%NAME</label><br>`
 function populate_network_list() {
     let networks = '';
     for (network in networks_list) {
@@ -121,13 +337,17 @@ function load_preferences() {
             continue;
         }
 
-        switch (lookup[item].type) {
-            case "checkbox":
-                lookup[item].checked = (value == "true");
-                break;
-            case "select-one":
-                lookup[item].value = value;
-                break;
+        try {
+            switch (lookup[item].type) {
+                case "checkbox":
+                    lookup[item].checked = (value == "true");
+                    break;
+                case "select-one":
+                    lookup[item].value = value;
+                    break;
+            }
+        } catch {
+            localStorage.clear();
         }
     }
 }
@@ -152,8 +372,8 @@ function update_form() {
     let region_selected = false;
     let network_selected = false;
 
-    for (i in networks_list) {
-        if (lookup[networks_list[i]].checked) {
+    for (network in networks_list) {
+        if (lookup[network].checked) {
             network_selected = true;
             break;
         }
@@ -170,6 +390,14 @@ function update_form() {
     search_button.disabled = disable_search;
     im_feeling_lucky_button.disabled = disable_search;
 
+    if (disable_search) {
+        search_button_border.classList.add("disabled");
+        im_feeling_lucky_button_border.classList.add("disabled");
+    } else {
+        search_button_border.classList.remove("disabled");
+        im_feeling_lucky_button_border.classList.remove("disabled");
+    }
+
     save_preferences();
 }
 
@@ -178,9 +406,10 @@ function update_form() {
 function search(callback) {
     let crits = crits_pref.value;
     let spread = spread_pref.value;
-    let pop = population_pref.value;
+    let allow_empty = toggle_empty.checked;
+    let allow_full = toggle_full.checked;
     let alltalk = alltalk_pref.value;
-    let allow_community_maps = toggle_maps.value == '1';
+    let allow_community_maps = toggle_community_maps.checked;
 
     let regions = [];
     for (i in regions_list) {
@@ -198,7 +427,8 @@ function search(callback) {
     }
     networks = networks.join(":");
 
-    let query_url = `https://jackavery.ca/api/hosts/${regions}/${allow_community_maps}/${pop}/${crits}/${spread}/${alltalk}/${networks}`;
+    let query_url = `https://jackavery.ca/api/hosts/${regions}/${networks}/${allow_empty}/${allow_full}/${allow_community_maps}/${crits}/${spread}/${alltalk}`;
+    console.log(query_url);
     fetch(query_url)
     .then(response => response.json())
     .then(response => {
@@ -219,23 +449,33 @@ function search(callback) {
     });
 }
 
-var ENTRIES_IP_MODE = `<p>click on an IP address to copy the address</p><br><p>%ENTRIES</p>`
-var ENTRY_IP_MODE = `<a onclick="navigator.clipboard.writeText('%IP')">%IP</a> - %HOSTNAME<br>`
-
-var ENTRIES = `<p>click on an IP address to copy the connect info</p><br>%ENTRIES`
-var ENTRY = `
-<h3><a class="join" href="steam://connect/%IP">(join)</a> %HOSTNAME</h3>
-<p>
-<a onclick="navigator.clipboard.writeText('connect %IP')">%IP</a><br>
-%STATUS<br>
-</p>
-<div class="small-vertical-divider"></div>
+const ENTRIES = `<table>
+    <thead>
+        <tr>
+            <td>Hostname</td>
+            <td>Map</td>
+            <td>Players</td>
+            <td>IP</td>
+            <td>Connect</td>
+        </tr>
+        %ENTRIES
+    </thead>
+</table>`
+const ENTRY = `
+<tr %ODD>
+    <td>%HOSTNAME</td>
+    <td class="map">%MAP</td>
+    <td %STATE>%PLAYERS / %MAXPLAYERS</td>
+    <td><button onclick="navigator.clipboard.writeText('%IP')">Copy</a></td>
+    <td>%CONNECT</td>
+</tr>
 `
-
-function change_ip_mode() {
-    populate_server_list();
-    save_preferences();
-}
+const CONNECT = `
+<a target="_blank" href="steam://connect/%IP"><button>Join!</button></a>
+`
+const CONNECT_FULL = `
+<button disabled>Full</button>
+`
 
 // populate the list. if "ip mode" is enabled it only shows IP addresses
 function populate_server_list() {
@@ -243,32 +483,37 @@ function populate_server_list() {
         return
     }
 
-    if (server_list_ip_mode.checked) {
-        let entry_list = '';
-        for (host in query_servers.hosts) {
-            host = query_servers.hosts[host];
-            entry_list += ENTRY_IP_MODE
-                .replaceAll("%IP", host.ip)
-                .replaceAll("%HOSTNAME", host.hostname);
+    let entry_list = '';
+    let odd = false;
+    for (host in query_servers.hosts) {
+        host = query_servers.hosts[host];
+        odd = !odd;
+        
+        let odd_class = '';
+        if (odd) {
+            odd_class = `class="odd"`
         }
-        server_list_div.innerHTML = ENTRIES_IP_MODE.replaceAll("%ENTRIES", entry_list);
-    } else {
-        let entry_list = '';
-        for (host in query_servers.hosts) {
-            host = query_servers.hosts[host];
 
-            let status = `${host.players}/${host.maxplayers} on ${host.map}`
-            if (host.players >= host.maxplayers || host.players == 0) {
-                status = `<span class="full_or_empty">${status}</span>`
-            }
-
-            entry_list += ENTRY
-                .replaceAll("%IP", host.ip)
-                .replaceAll("%HOSTNAME", host.hostname)
-                .replaceAll("%STATUS", status)
+        let state = '';
+        let connect = CONNECT.replaceAll("%IP", host.ip);
+        if (host.players >= host.maxplayers) {
+            connect = CONNECT_FULL;
+            state = `class="full_or_empty"`
+        } else if (host.players == 0) {
+            state = `class="full_or_empty"`
         }
-        server_list_div.innerHTML = ENTRIES.replaceAll("%ENTRIES", entry_list);
+
+        entry_list += ENTRY
+            .replaceAll("%ODD", odd_class)
+            .replaceAll("%IP", host.ip)
+            .replaceAll("%HOSTNAME", host.hostname)
+            .replaceAll("%MAP", host.map)
+            .replaceAll("%PLAYERS", host.players)
+            .replaceAll("%MAXPLAYERS", host.maxplayers)
+            .replaceAll("%STATE", state)
+            .replaceAll("%CONNECT", connect)
     }
+    server_list_div.innerHTML = ENTRIES.replaceAll("%ENTRIES", entry_list);
 }
 
 // search & join a random server

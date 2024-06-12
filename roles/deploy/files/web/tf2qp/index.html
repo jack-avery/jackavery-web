@@ -2,7 +2,6 @@
 
 <html>
     <head>
-        <link rel="stylesheet" href="../css/style.css" />
         <link rel="stylesheet" href="css/style.css" />
         <script src="../js/script.js"></script>
         <script src="js/script.js"></script>
@@ -13,185 +12,151 @@
         <title>jackavery.ca | tf2qp</title>
     </head>
     <body>
-        <header>
-            <h1 class="pagetitle">tf2 community quickplay</h1>
-            
-            <div class="iconbar">
-                <a target="_blank" href="https://github.com/jack-avery">
-                    <svg class="icon" viewBox="0 0 24 24">
-                        <path d="M12 1.27a11 11 0 00-3.48 21.46c.55.09.73-.28.73-.55v-1.84c-3.03.64-3.67-1.46-3.67-1.46-.55-1.29-1.28-1.65-1.28-1.65-.92-.65.1-.65.1-.65 1.1 0 1.73 1.1 1.73 1.1.92 1.65 2.57 1.2 3.21.92a2 2 0 01.64-1.47c-2.47-.27-5.04-1.19-5.04-5.5 0-1.1.46-2.1 1.2-2.84a3.76 3.76 0 010-2.93s.91-.28 3.11 1.1c1.8-.49 3.7-.49 5.5 0 2.1-1.38 3.02-1.1 3.02-1.1a3.76 3.76 0 010 2.93c.83.74 1.2 1.74 1.2 2.94 0 4.21-2.57 5.13-5.04 5.4.45.37.82.92.82 2.02v3.03c0 .27.1.64.73.55A11 11 0 0012 1.27"></path>
-                    </svg>
-                </a>
-                <a target="_blank" href="https://ko-fi.com/raspy">
-                    <svg class="icon" viewBox="0 0 24 24">
-                        <path d="M1 11h4v11H1zm15-7.75C16.65 2.49 17.66 2 18.7 2 20.55 2 22 3.45 22 5.3c0 2.27-2.91 4.9-6 7.7-3.09-2.81-6-5.44-6-7.7C10 3.45 11.45 2 13.3 2c1.04 0 2.05.49 2.7 1.25zM20 17h-7l-2.09-.73.33-.94L13 16h2.82c.65 0 1.18-.53 1.18-1.18 0-.49-.31-.93-.77-1.11L8.97 11H7v9.02L14 22l8.01-3c-.01-1.1-.9-2-2.01-2z"></path>
-                    </svg>
-                </a>
+        <div class="content">
+            <header>
+                <h1 class="pagetitle">Community Quickplay</h1>
+
+                <div class="navbar">
+                    <button class="navtab" onclick="tab('about')" id="aboutnav">Search</button>
+                    <button class="navtab" onclick="tab('faq')" id="faqnav">Frequently Asked Questions</button>
+                </div>
+            </header>
+
+            <div id="abouttab" class="tab">
+                <h2>Search Options</h2>
+
+                <label><span class="info" data-tooltip="Whether players can get random critical hits">?</span> Random crits:
+                <select name="crits" id="crits" value="-1" onchange="update_form()">
+                    <option value="2">No preference</option>
+                    <option value="1">Enabled</option>
+                    <option value="0">Disabled</option>
+                </select>
+                </label>
+                <br>
+
+                <label><span class="info" data-tooltip="Whether the bullet spread from certain guns (e.g. shotguns) is random">?</span> Random bullet spread:
+                <select name="spread" id="spread" value="-1" onchange="update_form()">
+                    <option value="2">No preference</option>
+                    <option value="1">Enabled</option>
+                    <option value="0">Disabled</option>
+                </select>
+                </label>
+                <br>
+
+                <label><span class="info" data-tooltip="Whether RED and BLU team can hear eachother in voice chat">?</span> Alltalk:
+                <select name="alltalk" id="alltalk" value="1" onchange="update_form()">
+                    <option value="2">No preference</option>
+                    <option value="1">Enabled</option>
+                    <option value="0">Disabled</option>
+                </select>
+                </label>
+                <br>
+
+                <label><span class="info" data-tooltip="Whether to show servers running community maps">?</span> Allow community maps:
+                <input type="checkbox" id="toggle_community_maps" onclick="update_form()">
+                </label>
+
+                <p><span class="info" data-tooltip="Whether to show servers without players">?</span> Allow empty servers:
+                <input type="checkbox" id="toggle_empty" onclick="update_form()">
+                </p>
+
+                <p><span class="info" data-tooltip="Whether to show servers without room for new players">?</span> Allow full servers:
+                <input type="checkbox" id="toggle_full" onclick="update_form()">
+                </p>
+                <br>
+
+                <h3>
+                <span class="info" data-tooltip="Which regions to search for servers from">?</span>
+                Regions:
+                </h3>
+                <label><input type="checkbox" id="naw" onclick="update_form()">NA West</label><br>
+                <label><input type="checkbox" id="nac" onclick="update_form()">NA Central</label><br>
+                <label><input type="checkbox" id="nae" onclick="update_form()">NA East</label><br>
+                <label><input type="checkbox" id="sa" onclick="update_form()">South America</label><br>
+                <label><input type="checkbox" id="euw" onclick="update_form()">EU West</label><br>
+                <label><input type="checkbox" id="eune" onclick="update_form()">EU Northeast</label><br>
+                <label><input type="checkbox" id="as" onclick="update_form()">Asia</label><br>
+                <label><input type="checkbox" id="oce" onclick="update_form()">Oceania</label><br>
+                <br>
+
+                <h3>
+                <span class="info" data-tooltip="the server providers to search for servers from">?</span>
+                Supported networks:
+                </h3>
+                <div id="networks_container"></div>
+
+                <br>
+
+                <p><span class="tcolors"><strong>At least one network and region must be selected to start searching!</strong></span></p>
+                <br>
+                <div class="disabled" id="search_border"><button id="search" class="search" onclick="search(populate_server_list)" disabled>Search</button></div>
+                <div class="disabled" id="lucky_border"><button id="im_feeling_lucky" class="search" onclick="search(im_feeling_lucky)" disabled>I'm feeling lucky!</button></div>
+                <br>
+                <br>
+                <p class="error" id="error_text"></p>
+                <div id="server_list"></div>
             </div>
-            <div class="navbar">
-                <button class="navtab" onclick="window.location.href='/index.html'">jackavery.ca</button>
-                <button class="navtab" onclick="tab('about')" id="aboutnav">home</button>
-                <button class="navtab" onclick="tab('faq')" id="faqnav">faq</button>
-            </div>
-        </header>
-        <div class="header-divider"></div>
 
-        <div id="abouttab" class="tab">
-            <h3>search options</h3>
-
-            <br>
-
-            <label><span data-tooltip="whether players can get random critical hits">(i)</span> random crits:
-            <select name="crits" id="crits" value="-1" onchange="update_form()">
-                <option value="2">no preference</option>
-                <option value="1">enabled</option>
-                <option value="0">disabled</option>
-            </select>
-            </label>
-            <br>
-
-            <label><span data-tooltip="whether bullet spread is random">(i)</span> random bullet spread:
-            <select name="spread" id="spread" value="-1" onchange="update_form()">
-                <option value="2">no preference</option>
-                <option value="1">enabled</option>
-                <option value="0">disabled</option>
-            </select>
-            </label>
-            <br>
-
-            <label><span data-tooltip="whether RED and BLU team can hear eachother in voice chat">(i)</span> alltalk:
-            <select name="alltalk" id="alltalk" value="1" onchange="update_form()">
-                <option value="2">no preference</option>
-                <option value="1">enabled</option>
-                <option value="0">disabled</option>
-            </select>
-            </label>
-            <br>
-
-            <label><span data-tooltip="how many players are currently on the server">(i)</span> population:
-            <select name="population" id="population" value="1" onchange="update_form()">
-                <option value="2">all</option>
-                <option value="1">not full</option>
-                <option value="0">allow empty</option>
-            </select>
-            </label>
-            <br>
-
-            <label><span data-tooltip="whether to allow community maps">(i)</span> maps:
-            <select name="maps" id="maps" value="0" onchange="update_form()">
-                <option value="0">stock only</option>
-                <option value="1">allow community</option>
-            </select>
-            </label>
-            <br>
-
-            <br>
-
-            <p>
-            <span data-tooltip="which regions to search for servers from">(i)</span>
-            regions:
-            </p>
-            <label><input type="checkbox" id="naw" onclick="update_form()">NA West</label><br>
-            <label><input type="checkbox" id="nac" onclick="update_form()">NA Central</label><br>
-            <label><input type="checkbox" id="nae" onclick="update_form()">NA East</label><br>
-            <label><input type="checkbox" id="sa" onclick="update_form()">South America</label><br>
-            <label><input type="checkbox" id="euw" onclick="update_form()">EU West</label><br>
-            <label><input type="checkbox" id="eune" onclick="update_form()">EU Northeast</label><br>
-            <label><input type="checkbox" id="as" onclick="update_form()">Asia</label><br>
-            <label><input type="checkbox" id="oce" onclick="update_form()">Oceania</label><br>
-            <br>
-
-            <p>
-            <span data-tooltip="the server providers to search for servers from">(i)</span>
-            supported networks:
-            </p>
-            <div id="networks_container"></div>
-
-            <br>
-
-            <p><span class="tcolors"><strong>at least one network and region must be selected to start searching!</strong></span></p>
-            <br>
-            <button id="search" class="search" onclick="search(populate_server_list)" disabled>search</button>
-            <button id="im_feeling_lucky" class="search" onclick="search(im_feeling_lucky)" disabled>i'm feeling lucky</button>
-            <br>
-            <label><input type="checkbox" id="ip_mode" onclick="change_ip_mode()">only show IP addresses (for favorites)</label>
-            <br>
-            <br>
-            <p class="error" id="error_text"></p>
-            <div class="small-vertical-divider"></div>
-            <div id="server_list">
+            <div id="faqtab" class="tab">
+                <h3>1. Why?</h3>
+                <p>
+                    For many years the playability of Team Fortress 2 has been in jeopardy due to a rampant cheating problem.
+                    <br>
+                    <br>
+                    In shounic's video
+                    <a target="_blank" href="https://www.youtube.com/watch?v=TvH7syo376E">#SaveTF2 #FixTF2 - Possible Disaster?</a>,
+                    two of things he suggests as solutions is the return to the legacy <strong>quickplay</strong> system,
+                    or an implementation of a <strong>community server matchmaking website</strong>.
+                    <br>
+                    <br>
+                    This is my answer: the best of both worlds.
+                </p>
+                <div class="small-vertical-divider"></div>
+                <h3>2. What servers are here?</h3>
+                <p>
+                    Servers with "casual-like" gameplay.
+                    most importantly, <strong>a rotating map pool</strong>, so no 24/7 2fort or similar.
+                    No, I will not be adding support for this, use the server browser.
+                </p>
+                <div class="small-vertical-divider"></div>
+                <h3>3. How does this work?</h3>
+                <p>
+                    I maintain a
+                    <a target="_blank" href="https://github.com/jack-avery/jackavery-web/blob/main/group_vars/all.yml">list of servers</a>
+                    and some metadata about them.
+                    the website updates what it knows about the servers every few seconds.
+                    <br>
+                    <br>
+                    When you ask this website for a game, it will filter through the
+                    server list using your parameters and give you a server (or servers)
+                    to join.
+                    <br>
+                    <br>
+                    I host this website out of pocket. if you want to support me, please
+                    consider <strong>donating</strong> to
+                    <a target="_blank" href="https://ko-fi.com/raspy">my ko-fi</a>.
+                    <br>
+                    If you want to contribute to the functionality of this project,
+                    <a target="_blank" href="https://github.com/jack-avery/jackavery-web">this website</a>
+                    and
+                    <a target="_blank" href="https://github.com/jack-avery/rsourcequery">the query library</a>
+                    are both open source.
+                </p>
+                <div class="small-vertical-divider"></div>
+                <h3>4. I host a server that qualifies. How can I get it added?</h3>
+                <p>
+                    Contact me through my business email at
+                    <strong><span class="tcolors">jack.avery.business@gmail.com</span></strong>
+                    and we can discuss the terms of having your server added to the list.
+                </p>
+                <div class="small-vertical-divider"></div>
+                <h3>5. I don't want my server in this list. Can you remove it?</h3>
+                <p>
+                    Contact me through my business email at
+                    <strong><span class="tcolors">jack.avery.business@gmail.com</span></strong>
+                    and I will remove your server from the list.
+                </p>
             </div>
         </div>
-
-        <div id="faqtab" class="tab">
-            <h3>1. why?</h3>
-            <p>
-                for many years the playability of Team Fortress 2 has been in jeopardy due to a rampant cheating problem.
-                <br>
-                <br>
-                in shounic's video
-                <a target="_blank" href="https://www.youtube.com/watch?v=TvH7syo376E">#SaveTF2 #FixTF2 - Possible Disaster?</a>,
-                two of things he suggests as solutions is the return to the legacy <strong>quickplay</strong> system,
-                or an implementation of a <strong>community server matchmaking website</strong>.
-                <br>
-                <br>
-                this is my answer: the best of both worlds.
-            </p>
-            <div class="small-vertical-divider"></div>
-            <h3>2. what servers are here?</h3>
-            <p>
-                servers with "casual-like" gameplay.
-                most importantly, <strong>a rotating map pool</strong>, so no 24/7 2fort or similar.
-                no, i will not be adding support for this, use the server browser.
-            </p>
-            <div class="small-vertical-divider"></div>
-            <h3>3. how does this work?</h3>
-            <p>
-                i maintain a
-                <a target="_blank" href="https://github.com/jack-avery/jackavery-web/blob/main/group_vars/all.yml">list of servers</a>
-                and some metadata about them.
-                the website updates what it knows about the servers every few seconds.
-                <br>
-                <br>
-                when you ask this website for a game, it will filter through the
-                server list using your parameters and give you a server (or servers)
-                to join.
-                <br>
-                <br>
-                i host this website out of pocket. if you want to support me, please
-                consider <strong>donating</strong> to
-                <a target="_blank" href="https://ko-fi.com/raspy">my ko-fi</a>.
-                <br>
-                if you want to contribute to the functionality of this project,
-                <a target="_blank" href="https://github.com/jack-avery/jackavery-web">this website</a>
-                and
-                <a target="_blank" href="https://github.com/jack-avery/rsourcequery">the query library</a>
-                are both open source.
-            </p>
-            <div class="small-vertical-divider"></div>
-            <h3>4. i host a server that qualifies. how can i get it added?</h3>
-            <p>
-                contact me through my business email at
-                <strong><span class="tcolors">jack.avery.business@gmail.com</span></strong>
-                and we can discuss the terms of having your server added to the list.
-            </p>
-            <div class="small-vertical-divider"></div>
-            <h3>5. i don't want my server in this list. can you remove it?</h3>
-            <p>
-                contact me through my business email at
-                <strong><span class="tcolors">jack.avery.business@gmail.com</span></strong>
-                and i will remove your server from the list.
-            </p>
-        </div>
-
-        <div class="vertical-divider"></div>
-
-        <footer>
-            <p id="c">
-                <a target="_blank" href="https://github.com/jack-avery/jackavery-web">website source code</a>
-                <br>
-                <a target="_blank" href="/legal/PRIVACY.pdf">privacy policy</a>
-            </p>
-        </footer>
     </body>
 </html>

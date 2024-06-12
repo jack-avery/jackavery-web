@@ -1,38 +1,322 @@
-#im_feeling_lucky:enabled {
-    border-color: magenta;
+@font-face {
+    font-family: "TF2 Build";
+    src: url("assets/tf2build-webfont.woff2") format("woff2");
+    font-weight: normal;
+    font-style: normal;
 }
 
-.search {
-    border-color: green;
+@font-face {
+    font-family: "TF2 Secondary";
+    src: url("assets/tf2secondary-webfont.woff2") format("woff2");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "TF2 Professor";
+    src: url("assets/tf2professor-webfont.woff2") format("woff2");
+    font-weight: normal;
+    font-style: normal;
+}
+
+button {
+    color: black;
+    background-color: white;
+    transition-duration: 1s;
+}
+
+button:disabled {
+    color: grey;
+    background-color: #2e2a28;
+}
+
+#search {
+    width: 100%;
+    transition-duration: 1s;
+}
+
+#search:hover {
     color: white;
 }
 
-.search:disabled {
-    border-color: red;
+#search_border {
+    display: inline-block;
+    padding: 1rem;
+    position: relative;
+    background: #577E8F;
+    border-radius: 10px;
+    padding: 3px;
+    transition-duration: 1s;
+}
+
+#search_border.disabled {
+    background: #A7584B;
+    transition-duration: 1s;
+}
+
+#im_feeling_lucky {
+    width: 100%;
+    transition-duration: 1s;
+}
+
+#im_feeling_lucky:hover {
+    color: white;
+}
+
+#lucky_border {
+    display: inline-block;
+    padding: 1rem;
+    position: relative;
+    background: linear-gradient(to right, purple, #577E8F);
+    border-radius: 10px;
+    padding: 3px;
+    transition-duration: 1s;
+}
+
+#lucky_border.disabled {
+    background: linear-gradient(to right, #A7584B, purple);
     color: grey;
+}
+
+.join_button {
+    color: #577E8F;
 }
 
 #server_list {
     background-color: rgb(33, 33, 33);
-    margin: 10px 40px;
-    padding: 20px 0px;
+    border-color: grey;
+    border-radius: 6px;
+    border-width: 3px;
+    padding: 5px 0px;
 }
 
-a.join {
-    color: rgb(128, 255, 128);
-    background-color: rgba(0, 128, 0, 0.1);
+td.full_or_empty {
+    color: grey;
 }
 
-a.join:hover {
-    background-color: rgba(0, 128, 0, 0.5);
-    transition: 0.5s;
-    cursor: pointer;
-}
-
-span.full_or_empty {
-    color: rgb(255, 188, 188);
+td.map {
+    font-family: arial, helvetica, sans-serif;
+    font-size: 20px;
 }
 
 span.grey {
     color: rgb(144, 144, 144);
+}
+
+span.info {
+    font-family: "TF2 Build";
+}
+
+.error {
+    color: red;
+}
+
+::-webkit-scrollbar { 
+    display: none; 
+}
+
+html
+{
+    height: 100%;
+    background-image: url("assets/badwater.jpg");
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-bottom: 20px;
+}
+
+input[type="checkbox"] {
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: black;
+  margin: 0;
+  font: inherit;
+  color: currentColor;
+  width: 1em;
+  height: 1em;
+  border: 0.15em solid #6A6162;
+  margin: 0 0.15em;
+  display: inline-block;
+  grid-template-columns: 1em auto;
+  gap: 0.5em;
+  transition: 1s;
+}
+
+input[type="checkbox"]:checked {
+  background-color: #00BB00;
+  transition: 0.1s;
+}
+
+body
+{
+    width: 90%;
+    max-width: 1200px;
+    border-radius: 6px;
+    background: linear-gradient(to bottom, grey, #A79F97);
+    padding: 2px 2px;
+    margin: 10px auto;
+    filter: drop-shadow(0 10px 5px black)
+    /* animation: body-fadein 0.75s ease forwards; */
+}
+
+div.content
+{
+    border-radius: 6px;
+    background: linear-gradient(to bottom, #A79F97, #68635F);
+    padding: 6px;
+}
+
+.navbar
+{
+    padding-top: 5px;
+    margin-left: 20px;
+    margin-bottom: 0px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+button,
+select
+{
+    margin: 0px 0px;
+    border-radius: 6px;
+    border: 0px;
+    font-size: 20px;
+    background-color: white;
+}
+
+.navtab
+{
+    float: left;
+    display: flex;
+    height: 24px;
+    margin: 1px 1px;
+    margin-bottom: 0px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+@keyframes navtab-select
+{
+    0%
+    {
+        background-color: #D2CDC8;
+    }
+    100%
+    {
+        background-color: #D2CDC8;
+    }
+}
+
+@keyframes navtab-deselect
+{
+    0%
+    {
+        background-color: #6B6866;
+    }
+    100%
+    {
+        background-color: #6B6866;
+    }
+}
+
+button:hover
+{
+    background-color: rgb(56, 56, 56);
+    transition: 0.5s;
+    cursor: pointer;
+}
+
+.tab
+{
+    display: none;
+    border-radius: 6px;
+    background-color: #D2CDC8;
+    padding: 20px;
+    padding-top: 1px;
+}
+
+/* Fonts */
+h1,
+h2,
+h3
+{
+    color: #f89b44;
+    font-family: 'TF2 Build';
+    filter: drop-shadow( 1px  0px 1px black)
+        drop-shadow(-1px  0px 1px black)
+        drop-shadow( 0px  1px 1px black)
+        drop-shadow( 0px -1px 1px black);
+}
+
+p,
+a,
+button,
+label,
+select
+{
+    margin: 1px 0px;
+    color: black;
+    font-family: 'TF2 Secondary';
+    font-size: 20px;
+}
+
+td {
+    font-family: 'TF2 Professor';
+    color: white;
+    font-size: 40px;
+}
+
+tr.odd {
+    background-color: rgb(55, 55, 55);
+}
+
+a
+{
+    color: #5252bd;
+    font-weight: bold;
+    transition: 0.5s;
+    text-decoration: none;
+    border-bottom: 1px dotted #5252bd;
+}
+
+a:hover
+{
+    background-color: #5252bd40;
+    transition: 0.5s;
+    cursor: pointer;
+}
+
+.pagetitle
+{
+    margin: auto;
+    text-align: center;
+    font-size: 40px;
+}
+
+.grey
+{
+    color: rgb(84, 84, 84)
+}
+
+[data-tooltip] {
+    border-bottom: 1px dotted black;
+    text-decoration: none;
+}
+
+[data-tooltip]:hover::after {
+  display: block;
+  position: absolute;
+  content: attr(data-tooltip);
+  border: 1px solid grey;
+  border-radius: 6px;
+  background: #A79F97;
+  color: black;
+  padding: .25em;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
 }

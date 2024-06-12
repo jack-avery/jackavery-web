@@ -180,11 +180,13 @@ async fn refresh_host<'a>(
     })
 }
 
+#[allow(clippy::too_many_arguments)]
 pub async fn get_host_info<'a>(
     regions: Vec<Region>,
     networks: Vec<&str>,
+    allow_empty: bool,
+    allow_full: bool,
     allow_community_maps: bool,
-    pop_pref: Preference,
     crits_pref: Preference,
     spread_pref: Preference,
     alltalk_pref: Preference
@@ -195,13 +197,8 @@ pub async fn get_host_info<'a>(
             regions.contains(&h.region) && // region
             networks.contains(&h.network.as_str()) && // network
             (!h.has_community_maps || allow_community_maps) && // maps
-            (
-                match pop_pref {
-                    Preference::None => true, // no pref
-                    Preference::Enabled => h.players != 0 && h.players < h.maxplayers, // not full, not empty
-                    Preference::Disabled => h.players < h.maxplayers, // not full
-                }
-            ) &&
+            (h.players > 0 || allow_empty) && // empty
+            (h.players < h.maxplayers || allow_full) && // full
             (
                 match crits_pref {
                     Preference::None => true, // no pref
@@ -232,11 +229,13 @@ pub async fn get_host_info<'a>(
     })
 }
 
-#[get("/hosts/<regions_str>/<allow_community_maps>/<pop_pref>/<crits_pref>/<spread_pref>/<alltalk_pref>/<networks_str>")]
+#[allow(clippy::too_many_arguments)]
+#[get("/hosts/<regions_str>/<networks_str>/<allow_empty>/<allow_full>/<allow_community_maps>/<crits_pref>/<spread_pref>/<alltalk_pref>")]
 pub async fn get_hosts(
     regions_str: &str,
+    allow_empty: bool,
+    allow_full: bool,
     allow_community_maps: bool,
-    pop_pref: u8,
     crits_pref: u8,
     spread_pref: u8,
     alltalk_pref: u8,
@@ -264,8 +263,9 @@ pub async fn get_hosts(
     match get_host_info(
         regions,
         networks,
+        allow_empty,
+        allow_full,
         allow_community_maps,
-        pop_pref.into(),
         crits_pref.into(),
         spread_pref.into(),
         alltalk_pref.into()
