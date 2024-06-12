@@ -41,7 +41,7 @@
 
             <br>
 
-            <label>random crits:
+            <label><span data-tooltip="whether players can get random critical hits">(i)</span> random crits:
             <select name="crits" id="crits" value="-1" onchange="update_form()">
                 <option value="2">no preference</option>
                 <option value="1">enabled</option>
@@ -50,7 +50,7 @@
             </label>
             <br>
 
-            <label>random bullet spread:
+            <label><span data-tooltip="whether bullet spread is random">(i)</span> random bullet spread:
             <select name="spread" id="spread" value="-1" onchange="update_form()">
                 <option value="2">no preference</option>
                 <option value="1">enabled</option>
@@ -59,7 +59,7 @@
             </label>
             <br>
 
-            <label>alltalk:
+            <label><span data-tooltip="whether RED and BLU team can hear eachother in voice chat">(i)</span> alltalk:
             <select name="alltalk" id="alltalk" value="1" onchange="update_form()">
                 <option value="2">no preference</option>
                 <option value="1">enabled</option>
@@ -68,7 +68,7 @@
             </label>
             <br>
 
-            <label>population:
+            <label><span data-tooltip="how many players are currently on the server">(i)</span> population:
             <select name="population" id="population" value="1" onchange="update_form()">
                 <option value="2">all</option>
                 <option value="1">not full</option>
@@ -77,7 +77,7 @@
             </label>
             <br>
 
-            <label>maps:
+            <label><span data-tooltip="whether to allow community maps">(i)</span> maps:
             <select name="maps" id="maps" value="0" onchange="update_form()">
                 <option value="0">stock only</option>
                 <option value="1">allow community</option>
@@ -85,7 +85,12 @@
             </label>
             <br>
 
-            <p>regions:</p>
+            <br>
+
+            <p>
+            <span data-tooltip="which regions to search for servers from">(i)</span>
+            regions:
+            </p>
             <label><input type="checkbox" id="naw" onclick="update_form()">NA West</label><br>
             <label><input type="checkbox" id="nac" onclick="update_form()">NA Central</label><br>
             <label><input type="checkbox" id="nae" onclick="update_form()">NA East</label><br>
@@ -96,7 +101,10 @@
             <label><input type="checkbox" id="oce" onclick="update_form()">Oceania</label><br>
             <br>
 
-            <p>supported networks:</p>
+            <p>
+            <span data-tooltip="the server providers to search for servers from">(i)</span>
+            supported networks:
+            </p>
             <div id="networks_container"></div>
 
             <br>

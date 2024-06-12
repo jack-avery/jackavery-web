@@ -244,6 +244,20 @@ a:hover
     cursor: pointer;
 }
 
+[data-tooltip] {
+    border-bottom: 1px dotted #FFFFFF;
+    text-decoration: none;
+}
+
+[data-tooltip]:hover::after {
+  display: block;
+  position: absolute;
+  content: attr(data-tooltip);
+  border: 1px solid grey;
+  background: #0F0F0F;
+  padding: .25em;
+}
+
 .grey
 {
     color: rgb(84, 84, 84)
