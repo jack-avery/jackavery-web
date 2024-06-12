@@ -179,9 +179,9 @@ function search(callback) {
     let allow_community_maps = toggle_maps.value == '1';
 
     let regions = [];
-    for (region in regions_list) {
-        if (lookup[region].checked) {
-            regions.push(region);
+    for (i in regions_list) {
+        if (lookup[regions_list[i]].checked) {
+            regions.push(regions_list[i]);
         }
     }
     regions = regions.join(":");
