@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <link rel="stylesheet" href="../css/style.css" />
+        <meta charset="utf-8" />
+        <link rel="shortcut icon" href="/favicon.ico" />
+        <meta name="viewport" content="initial-scale=1, width=device-width" />
+        <link rel="manifest" href="/manifest.json" />
+        <title>jackavery.ca | debian install for arch users</title>
+    </head>
+    <body>
+        <header>
+            <h1 class="pagetitle">jack avery's devblog</h1>
+
+            <div class="navbar">
+                <button class="navtab" onclick="window.location.href='/index.html#devblog'">go back...</button>
+            </div>
+        </header>
+
+        <div class="header-divider"></div>
+
+        <h1>
+        installing debian (for arch users)
+        </h1>
+        <p>august 2, 2024</p>
+
+        <div class="small-vertical-divider"></div>
+
+        <p>
+        In this downtime between jobs and education I've been spending a lot of time learning programming languages and fiddling with Linux,
+        so I thought I might as well begin to document my adventures in some sort of publicly-available system. A development blog. Devblog?
+        <br>
+        <br>
+        I've used Windows 11 on my home PC for a long time, but the way that Microsoft is leading Windows with things like Recall leaves a lot to be desired for me.
+        I've tried out many distributions of Linux, wondering to myself if it's quite ready yet -- my fondest experiences being with Fedora, and most recently Gentoo.
+        <br>
+        <br>
+        Throughout all of my time fiddling about with distributions though, I've come to cherish the installation experience that I have when I'm installing Arch or Gentoo.
+        Something about having direct, immediate control over everything related to the install via a command line gives me a lot more comfort
+        than sitting and waiting for some graphical installer to finish whatever it's doing.
+        <br>
+        <br>
+        It also just so happens that the little laptop I bought for $100 from my local Best Buy refuses to work correctly with graphical installers.
+        It's much too slow to be running something like Gentoo (I'm aware Gentoo provides binary repositories now, but that doesn't mean all packages have a binary equivalent),
+        and I'm just not a fan of Arch, after trying it multiple times. Bleeding edge just isn't for me.
+        <br>
+        <br>
+        <strong>So what to do?</strong> ... I did a bit of research (approximately One [1] Startpage search) and discovered <a target="_blank" href="https://wiki.debian.org/Debootstrap">debootstrap</a>,
+        and there's <a target="_blank" href="https://gist.github.com/varqox/42e213b6b2dde2b636ef">this gist</a> made by varqox over on GitHub that helped me out.
+        <br>
+        <br>
+        Immediately I loaded up my favorite bootloader for installing better operating systems -- the Arch USB installation medium -- and picked up debootstrap from the Arch repositories.
+        It's a bit more involved than the Arch install -- requiring you to apt install the kernel image you want, and select your repository -- but it really does feel like I'm right back at home.
+        <br>
+        <br>
+        I tried installing using the Ubuntu repository, assuming that debootstrap had its' own list of required packages to install; but I was proven wrong upon seeing ubuntu-advantage in my installed packages.
+        Afterwards, I installed standard Bookworm just to prove to myself it could be done from scratch using debootstrap. All things considered, I think I'll just install Debian this way moving forward.
+        </p>
+
+        <div class="vertical-divider"></div>
+
+        <footer>
+            <p id="c">
+                <a target="_blank" href="https://github.com/jack-avery/jackavery-web">website source code</a>
+                <br>
+                <a target="_blank" href="/legal/PRIVACY.pdf">privacy policy</a>
+            </p>
+        </footer>
+    </body>
+</html>
