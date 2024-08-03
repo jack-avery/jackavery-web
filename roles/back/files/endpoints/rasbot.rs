@@ -2,7 +2,7 @@ use crate::endpoints::BasicMessage;
 
 use rocket::serde::json::Json;
 
-use lazy_static::lazy_static;
+use once_cell::sync::Lazy;
 use serde::Deserialize;
 use std::{
     error::Error,
@@ -12,12 +12,12 @@ use webhook::client::WebhookClient;
 
 use urlencoding::decode;
 
-lazy_static! {
-    // TODO: make this use jackavery.ca as CDN for this image for longevity, though Discord tends to be fine
-    static ref ICON_INFO: &'static str = "https://cdn.discordapp.com/attachments/488850419301220352/1127803740531990588/47289484.png";
-    static ref ICON_ERR: &'static str = "https://cdn.discordapp.com/attachments/488850419301220352/1127803837948907530/47289484.png";
-    static ref WEBHOOK_URL: Arc<Mutex<String>> = Arc::new(Mutex::new(String::new()));
-}
+static ICON_INFO: &str = "https://cdn.discordapp.com/attachments/488850419301220352/1127803740531990588/47289484.png";
+static ICON_ERR: &str = "https://cdn.discordapp.com/attachments/488850419301220352/1127803837948907530/47289484.png";
+
+static WEBHOOK_URL: Lazy<Arc<Mutex<String>>> = Lazy::new(||
+    Arc::new(Mutex::new(String::new()))
+);
 
 #[derive(Clone, Deserialize)]
 pub struct RasbotConfig {
@@ -38,11 +38,11 @@ pub async fn init(config: RasbotConfig) {
 }
 
 async fn info(text: &str) -> Result<(), Box<dyn Error + Send + Sync>> {
-    webhook_send(*ICON_INFO, "info", text).await
+    webhook_send(ICON_INFO, "info", text).await
 }
 
 async fn err(text: &str) -> Result<(), Box<dyn Error + Send + Sync>> {
-    webhook_send(*ICON_ERR, "err", text).await
+    webhook_send(ICON_ERR, "err", text).await
 }
 
 async fn webhook_send(
@@ -57,7 +57,7 @@ async fn webhook_send(
         .send(|message| {
             message
                 .username("rasbot logging")
-                .avatar_url(*ICON_INFO)
+                .avatar_url(ICON_INFO)
                 .embed(|embed| {
                     embed.description(&text_de).author(
                         format!("rasbot: {}", mode).as_str(),

@@ -3,7 +3,7 @@ use crate::error::WebsiteError;
 
 use rsourcequery::info::{query_timeout_duration, ServerInfo};
 
-use lazy_static::lazy_static;
+use once_cell::sync::Lazy;
 
 use rocket::serde::json::Json;
 use serde::{Deserialize, Serialize};
@@ -58,10 +58,9 @@ pub struct HostsEndpointResponse {
     hosts: Vec<HostInfo>,
 }
 
-lazy_static! {
-    // cached host info
-    static ref HOST_INFO: Arc<Mutex<Vec<HostInfo>>> = Arc::new(Mutex::new(Vec::new()));
-}
+static HOST_INFO: Lazy<Arc<Mutex<Vec<HostInfo>>>> = Lazy::new(||
+    Arc::new(Mutex::new(Vec::new()))
+);
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub enum Preference {
