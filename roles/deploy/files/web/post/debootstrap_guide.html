@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <link rel="stylesheet" href="../css/style.css" />
+        <meta charset="utf-8" />
+        <link rel="shortcut icon" href="/favicon.ico" />
+        <meta name="viewport" content="initial-scale=1, width=device-width" />
+        <link rel="manifest" href="/manifest.json" />
+        <title>jackavery.ca | an in-depth debootstrap guide</title>
+    </head>
+    <body>
+        <header>
+            <h1 class="pagetitle">jack avery's devblog</h1>
+
+            <div class="iconbar">
+                <a target="_blank" href="https://github.com/jack-avery">
+                    <svg class="icon" viewBox="0 0 24 24">
+                        <path d="M12 1.27a11 11 0 00-3.48 21.46c.55.09.73-.28.73-.55v-1.84c-3.03.64-3.67-1.46-3.67-1.46-.55-1.29-1.28-1.65-1.28-1.65-.92-.65.1-.65.1-.65 1.1 0 1.73 1.1 1.73 1.1.92 1.65 2.57 1.2 3.21.92a2 2 0 01.64-1.47c-2.47-.27-5.04-1.19-5.04-5.5 0-1.1.46-2.1 1.2-2.84a3.76 3.76 0 010-2.93s.91-.28 3.11 1.1c1.8-.49 3.7-.49 5.5 0 2.1-1.38 3.02-1.1 3.02-1.1a3.76 3.76 0 010 2.93c.83.74 1.2 1.74 1.2 2.94 0 4.21-2.57 5.13-5.04 5.4.45.37.82.92.82 2.02v3.03c0 .27.1.64.73.55A11 11 0 0012 1.27"></path>
+                    </svg>
+                </a>
+                <a target="_blank" href="https://ko-fi.com/raspy">
+                    <svg class="icon" viewBox="0 0 24 24">
+                        <path d="M1 11h4v11H1zm15-7.75C16.65 2.49 17.66 2 18.7 2 20.55 2 22 3.45 22 5.3c0 2.27-2.91 4.9-6 7.7-3.09-2.81-6-5.44-6-7.7C10 3.45 11.45 2 13.3 2c1.04 0 2.05.49 2.7 1.25zM20 17h-7l-2.09-.73.33-.94L13 16h2.82c.65 0 1.18-.53 1.18-1.18 0-.49-.31-.93-.77-1.11L8.97 11H7v9.02L14 22l8.01-3c-.01-1.1-.9-2-2.01-2z"></path>
+                    </svg>
+                </a>
+            </div>
+            <div class="navbar">
+                <button class="navtab" onclick="window.location.href='/index.html#devblog'">go back...</button>
+            </div>
+        </header>
+
+        <div class="header-divider"></div>
+
+        <h1>
+        an in-depth debootstrap guide
+        </h1>
+        <p>august 26, 2024</p>
+
+        <div class="small-vertical-divider"></div>
+
+        <h2 id="toc">
+        table of contents
+        </h2>
+        <ol>
+            <li><a href="#benefits">1. the benefits</a></li>
+            <li><a href="#drawbacks">2. the drawbacks</a></li>
+            <li><a href="#get-started">3. getting started</a></li>
+            <li><a href="#connection">4. internet connection</a></li>
+            <li><a href="#formatting">5. formatting your drive</a></li>
+            <li><a href="#bootstrapping">6. bootstrapping debian</a></li>
+            <li><a href="#configuring">7. configuring debian</a></li>
+            <li><a href="#encrypted">8. addendum: encrypted swap and root</a></li>
+        </ol>
+
+        <div class="small-vertical-divider"></div>
+
+        <h2 id="benefits">
+        1. what are the benefits over the standard debian installer?
+        </h2>
+
+        <p>
+        by installing debian manually using debootstrap you have full and absolute control over everything before your first boot.
+        for <strong>arch</strong> and <strong>gentoo</strong> users, this installation method may feel more familiar.
+        <br>
+        <br>
+        likewise, a lot of the information available in the <a target="_blank" href="https://wiki.archlinux.org/title/Main_page">arch wiki</a>
+        for setting things up applies just as well to installing debian this way.
+        </p>
+
+        <div class="small-vertical-divider"></div>
+
+        <h2 id="drawbacks">
+        2. what are the drawbacks over standard debian (& derivatives) installers?
+        </h2>
+
+        <p>
+        a lot of the draw of Linux over other operating systems is deeper control of the system.
+        of course, having deeper control also comes with less convenience; less is done for you, and as such, you need to learn more to have things done the way you want.
+        <br>
+        <br>
+        installing a debian system via debootstrap will also almost always take longer.
+        </p>
+
+        <div class="small-vertical-divider"></div>
+
+        <h2 id="get-started">
+        3. how do i get started?
+        </h2>
+
+        <p>
+        for installing debian via debootstrap i, ironically, recommend using the <a target="_blank" href="https://archlinux.org/download/">arch installation medium</a>.
+        <br>
+        <br>
+        the arch installation medium comes with some useful tools that we will be using and has lots of support for things like wifi adapters.
+        <br>
+        <br>
+        you can burn the downloaded .iso onto a flash drive (USB drive) using an application such as
+        <a target="_blank" href="https://etcher.balena.io/">balena etcher</a> or
+        <a target="_blank" href="https://rufus.ie/en/">rufus</a>.
+        <br>
+        <br>
+        once you have your drive, plug it into whatever you want to install debian onto, and boot into it from the BIOS.
+        how you get into your BIOS and select a boot drive is specific to your motherboard, but mashing F12 and/or Delete on startup will probably bring you to the right place.
+        <br>
+        <br>
+        this guide goes over installing debian. for a detailed guide on setting up an encrypted Ubuntu installation you can see <a target="_blank" href="https://semjonov.de/posts/2021-09/minimal-ubuntu-installation-with-debootstrap/">this post</a> by Anton.
+        </p>
+
+        <div class="small-vertical-divider"></div>
+
+        <h2 id="connection">
+        4. internet connection
+        </h2>
+
+        <p>
+        now that you're in the arch installation medium, you need to verify that you have an internet connection.<br>
+        <strong>it's recommended you use an ethernet connection instead of wifi since it vastly simplifies this process!</strong>
+        <br>
+        <br>
+        you can try this to verify your connection:
+        <span class="code">
+            <span class="red">root</span>@archiso ~ # ping 8.8.8.8
+        </span>
+        this will attempt to ping google. <strong>if this succeeds, skip this section.</strong> see the end of the section for a successful ping.
+        <br>
+        <br>
+        if you're not using ethernet, there's a good chance you'll get something like:
+        <span class="code">
+            ping: connect: Network is unreachable
+        </span>
+        this means that you need to connect to wifi.<br>
+        you will likely need to unblock some required operations first:
+        <span class="code">
+            <span class="red">root</span>@archiso ~ # rfkill unblock all
+        </span>
+        then, you can open <strong>iwctl</strong>, the REPL (read, evaluate, print, loop) for controlling wifi:
+        <span class="code">
+            <span class="red">root</span>@archiso ~ # iwctl<br>
+            NetworkConfigurationEnabled: disabled<br>
+            StateDirectory: /var/lib/iwd<br>
+            Version: 2.17<br>
+            <span class="green">[iwd]</span>#
+        </span>
+        you can list your wireless devices using <strong>device list</strong>:
+        <span class="code">
+            <span class="green">[iwd]</span># device list
+        </span>
+        there is a good chance you'll have one named <strong>wlan0</strong>. enable it like so:
+        <span class="code">
+            <span class="green">[iwd]</span># device wlan0 set-property Powered on
+        </span>
+        this should put it to station mode. you can then scan for networks and list them:
+        <span class="code">
+            <span class="green">[iwd]</span># station wlan0 scan<br>
+            <span class="green">[iwd]</span># station wlan0 get-networks
+        </span>
+        this should have some familiar names for wifi networks. connect to yours like so:
+        <span class="code">
+            <span class="green">[iwd]</span># station wlan0 connect MYNETWORK<br>
+            Type the network passphrase for MYNETWORK psk.<br>
+            <span class="skyblue">Passphrase:</span> ********<br>
+            <span class="green">[iwd]</span># exit
+        </span>
+        now you should be able to ping google again and see success:
+        <span class="code">
+            <span class="red">root</span>@archiso ~ # ping 8.8.8.8<br>
+            PING 8.8.8.8 (8.8.8.8) 56(84) bytes of data.<br>
+            64 bytes from 8.8.8.8: icmp_seq=1 ttl=114 time=13.4ms<br>
+            [ ... continues until you hit Ctrl+C ]
+            ^C<br>
+            --- 8.8.8.8 ping statistics ---<br>
+            2 packets transmitted, 2 received, 0% packet loss, time 2003ms
+        </span>
+        now that you have a working internet connection, you can continue.
+        </p>
+
+        <div class="small-vertical-divider"></div>
+
+        <h2 id="formatting">
+        5. formatting your drive
+        </h2>
+
+        <p>
+        before you can install anything, you need to partition and format your drive.<br>
+        <a target="_blank" href="https://wiki.archlinux.org/title/Installation_guide#Partition_the_disks">the arch wiki has a good guide for this</a>.
+        since you're on the arch installation medium, this guide should work just fine.<br>
+        <strong>stop once you hit 2 Installation as those instructions are for Arch Linux, not Debian!</strong>
+        </p>
+
+        <div class="small-vertical-divider"></div>
+
+        <h2 id="bootstrapping">
+        6. bootstrapping debian
+        </h2>
+
+        <p>
+        if you've done everything correctly, you should now have your drive partitioned, formatted, and mounted on <strong>/mnt</strong>.<br>
+        now you'll need to install debootstrap:
+        <span class="code">
+            <span class="red">root</span>@archiso ~ # pacman -Sy <span class="grey"># update your local repositories</span><br>
+            <span class="red">root</span>@archiso ~ # pacman -S debootstrap <span class="grey"># install debootstrap</span>
+        </span>
+        <br>
+        now is the time to pick your <a target="_blank" href="https://wiki.debian.org/DebianReleases">debian release</a>:
+        </p>
+        <ol>
+            <li>1. <a target="_blank" href="https://wiki.debian.org/DebianStable">stable</a> -- major updates every 2 years. updates are slow, but the current release is well-maintained</li>
+            <li>2. <a target="_blank" href="https://wiki.debian.org/DebianUnstable">unstable</a> -- the most up-to-date (does not mean recent), but also little to no quality assurance</li>
+            <li>1. <a target="_blank" href="https://wiki.debian.org/DebianTesting">testing</a> -- the current working version of the next stable release. a week or so behind unstable, some quality assurance</li>
+        </ol>
+        <p>
+        i personally recommend <strong>testing</strong> as it includes some nice new changes that stable may be missing.<br>
+        once you've decided, you can bootstrap your debian system like so:
+        <span class="code">
+            <span class="red">root</span>@archiso ~ # debootstrap --arch amd64 testing /mnt https://deb.debian.org/debian<br>
+            <span class="grey"># . . . . . . . . . . . . . . . . . | . . L you can change this out for your preferred release</span><br>
+            <span class="grey"># . . . . . . . . . . . . . . . . . L you'll need to swap this out if you're not using an x86_64 processor (e.g. aarch64)</span>
+        </span>
+        now that you have a minimal debian system bootstrapped, do some early setup:
+        <span class="code">
+            <span class="red">root</span>@archiso ~ # genfstab -U /mnt > /mnt/etc/fstab <span class="grey"># generate the <a target="_blank" href="https://wiki.archlinux.org/title/Fstab">fstab</a></span><br>
+            <span class="red">root</span>@archiso ~ # cp /etc/hosts /mnt/etc/hosts <span class="grey"># copy the hosts file</span><br>
+            <span class="red">root</span>@archiso ~ # arch-chroot /mnt <span class="grey"># enter the installation</span><br>
+            root@archiso:/# source /etc/profile <span class="grey"># set our environment so we can use debian commands easily</span><br>
+            root@archiso:/# PS1="(chroot) $PS1" <span class="grey"># set the prompt so we're not confused where we are</span><br>
+            (chroot) root@archiso:/#
+        </span>
+        </p>
+
+        <div class="small-vertical-divider"></div>
+
+        <h2 id="configuring">
+        7. configuring debian
+        </h2>
+
+        <p>
+        we will need to update our apt sources list, since it currently only has the release base:
+        <span class="code">
+            (chroot) root@archiso:/# apt install lsb-release <span class="grey"># install the lsb_release tool</span><br>
+            (chroot) root@archiso:/# CODENAME=$(lsb_release --codename --short) <span class="grey"># set the CODENAME variable for use</span><br>
+            (chroot) root@archiso:/# cat > /etc/apt/sources.list << HEREDOC<br>
+            > deb https://deb.debian.org/debian/ $CODENAME main contrib non-free<br>
+            > deb-src https://deb.debian.org/debian/ $CODENAME main contrib non-free<br>
+            > deb https://security.debian.org/debian-security $CODENAME-security main contrib non-free<br>
+            > deb-src https://security.debian.org/debian-security $CODENAME-security main contrib non-free<br>
+            > deb https://deb.debian.org/debian/ $CODENAME-updates main contrib non-free<br>
+            > deb-src https://deb.debian.org/debian/ $CODENAME-updates main contrib non-free<br>
+            > HEREDOC <span class="grey"># set the apt sources list using a "heredoc"</span><br>
+            (chroot) root@archiso:/# apt update <span class="grey"># update our local apt cache</span>
+        </span>
+        for an explanation on the apt sources list, check <a target="_blank" href="https://wiki.debian.org/SourcesList">this article</a> in the debian wiki.
+        <br>
+        <br>
+        choose your timezone:
+        <span class="code">
+            (chroot) root@archiso:/# dpkg-reconfigure tzdata
+        </span>
+        use the arrow keys to navigate and enter to select.
+        <br>
+        <br>
+        choose your locales:
+        <span class="code">
+            (chroot) root@archiso:/# apt install locales<br>
+            (chroot) root@archiso:/# dpkg-reconfigure locales
+        </span>
+        use the arrow keys to navigate, space to select, and enter to confirm.<br>
+        for example, scroll down to <strong>en_US.UTF-8 UTF-8</strong>, space to select, and enter to confirm.
+        <br>
+        <br>
+        set your hostname:
+        <span class="code">
+            (chroot) root@archiso:/# echo "debian" > /etc/hostname <span class="grey"># debian is here as an example, you can set it to anything you like</span>
+        </span>
+        <br>
+        install the kernel:
+        <span class="code">
+            (chroot) root@archiso:/# apt search linux-image | less <span class="grey"># use your arrow keys to navigate, and press q to exit 'less'</span><br>
+            (chroot) root@archiso:/# apt install linux-image-amd64 <span class="grey"># this is fine as a default if you don't have a preference</span>
+        </span>
+        now to install the bootloader. for this we'll be using grub2:
+        <span class="code">
+            (chroot) root@archiso:/# apt install grub2 <span class="grey"># install grub2 tools</span><br>
+            (chroot) root@archiso:/# apt install grub-efi-amd64-bin <span class="grey"># install the grub efi tools for amd64 (or your architecture)</span><br>
+            (chroot) root@archiso:/# grub-install --efi-directory=/boot <span class="grey"># /boot, or your efi directory; /efi is also common</span><br>
+            (chroot) root@archiso:/# update-grub <span class="grey"># update grub with your kernel</span>
+        </span>
+        <br>
+        and finally, to set up your personal user. a lot of stuff will break if you try to use root as your default user:
+        <span class="code">
+            (chroot) root@archiso:/# apt install sudo <span class="grey"># install the 'sudo' application for privilege escalation</span><br>
+            (chroot) root@archiso:/# useradd -UmG sudo -s /bin/bash jack <span class="grey"># replace 'jack' with your preferred username</span><br>
+            (chroot) root@archiso:/# passwd jack <span class="grey"># set your password</span><br>
+            (chroot) root@archiso:/# exit <span class="grey"># all done here! time to leave our chroot</span><br>
+            <span class="red">root</span>@archiso ~ # umount -R /mnt <span class="grey"># unmount the drives to avoid corrupting your work!</span><br>
+            <span class="red">root</span>@archiso ~ # reboot <span class="grey"># reboot and enjoy!</span>
+        </span>
+        you can now continue to install a display manager (e.g. lightdm), desktop environment (e.g. xfce4) or window manager (e.g. i3), and your usual system utilities!
+        </p>
+
+        <div class="small-vertical-divider"></div>
+
+        <h2 id="encrypted">
+        8. addendum: encrypted swap & root
+        </h2>
+
+        <p>
+        a lot of users prefer to encrypt their root and swap. this prevents people from seeing their files if, say, you lose the device.<br>
+        we encrypt swap as well, since data persists in swap even after shutdown.<br>
+        it takes a bit more setup, and starts before you partition your drives.<br>
+        this is adapted and simplified from arch's <a target="_blank" href="https://wiki.archlinux.org/title/Dm-crypt/Encrypting_an_entire_system">system</a> and <a target="_blank" href="https://wiki.archlinux.org/title/Dm-crypt/Swap_encryption">swap</a> encryption guides.
+        <br>
+        <br>
+        for this guide,
+        <ul>
+            <li>/dev/sda1 is the EFI partition</li>
+            <li>/dev/sda2 is the root partition</li>
+        </ul>
+        </p>
+        <p>
+        ... but, your setup may differ.<br>
+        we will have swap space as a <a target="_blank" href="https://wiki.archlinux.org/title/Swap#Swap_file">file</a>.<br>
+        this will be a rapid-fire of things in order.
+        <br>
+        <br>
+        immediately after partitioning your drives:
+        <span class="code">
+            <span class="red">root</span>@archiso ~ # cryptsetup -v luksFormat /dev/sda2 <span class="grey"># give it a good password!</span><br>
+            <span class="red">root</span>@archiso ~ # cryptsetup open /dev/sda2 root <span class="grey"># /dev/sda2 becomes /dev/mapper/root</span><br>
+            <span class="red">root</span>@archiso ~ # mkfs.ext4 /dev/mapper/root <span class="grey"># ext4 or your preferred filesystem</span><br>
+            <span class="red">root</span>@archiso ~ # mount /dev/mapper/root /mnt <span class="grey"># mount root</span><br>
+            <span class="red">root</span>@archiso ~ # mount --mkdir /dev/sda1 /mnt/boot <span class="grey"># mount the EFI partition</span><br>
+            <span class="red">root</span>@archiso ~ # mkswap -U clear --size 4G --file /mnt/swapfile <span class="grey"># make our swapfile...</span><br>
+            <span class="grey"># note: for a swapfile on btrfs, see <a target="_blank" href="https://wiki.archlinux.org/title/Btrfs#Swap_file">this</a>.</span><br>
+            <span class="red">root</span>@archiso ~ # swapon /mnt/swapfile <span class="grey"># turn it on</span><br>
+            <span class="red">root</span>@archiso ~ # pacman -Sy && pacman -S debootstrap <span class="grey"># install debootstrap</span><br>
+            <span class="red">root</span>@archiso ~ # debootstrap --arch amd64 testing /mnt https://deb.debian.org/debian <span class="grey"># bootstrap as normal</span><br>
+            <span class="red">root</span>@archiso ~ # genfstab /mnt > /mnt/etc/fstab <span class="grey"># generate fstab</span><br>
+            <span class="red">root</span>@archiso ~ # lsblk -f <span class="grey"># list drives with UUIDs</span>
+        </span>
+        make note of the UUID of the partition with crypto_LUKS as its' FSTYPE! this will be important!
+        <span class="code">
+            <span class="red">root</span>@archiso ~ # arch-chroot /mnt <span class="grey"># enter the new root</span><br>
+            root@archiso:/# source /etc/profile <span class="grey"># set our environment so we can use debian commands easily</span><br>
+            root@archiso:/# PS1="(chroot) $PS1" <span class="grey"># set the prompt so we're not confused where we are</span><br>
+            (chroot) root@archiso:/# apt install linux-image-amd64 grub2 grub-efi-amd64-bin <span class="grey"># install kernel and grub</span><br>
+            (chroot) root@archiso:/# apt install cryptsetup-initramfs <span class="grey"># install the cryptsetup initramfs hook</span><br>
+            (chroot) root@archiso:/# editor /etc/crypttab <span class="grey"># open your crypttab</span>
+        </span>
+        in your crypttab, insert:
+        <span class="code">
+            root UUID=<span class="grey">your-luks-encrypted-partitions-uuid</span> none luks<br>
+            <span class="grey">... for example, mine looks like:</span><br>
+            root UUID=3af23466-44a4-4142-9f2d-e6e657b079d2 none luks
+        </span>
+        save and exit. in vim, this would be Escape -> :wq -> Enter. in nano, this would be Ctrl+O -> Enter -> Ctrl+X.<br>
+        <span class="code">
+            (chroot) root@archiso:/# update-initramfs -u <span class="grey"># update the initramfs</span>
+        </span>
+        your encrypted root is ready, and you can continue the installation as normal <a href="#configuring">here</a>.<br>
+        you can skip installing the kernel and grub as we've already done that.
+        </p>
+
+        <div class="vertical-divider"></div>
+
+        <footer>
+            <p id="c">
+                <a target="_blank" href="https://github.com/jack-avery/jackavery-web">website source code</a>
+                <br>
+                <a target="_blank" href="/legal/PRIVACY.pdf">privacy policy</a>
+            </p>
+        </footer>
+    </body>
+</html>

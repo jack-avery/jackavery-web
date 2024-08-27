@@ -320,3 +320,33 @@ iframe.large
     display: flex;
     justify-content: center;
 }
+
+span.code
+{
+    display: block;
+    background-color: rgb(34, 34, 34);
+    margin: 5px 30px;
+    padding: 5px;
+    font-family: monospace;
+    width: fit-content;
+}
+
+span.red
+{
+    color: rgb(160, 0, 0);
+}
+
+span.green
+{
+    color: rgb(0, 160, 0);
+}
+
+span.skyblue
+{
+    color: skyblue
+}
+
+span.magenta
+{
+    color: magenta
+}
