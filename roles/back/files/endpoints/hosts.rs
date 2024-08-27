@@ -189,43 +189,46 @@ pub async fn get_host_info<'a>(
     crits_pref: Preference,
     spread_pref: Preference,
     alltalk_pref: Preference
-) -> Result<HostsEndpointResponse, Box<dyn Error + 'a>> {
-    let host_info: Vec<HostInfo> = HOST_INFO.lock().await.clone();
-    let hosts: Vec<HostInfo> = host_info.iter()
+) -> HostsEndpointResponse {
+    let hosts: Vec<HostInfo> = HOST_INFO
+        .lock()
+        .await
+        .clone()
+        .iter()
         .filter(|h|
-            regions.contains(&h.region) && // region
-            networks.contains(&h.network.as_str()) && // network
-            (!h.has_community_maps || allow_community_maps) && // maps
-            (h.players > 0 || allow_empty) && // empty
-            (h.players < h.maxplayers || allow_full) && // full
-            (
-                match crits_pref {
-                    Preference::None => true, // no pref
-                    Preference::Enabled => h.crits, // yes random crits
-                    Preference::Disabled => !h.crits, // no random crits
-                }
-            ) &&
-            (
-                match spread_pref {
-                    Preference::None => true, // no pref
-                    Preference::Enabled => h.spread, // yes random spread
-                    Preference::Disabled => !h.spread, // no random spread
-                }
-            ) &&
-            (
-                match alltalk_pref {
-                    Preference::None => true, // no pref
-                    Preference::Enabled => h.alltalk, // yes alltalk
-                    Preference::Disabled => !h.alltalk, // no alltalk
-                }
-            )
-        ).cloned().collect_vec();
+        regions.contains(&h.region) && // region
+        networks.contains(&h.network.as_str()) && // network
+        (!h.has_community_maps || allow_community_maps) && // maps
+        (h.players > 0 || allow_empty) && // empty
+        (h.players < h.maxplayers || allow_full) && // full
+        (
+            match crits_pref {
+                Preference::None => true, // no pref
+                Preference::Enabled => h.crits, // yes random crits
+                Preference::Disabled => !h.crits, // no random crits
+            }
+        ) &&
+        (
+            match spread_pref {
+                Preference::None => true, // no pref
+                Preference::Enabled => h.spread, // yes random spread
+                Preference::Disabled => !h.spread, // no random spread
+            }
+        ) &&
+        (
+            match alltalk_pref {
+                Preference::None => true, // no pref
+                Preference::Enabled => h.alltalk, // yes alltalk
+                Preference::Disabled => !h.alltalk, // no alltalk
+            }
+        )
+    ).cloned().collect_vec();
 
-    Ok(HostsEndpointResponse{
+    HostsEndpointResponse{
         code: 200,
         matches: hosts.len(),
         hosts
-    })
+    }
 }
 
 #[allow(clippy::too_many_arguments)]
@@ -259,7 +262,7 @@ pub async fn get_hosts(
     }
     let networks: Vec<&str> = networks_str.split(':').collect();
 
-    match get_host_info(
+    Ok(Json(get_host_info(
         regions,
         networks,
         allow_empty,
@@ -268,8 +271,5 @@ pub async fn get_hosts(
         crits_pref.into(),
         spread_pref.into(),
         alltalk_pref.into()
-    ).await {
-        Ok(r) => Ok(Json(r)),
-        Err(e) => Err(BasicMessage::new(500, format!("failed: {}", e))),
-    }
+    ).await))
 }
