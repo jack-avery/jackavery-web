@@ -9,7 +9,7 @@ use rocket::serde::json::Json;
 use serde::{Deserialize, Serialize};
 
 use std::sync::Arc;
-use tokio::sync::Mutex;
+use tokio::sync::RwLock;
 
 use itertools::EitherOrBoth::{Both, Left, Right};
 use itertools::Itertools;
@@ -58,8 +58,8 @@ pub struct HostsEndpointResponse {
     hosts: Vec<HostInfo>,
 }
 
-static HOST_INFO: Lazy<Arc<Mutex<Vec<HostInfo>>>> = Lazy::new(||
-    Arc::new(Mutex::new(Vec::new()))
+static HOST_INFO: Lazy<Arc<RwLock<Vec<HostInfo>>>> = Lazy::new(||
+    Arc::new(RwLock::new(Vec::new()))
 );
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
@@ -120,7 +120,7 @@ pub async fn init(config: HostsConfig) {
             println!("hosts: refreshing");
 
             let mut new_hosts_info: Vec<HostInfo> = Vec::new();
-            let old_hosts_info: Vec<HostInfo> = HOST_INFO.lock().await.clone();
+            let old_hosts_info: Vec<HostInfo> = HOST_INFO.read().await.clone();
 
             for it in config.hosts.iter().zip_longest(old_hosts_info) {
                 match it {
@@ -148,7 +148,7 @@ pub async fn init(config: HostsConfig) {
                 }
             }
 
-            let mut hosts_info = HOST_INFO.lock().await;
+            let mut hosts_info: tokio::sync::RwLockWriteGuard<'_, Vec<HostInfo>> = HOST_INFO.write().await;
             *hosts_info = new_hosts_info;
             std::mem::drop(hosts_info); // manually unlock
 
@@ -191,9 +191,8 @@ pub async fn get_host_info<'a>(
     alltalk_pref: Preference
 ) -> HostsEndpointResponse {
     let hosts: Vec<HostInfo> = HOST_INFO
-        .lock()
+        .read()
         .await
-        .clone()
         .iter()
         .filter(|h|
         regions.contains(&h.region) && // region

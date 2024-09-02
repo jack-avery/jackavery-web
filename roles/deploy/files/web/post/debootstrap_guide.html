@@ -291,6 +291,8 @@
             (chroot) root@archiso:/# apt install sudo <span class="grey"># install the 'sudo' application for privilege escalation</span><br>
             (chroot) root@archiso:/# useradd -UmG sudo -s /bin/bash jack <span class="grey"># replace 'jack' with your preferred username</span><br>
             (chroot) root@archiso:/# passwd jack <span class="grey"># set your password</span><br>
+            (chroot) root@archiso:/# apt install network-manager <span class="grey"># there are multiple ways to handle networking, but i like network-manager</span><br>
+            (chroot) root@archiso:/# systemctl enable NetworkManager <span class="grey"># set network-manager to start on boot</span>
             (chroot) root@archiso:/# exit <span class="grey"># all done here! time to leave our chroot</span><br>
             <span class="red">root</span>@archiso ~ # umount -R /mnt <span class="grey"># unmount the drives to avoid corrupting your work!</span><br>
             <span class="red">root</span>@archiso ~ # reboot <span class="grey"># reboot and enjoy!</span>
@@ -324,39 +326,40 @@
         <br>
         <br>
         immediately after partitioning your drives:
-        <span class="code">
-            <span class="red">root</span>@archiso ~ # cryptsetup -v luksFormat /dev/sda2 <span class="grey"># give it a good password!</span><br>
-            <span class="red">root</span>@archiso ~ # cryptsetup open /dev/sda2 root <span class="grey"># /dev/sda2 becomes /dev/mapper/root</span><br>
-            <span class="red">root</span>@archiso ~ # mkfs.ext4 /dev/mapper/root <span class="grey"># ext4 or your preferred filesystem</span><br>
-            <span class="red">root</span>@archiso ~ # mount /dev/mapper/root /mnt <span class="grey"># mount root</span><br>
-            <span class="red">root</span>@archiso ~ # mount --mkdir /dev/sda1 /mnt/boot <span class="grey"># mount the EFI partition</span><br>
-            <span class="red">root</span>@archiso ~ # mkswap -U clear --size 4G --file /mnt/swapfile <span class="grey"># make our swapfile...</span><br>
-            <span class="grey"># note: for a swapfile on btrfs, see <a target="_blank" href="https://wiki.archlinux.org/title/Btrfs#Swap_file">this</a>.</span><br>
-            <span class="red">root</span>@archiso ~ # swapon /mnt/swapfile <span class="grey"># turn it on</span><br>
-            <span class="red">root</span>@archiso ~ # pacman -Sy && pacman -S debootstrap <span class="grey"># install debootstrap</span><br>
-            <span class="red">root</span>@archiso ~ # debootstrap --arch amd64 testing /mnt https://deb.debian.org/debian <span class="grey"># bootstrap as normal</span><br>
-            <span class="red">root</span>@archiso ~ # genfstab /mnt > /mnt/etc/fstab <span class="grey"># generate fstab</span><br>
-            <span class="red">root</span>@archiso ~ # lsblk -f <span class="grey"># list drives with UUIDs</span>
-        </span>
-        make note of the UUID of the partition with crypto_LUKS as its' FSTYPE! this will be important!
-        <span class="code">
-            <span class="red">root</span>@archiso ~ # arch-chroot /mnt <span class="grey"># enter the new root</span><br>
-            root@archiso:/# source /etc/profile <span class="grey"># set our environment so we can use debian commands easily</span><br>
-            root@archiso:/# PS1="(chroot) $PS1" <span class="grey"># set the prompt so we're not confused where we are</span><br>
-            (chroot) root@archiso:/# apt install linux-image-amd64 grub2 grub-efi-amd64-bin <span class="grey"># install kernel and grub</span><br>
-            (chroot) root@archiso:/# apt install cryptsetup-initramfs <span class="grey"># install the cryptsetup initramfs hook</span><br>
-            (chroot) root@archiso:/# editor /etc/crypttab <span class="grey"># open your crypttab</span>
-        </span>
-        in your crypttab, insert:
-        <span class="code">
-            root UUID=<span class="grey">your-luks-encrypted-partitions-uuid</span> none luks<br>
-            <span class="grey">... for example, mine looks like:</span><br>
-            root UUID=3af23466-44a4-4142-9f2d-e6e657b079d2 none luks
-        </span>
-        save and exit. in vim, this would be Escape -> :wq -> Enter. in nano, this would be Ctrl+O -> Enter -> Ctrl+X.<br>
-        <span class="code">
-            (chroot) root@archiso:/# update-initramfs -u <span class="grey"># update the initramfs</span>
-        </span>
+        <pre><span class="code"><span class="red">root</span>@archiso ~ # fdisk [your disk] <span class="grey"># so, after this...</span>
+<span class="red">root</span>@archiso ~ # cryptsetup -v luksFormat /dev/sda2 <span class="grey"># give it a good password!</span>
+<span class="red">root</span>@archiso ~ # cryptsetup open /dev/sda2 root <span class="grey"># /dev/sda2 becomes /dev/mapper/root</span>
+<span class="red">root</span>@archiso ~ # mkfs.fs /dev/mapper/root <span class="grey"># replace fs with your preferred filesystem</span>
+<span class="red">root</span>@archiso ~ # mkfs.fat -F 32 /dev/sda1 <span class="grey"># format the EFI partition</span>
+<span class="red">root</span>@archiso ~ # mount /dev/mapper/root /mnt <span class="grey"># mount root</span>
+<span class="red">root</span>@archiso ~ # mount --mkdir /dev/sda1 /mnt/boot <span class="grey"># mount the EFI partition</span>
+
+<span class="grey"># for a swapfile on btrfs, you'll need to follow this:</span>
+<span class="red">root</span>@archiso ~ # btrfs subvolume create /mnt/swap
+<span class="red">root</span>@archiso ~ # btrfs filesystem mkswapfile --size 4g --uid clear /mnt/swap/swapfile <span class="grey"># replace 4g with your preferred size</span>
+
+<span class="grey"># ... if you're not on btrfs, you can just create the swapfile using mkswap:</span>
+<span class="red">root</span>@archiso ~ # mkswap -U clear --size 4G --file /mnt/swapfile <span class="grey"># make our swapfile...</span>
+
+<span class="red">root</span>@archiso ~ # swapon /mnt/swapfile <span class="grey"># turn it on</span>
+<span class="red">root</span>@archiso ~ # pacman -Sy && pacman -S debootstrap <span class="grey"># install debootstrap</span>
+<span class="red">root</span>@archiso ~ # debootstrap --arch amd64 testing /mnt https://deb.debian.org/debian <span class="grey"># bootstrap as normal</span>
+<span class="red">root</span>@archiso ~ # genfstab -U /mnt > /mnt/etc/fstab <span class="grey"># generate fstab</span>
+
+<span class="grey"># add the partition UUID to your crypttab so Debian knows to prompt your password:</span>
+<span class="red">root</span>@archiso ~ # LUKSUUID=$(lsblk -f | perl -n -e'/crypto_LUKS\s+2\s+([a-z0-9\-]+)/ && print "$1\n"') <span class="grey"># get the UUID of your LUKS part</span>
+<span class="grey"># you may want to verify it's the correct, single UUID by running:</span>
+<span class="red">root</span>@archiso ~ # lsblk -f
+<span class="red">root</span>@archiso ~ # echo $LUKSUUID
+<span class="grey"># once you've verified it's correct:</span>
+<span class="red">root</span>@archiso ~ # echo "root UUID=$LUKSUUID none luks" > /mnt/etc/crypttab <span class="grey"># add it to the crypttab</span>
+<span class="red">root</span>@archiso ~ # arch-chroot /mnt <span class="grey"># enter the new root</span>
+root@archiso:/# source /etc/profile <span class="grey"># set our environment so we can use debian commands easily</span>
+root@archiso:/# PS1="(chroot) $PS1" <span class="grey"># set the prompt so we're not confused where we are</span>
+(chroot) root@archiso:/# apt install linux-image-amd64 grub2 grub-efi-amd64-bin <span class="grey"># install kernel and grub</span>
+(chroot) root@archiso:/# apt install cryptsetup-initramfs <span class="grey"># install the cryptsetup initramfs hook</span>
+(chroot) root@archiso:/# update-initramfs -u <span class="grey"># update the initramfs</span></span></pre>
+        <p>
         your encrypted root is ready, and you can continue the installation as normal <a href="#configuring">here</a>.<br>
         you can skip installing the kernel and grub as we've already done that.
         </p>
