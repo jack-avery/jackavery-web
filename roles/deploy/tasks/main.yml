@@ -39,5 +39,11 @@
 - name: Compose down
   shell: docker-compose down
 
+- name: Copy RSA public key for git server access
+  copy:
+    content: "{{ git_pubkey }}"
+    dest: /home/web/.ssh/git.pub
+    mode: 0700
+
 - name: Compose up
   shell: docker-compose up -d --quiet-pull
