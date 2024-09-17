@@ -30,22 +30,3 @@ services:
       - ./data/certbot/www:/var/www/certbot
     network_mode: "host"
     entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
-
-  git-server:
-    image: "rockstorm/git-server"
-    volumes:
-      - ./.ssh/git.pub:/home/git/.ssh/authorized_keys
-      - ./git-repositories:/srv/git
-    environment:
-      SSH_AUTH_METHODS: "publickey"
-      SSH_AUTHORIZED_KEYS_FILE: /home/git/.ssh/authorized_keys
-      REPOSITORIES_HOME_LINK: "/srv/git"
-    ports:
-      - "1617:22"
-
-  git-web:
-    image: "rockstorm/gitweb"
-    ports:
-      - "16171:80"
-    volumes:
-      - ./git-repositories:/srv/git:ro
