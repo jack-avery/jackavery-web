@@ -1,0 +1,18 @@
+www.jackavery.ca {
+    redir https://jackavery.ca{uri}
+}
+
+jackavery.ca {
+    root * /usr/share/nginx/html
+    encode gzip
+
+    handle /api/* {
+        reverse_proxy back:8000
+    }
+
+    handle {
+        root * /usr/share/nginx/html
+        try_files {path} /index.html
+        file_server
+    }
+}
