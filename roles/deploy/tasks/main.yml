@@ -21,8 +21,8 @@
 - name: Transfer docker-compose.yml
   copy: src=docker-compose.yml dest=~/ mode=0755
 
-- name: Transfer nginx.conf
-  copy: src=nginx.conf dest=~/data/nginx.conf mode=0755
+- name: Transfer Caddyfile
+  copy: src=Caddyfile dest=~/data/Caddyfile mode=0755
 
 - name: Create back-end config directory
   ansible.builtin.file:
