@@ -1,0 +1,25 @@
+www.jackavery.ca {
+    redir https://jackavery.ca{uri}
+}
+
+jackavery.ca {
+    encode gzip
+
+    handle /api/* {
+        reverse_proxy back:8000
+    }
+
+    handle {
+        root * /usr/share/caddy
+        try_files {path} {path}/index.html =404
+        file_server
+    }
+
+    handle_errors {
+        @404 {
+            expression {http.error.status_code} == 404
+        }
+        rewrite @404 /404.html
+        file_server
+    }
+}
