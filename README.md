@@ -3,7 +3,7 @@
 personal website for me.
 
 ## front-end
-raw HTML, CSS, JS. nginx container. see `roles/deploy/files/web`.
+raw HTML, CSS, JS. caddy container. see `roles/deploy/files/web`.
 
 ## back-end
 [rocket.rs](https://rocket.rs/) binary. debian container. see `roles/back/files`.
