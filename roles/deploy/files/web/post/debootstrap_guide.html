@@ -292,7 +292,7 @@
             (chroot) root@archiso:/# useradd -UmG sudo -s /bin/bash jack <span class="grey"># replace 'jack' with your preferred username</span><br>
             (chroot) root@archiso:/# passwd jack <span class="grey"># set your password</span><br>
             (chroot) root@archiso:/# apt install network-manager <span class="grey"># there are multiple ways to handle networking, but i like network-manager</span><br>
-            (chroot) root@archiso:/# systemctl enable NetworkManager <span class="grey"># set network-manager to start on boot</span>
+            (chroot) root@archiso:/# systemctl enable NetworkManager <span class="grey"># set network-manager to start on boot</span><br>
             (chroot) root@archiso:/# exit <span class="grey"># all done here! time to leave our chroot</span><br>
             <span class="red">root</span>@archiso ~ # umount -R /mnt <span class="grey"># unmount the drives to avoid corrupting your work!</span><br>
             <span class="red">root</span>@archiso ~ # reboot <span class="grey"># reboot and enjoy!</span>

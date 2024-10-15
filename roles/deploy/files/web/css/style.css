@@ -218,7 +218,8 @@ th,
 td,
 button,
 label,
-select
+select,
+pre
 {
     color:white;
     font-family: monospace;
