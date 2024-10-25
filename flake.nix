@@ -1,5 +1,5 @@
 {
-  description = "ansible-tf2network development nix flake";
+  description = "jackavery.ca development nix flake";
 
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-24.05";
