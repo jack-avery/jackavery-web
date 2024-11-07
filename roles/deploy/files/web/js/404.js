@@ -8,6 +8,7 @@ let VIDEOS = [
     "8d44ykdKvCw", // Basshunter - DotA
     "I8sUC-dsW8A", // Tally Hall - Ruler of Everything
     "dLrdSC9MVb4", // Tally Hall - Turn The Lights Off
+    "rfUeWe7u364", // Tally Hall - Hymn for a Scarecrow
     "EGXPAoyP_cg", // Chris Christodoulou - The Rain Formerly Known as Purple (Risk of Rain 2 OST)
     "103F1YbbSv0", // Chris Christodoulou - The Face of the Deep (Risk of Rain 2 OST)
     "iKnwVvXkWq0", // Lena Raine & 2 Mello - Mirror Temple (Mirror Magic Mix) (Celeste OST)
@@ -24,6 +25,15 @@ let VIDEOS = [
     "_LUFMHvvNt4", // Exyl - Together Forever (ft. Rythm)
     "vatcanQQJvQ", // xi - Blue Zenith
     "vZyenjZseXA", // Virtual Riot - Idols
+    "nkLDh-UNqGI", // Raccy - Level Up
+    "vIFJODP_zTE", // Ludicin - Signal
+    "xMNRS5_eCT8", // INZO, LSDREAM - Faceplant on the Galaxy
+    "ej7-BS1i35Y", // INZO - Earth Magic (ft. Elohim)
+    "KEwe13VIfxk", // KORDHELL - SCOPIN
+    "DwiEvPMANa8", // FEX - Subways of Your Mind (1983)
+    "k1BneeJTDcU", // Bo Burnham - Welcome to the Internet
+    "c69eHlQrKaY", // Molchat Doma - Kletka
+    "8ravZ03m55A", // Kumi Tanioka - pokopoko
 ]
 
 let PROMPTS = [
