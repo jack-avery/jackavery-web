@@ -12,7 +12,7 @@ let VIDEOS = [
     "EGXPAoyP_cg", // Chris Christodoulou - The Rain Formerly Known as Purple (Risk of Rain 2 OST)
     "103F1YbbSv0", // Chris Christodoulou - The Face of the Deep (Risk of Rain 2 OST)
     "iKnwVvXkWq0", // Lena Raine & 2 Mello - Mirror Temple (Mirror Magic Mix) (Celeste OST)
-    "GISnTECX8Eg", // ??? - Space Asshole (SS13 OST)
+    "GISnTECX8Eg", // Chris Remo - Space Asshole
     "FBdoJppGvxw", // From Grotto - Torni (Noita OST)
     "Q7eJg7hRvqE", // Valve Orchestra - Upgrade Station (Unused?)
     "RBRlXsSXzCg", // Valve Orchestra - Red Bread (Expiration Date Intro)
@@ -34,6 +34,22 @@ let VIDEOS = [
     "k1BneeJTDcU", // Bo Burnham - Welcome to the Internet
     "c69eHlQrKaY", // Molchat Doma - Kletka
     "8ravZ03m55A", // Kumi Tanioka - pokopoko
+    "lCaun_EiJZQ", // Rolobi - UNDO UNDO
+    "_c2NS5Om998", // KORDHELL - MURDER PLOT
+    "DI-wpzVAtH4", // Infected Mushroom - Zazim Beyhad (We Move Together) (ft May Sfadia)
+    "pnfaeE47zxQ", // Infected Mushroom - Black Velvet (feat. Ninet Tayeb)
+    "6v98TpTscaw", // Tanger - BIKE
+    "9STiQ8cCIo0", // Kenet & Rez - Unreal Super Hero 3
+    "jwhSUmN5zTk", // curgney gurgney - Silly Billy
+    "Tds16xhPdT0", // Darius + Rotteen - Mars Needs Ravers
+    "suisIF4hwyw", // Dion Timmer - Shiawase (VIP)
+    "cG8p6B4-Dmc", // Romos - Magic Touch (30+ songs mashup)
+    "WNLBSarUluo", // Camellia - Night Raid with a Dragon
+    "BE05mKyjehg", // Camellia - SECRET BOSS
+    "hM7Eh0gGNKA", // SIAMES - Summer Nights
+    "g2i-u-9A7UA", // late night drive home - Stress Relief
+    "ausqr8vTMgc", // t+pazolite - You are the Miserable (Laur Remix)
+    "FQnD4rt8Vog", // peak
 ]
 
 let PROMPTS = [
