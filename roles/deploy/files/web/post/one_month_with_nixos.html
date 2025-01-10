@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <link rel="stylesheet" href="../css/style.css" />
+        <meta charset="utf-8" />
+        <link rel="shortcut icon" href="/favicon.ico" />
+        <meta name="viewport" content="initial-scale=1, width=device-width" />
+        <link rel="manifest" href="/manifest.json" />
+        <title>jackavery.ca | one month with NixOS</title>
+    </head>
+    <body>
+        <header>
+            <h1 class="pagetitle">jack avery's devblog</h1>
+
+            <div class="iconbar">
+                <a target="_blank" href="https://github.com/jack-avery">
+                    <svg class="icon" viewBox="0 0 24 24">
+                        <path d="M12 1.27a11 11 0 00-3.48 21.46c.55.09.73-.28.73-.55v-1.84c-3.03.64-3.67-1.46-3.67-1.46-.55-1.29-1.28-1.65-1.28-1.65-.92-.65.1-.65.1-.65 1.1 0 1.73 1.1 1.73 1.1.92 1.65 2.57 1.2 3.21.92a2 2 0 01.64-1.47c-2.47-.27-5.04-1.19-5.04-5.5 0-1.1.46-2.1 1.2-2.84a3.76 3.76 0 010-2.93s.91-.28 3.11 1.1c1.8-.49 3.7-.49 5.5 0 2.1-1.38 3.02-1.1 3.02-1.1a3.76 3.76 0 010 2.93c.83.74 1.2 1.74 1.2 2.94 0 4.21-2.57 5.13-5.04 5.4.45.37.82.92.82 2.02v3.03c0 .27.1.64.73.55A11 11 0 0012 1.27"></path>
+                    </svg>
+                </a>
+                <a target="_blank" href="https://ko-fi.com/raspy">
+                    <svg class="icon" viewBox="0 0 24 24">
+                        <path d="M1 11h4v11H1zm15-7.75C16.65 2.49 17.66 2 18.7 2 20.55 2 22 3.45 22 5.3c0 2.27-2.91 4.9-6 7.7-3.09-2.81-6-5.44-6-7.7C10 3.45 11.45 2 13.3 2c1.04 0 2.05.49 2.7 1.25zM20 17h-7l-2.09-.73.33-.94L13 16h2.82c.65 0 1.18-.53 1.18-1.18 0-.49-.31-.93-.77-1.11L8.97 11H7v9.02L14 22l8.01-3c-.01-1.1-.9-2-2.01-2z"></path>
+                    </svg>
+                </a>
+            </div>
+            <div class="navbar">
+                <button class="navtab" onclick="window.location.href='/index.html#devblog'">go back...</button>
+            </div>
+        </header>
+
+        <div class="header-divider"></div>
+
+        <h1>
+        one month with NixOS: a retrospective
+        </h1>
+        <p>december 4, 2024</p>
+
+        <div class="small-vertical-divider"></div>
+
+        <p>
+        it was now a month ago i made the swap to <a href="https://nixos.org/" target="_blank">NixOS</a>,
+        and i've passed my initial honeymoon phase with it. that isn't to say NixOS isn't a gorgeous distro,
+        and especially not to say that nixpkgs is unsatisfactory, but i find that i'm beginning to see the seams.
+        <br>
+        <br>
+        my layman's description of NixOS as I understand it right now is that it's a linux distribution
+        which uses the nix package manager as its' primary package manager. it also provides the ability to
+        <strong>declaratively</strong> manage the packages and configuration of the system.
+        for enterprise application, such as distributed laptops to employees, this sounds wonderful,
+        and for managing development environments, it has proven a very wonderful tool.
+        <br>
+        <br>
+        <strong>however...</strong><br>
+        NixOS has a preference that everything on the system be managed through the system configuration file.
+        i understand the appeal, but seeing as i'm not swapping systems that often, i opted to forego all of that.
+        the reproducibility of NixOS is definitely more geared towards enterprise application,
+        instead of home personal computing. thankfully, this decision hasn't affected my experience on NixOS;
+        the system seems perfectly fine with you managing things externally from the system config.
+        <br>
+        another thing to note is that NixOS will outright refuse to run dynamically linked binaries not a part of the
+        Nix store; that is, any application that isn't statically compiled not managed by Nix. this makes sense considering
+        a quick peek into the /lib folder confirms it is completely empty, except a symlink to ld-linux.so.2, which i assume
+        is there for compatibility reasons.
+        <br>
+        this normally wouldn't be such an issue; just incorporate the package into Nix. the issue arises then that learning
+        how to package applications that <strong>you did not make</strong> in Nix is kind-of difficult. some applications
+        can have special handling for certain dependencies, and that special handling can in turn become difficult to
+        manage, especially if it expects to write to the Nix store; which is intended to be immutable, and read-only.
+        <br>
+        <br>
+        <strong>despite this...</strong><br>
+        i have discovered that Nix itself is an extremely powerful tool for creating build scripts; i now use it for
+        <a href="https://github.com/jack-avery/ansible-tf2network-relay" target="_blank">ansible-tf2network's relay bot</a>,
+        as well as a simple development flake that handles dependencies and an ssh agent for me.
+        <br>
+        <br>
+        and my favorite part: Nix, the package manager, is almost entirely distro-agnostic, allowing you to install it on
+        pretty much any linux distribution and benefit from the wealth of packages that nixpkgs contains.
+        <br>
+        <br>
+        i will likely continue using NixOS as it has proven to be a stable and reliable system, but sometimes i yearn for
+        the often deeper, imperative control of something like Gentoo; but no distro is perfect, i suppose, and we all
+        have to accept the benefits and pitfalls. NixOS will still be my home for the foreseeable future.
+        </p>
+
+        <div class="vertical-divider"></div>
+
+        <footer>
+            <p id="c">
+                <a target="_blank" href="https://github.com/jack-avery/jackavery-web">website source code</a>
+                <br>
+                <a target="_blank" href="/legal/PRIVACY.pdf">privacy policy</a>
+            </p>
+        </footer>
+    </body>
+</html>

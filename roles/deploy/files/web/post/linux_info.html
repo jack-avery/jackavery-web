@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <link rel="stylesheet" href="../css/style.css" />
+        <meta charset="utf-8" />
+        <link rel="shortcut icon" href="/favicon.ico" />
+        <meta name="viewport" content="initial-scale=1, width=device-width" />
+        <link rel="manifest" href="/manifest.json" />
+        <title>jackavery.ca | some things to know before swapping to linux</title>
+    </head>
+    <body>
+        <header>
+            <h1 class="pagetitle">jack avery's devblog</h1>
+
+            <div class="iconbar">
+                <a target="_blank" href="https://github.com/jack-avery">
+                    <svg class="icon" viewBox="0 0 24 24">
+                        <path d="M12 1.27a11 11 0 00-3.48 21.46c.55.09.73-.28.73-.55v-1.84c-3.03.64-3.67-1.46-3.67-1.46-.55-1.29-1.28-1.65-1.28-1.65-.92-.65.1-.65.1-.65 1.1 0 1.73 1.1 1.73 1.1.92 1.65 2.57 1.2 3.21.92a2 2 0 01.64-1.47c-2.47-.27-5.04-1.19-5.04-5.5 0-1.1.46-2.1 1.2-2.84a3.76 3.76 0 010-2.93s.91-.28 3.11 1.1c1.8-.49 3.7-.49 5.5 0 2.1-1.38 3.02-1.1 3.02-1.1a3.76 3.76 0 010 2.93c.83.74 1.2 1.74 1.2 2.94 0 4.21-2.57 5.13-5.04 5.4.45.37.82.92.82 2.02v3.03c0 .27.1.64.73.55A11 11 0 0012 1.27"></path>
+                    </svg>
+                </a>
+                <a target="_blank" href="https://ko-fi.com/raspy">
+                    <svg class="icon" viewBox="0 0 24 24">
+                        <path d="M1 11h4v11H1zm15-7.75C16.65 2.49 17.66 2 18.7 2 20.55 2 22 3.45 22 5.3c0 2.27-2.91 4.9-6 7.7-3.09-2.81-6-5.44-6-7.7C10 3.45 11.45 2 13.3 2c1.04 0 2.05.49 2.7 1.25zM20 17h-7l-2.09-.73.33-.94L13 16h2.82c.65 0 1.18-.53 1.18-1.18 0-.49-.31-.93-.77-1.11L8.97 11H7v9.02L14 22l8.01-3c-.01-1.1-.9-2-2.01-2z"></path>
+                    </svg>
+                </a>
+            </div>
+            <div class="navbar">
+                <button class="navtab" onclick="window.location.href='/index.html#devblog'">go back...</button>
+            </div>
+        </header>
+
+        <div class="header-divider"></div>
+
+        <h1>
+        some things to know before swapping to linux
+        </h1>
+        <p>november 23, 2024</p>
+
+        <div class="small-vertical-divider"></div>
+
+        <h2 id="toc">
+        table of contents
+        </h2>
+        <ol>
+            <li><a href="#preamble">0. preamble</a></li>
+            <li><a href="#packagemanagers">1. package managers</a></li>
+            <li><a href="#releasecycles">2. release cycles</a></li>
+            <li><a href="#distributions">3. distributions</a></li>
+            <li><a href="#gaming">4. gaming</a></li>
+            <li><a href="#recommendations">5. what should i choose?</a></li>
+        </ol>
+
+        <div class="small-vertical-divider"></div>
+
+        <h2 id="preamble">
+        0. preamble
+        </h2>
+
+        <p>
+        a lot of my friends have expressed desire to swap to linux. with the end of Windows 10 support nearing and Windows 11 continuing downhill,
+        linux continues to offer itself as a perfect alternative for anyone wishing for a system that respects them.
+        <br>
+        <br>
+        i'm pretty much the only person in any of my friend groups that actually uses linux daily (i have now been using NixOS as a primary system for over a month),
+        and i feel obligated to provide some information off-the-bat to everyone interested where there may be lacking some basic explanations online.
+        <br>
+        <br>
+        this page serves as a way for me to share my information to anyone who might be interested in making the move to linux.
+        </p>
+
+        <div class="small-vertical-divider"></div>
+
+        <h2 id="packagemanagers">
+        1. what is a "package manager"?
+        </h2>
+
+        <p>
+        let's start this off with a comparison. you have a phone, right? let's say you have an Android phone.
+        on your Android phone, you have an app (most often the Google Play store) that you use to install programs,
+        and it also handles updating your programs for you.
+        <br>
+        <br>
+        in linux, that is fundamentally what a package manager is and does. it manages the software on your system.
+        because of this, unlike how you'd handle it on Windows, you should install software through your package manager.
+        <br>
+        <br>
+        common package managers include:
+        </p>
+        <ul>
+            <li>apt (Debian/Ubuntu family)</li>
+            <li>dnf (RHEL family)</li>
+            <li>pacman (Arch family)</li>
+            <li>nix</li>
+            <li>flatpak (a desktop app package manager)</li>
+        </ul>
+        <br>
+        <p>
+        these package managers all accomplish the same thing; they manage your software.
+        differences between package managers include things like how they handle installing software, what kind of software they handle,
+        and their "repositories", which are public databases of software for you to install.
+        </p>
+
+        <div class="small-vertical-divider"></div>
+
+        <h2 id="releasecycles">
+        2. what is a "release cycle"?
+        </h2>
+
+        <p>
+        one of the main differences between distributions is their release cycles.
+        a release cycle is just how often the main repository for your distribution adopts major updates for software it manages.
+        <br>
+        some distributions have a long release cycle, such as Debian, which has a major release every 2 years.
+        <br>
+        some have shorter ones, such as Fedora, which has a major release every 4 months.
+        <br>
+        some don't have a release cycle at all, such as Arch, which follows a "rolling release" model instead, where all software is always the absolute latest version.
+        <br>
+        <br>
+        the release cycle you want depends on your personal preference. some people don't mind older software and rather not worry about things breaking,
+        so they may choose distributions with a longer cycle such as Debian. others are savvy enough to fix things when they do break, and may opt for Arch.
+        </p>
+
+        <div class="small-vertical-divider"></div>
+
+        <h2 id="distributions">
+        3. what is a "distribution"?
+        </h2>
+
+        <p>
+        with those two fundamentals out of the way, all that a distribution is, is a collection of default software, and a package manager with a set repository.
+        <br>
+        <br>
+        for example, Linux Mint comes with the apt and flatpak package managers, follows the Ubuntu repositories,
+        comes with the Cinnamon desktop environment by default, as well as plenty of other software that you'd expect to see on a regular system such as Firefox.
+        <br>
+        <br>
+        most distributions pick a default desktop environment, but you can swap it out with another by installing it through your package manager
+        and changing what desktop environment you will use on the login screen.
+        </p>
+
+        <div class="small-vertical-divider"></div>
+
+        <h2 id="gaming">
+        4. what about gaming?
+        </h2>
+
+        <p>
+        for most games, linux is ready. i frequently play demanding games such as Helldivers 2, Warframe, WH40K: Darktide, and Sea of Thieves on linux.
+        <br>
+        <br>
+        if you're worried about whether your game is able to be played on linux, there is <a href="https://protondb.com" target="_blank">protondb</a>.
+        protondb is a collection of user reviews and possible configuration steps to get games running smoothly on linux.
+        <br>
+        <br>
+        if the game you want to play isn't available on Steam, know that you can actually add an arbitrary program to Steam and then run it through Proton.
+        </p>
+
+        <div class="small-vertical-divider"></div>
+
+        <h2 id="recommendations">
+        5. what do you recommend?
+        </h2>
+
+        <p>
+        i recommend doing a bit of research before picking a distribution. if you don't want to go hunting information, just choose Linux Mint,
+        and make sure you don't go hunting program installers online. instead, consult official documentation and guides for how to install things.
+        for example, NVidia drivers. Linux Mint comes with an application that handles driver installation for you.
+        <br>
+        <br>
+        you can always play with different distributions in something like Oracle VM VirtualBox before coming to a decision, but, ultimately, if you are brand new,
+        you likely have no idea what is and isn't important to you, so you should go with something simple and go from there.
+        <br>
+        <br>
+        if you want to learn more about how linux works to be able to fix things yourself when they go wrong, firstly, do not fear the terminal.
+        installing Arch will teach you a lot of how the standard linux installer works under the hood,
+        and setting up a full Arch system will teach you a lot of how to manage services under systemd.
+        <br>
+        <br>
+        once you have Linux Mint set up, i strongly recommend setting up Timeshift. Timeshift is a program that fulfills the same purpose as Windows System Restore Points.
+        beyond this, don't forget to RTFM using the man command, and understand that linux is a completely different operating system. your workflow will have to change.
+        </p>
+
+        <div class="vertical-divider"></div>
+
+        <footer>
+            <p id="c">
+                <a target="_blank" href="https://github.com/jack-avery/jackavery-web">website source code</a>
+                <br>
+                <a target="_blank" href="/legal/PRIVACY.pdf">privacy policy</a>
+            </p>
+        </footer>
+    </body>
+</html>

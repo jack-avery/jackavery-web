@@ -86,24 +86,23 @@ header {
     }
 } */
 
-.vertical-divider
-{
-    height: 1px;
-    margin: 20px 20px;
-    background-color: var(--color-primary)
-}
-
 .header-divider
 {
-    height: 1px;
+    height: 2px;
     margin: 20px 20px;
     margin-top: 0px;
+    background-color: var(--color-primary)
+}
+.vertical-divider
+{
+    height: 2px;
+    margin: 20px 20px;
     background-color: var(--color-primary)
 }
 
 .small-vertical-divider
 {
-    height: 1px;
+    height: 2px;
     margin: 20px 20%;
     background-color: var(--color-primary)
 }
@@ -112,14 +111,14 @@ header {
 .iconbar
 {
     padding: 5px 0;
-    height: 32px;
+    height: 50px;
     display: flex;
 }
 
 .icon
 {
-    width: 32px;
-    height: 32px;
+    width: 50px;
+    height: 50px;
     margin: 0px 5px;
     filter: invert(100%) brightness(90%);
 }
@@ -147,8 +146,8 @@ select
 {
     float: left;
     display: flex;
-    height: 20px;
-    margin: 1px 1px;
+    height: 28px;
+    margin: 1px 2px 0px 0px;
 }
 
 @keyframes navtab-select
@@ -224,6 +223,35 @@ pre
     color:white;
     font-family: monospace;
     margin: 0px 20px;
+    line-height: 1.4;
+}
+
+p,
+ul,
+li,
+th,
+td,
+label,
+select,
+pre,
+button
+{
+    font-size: 18px;
+}
+
+h1
+{
+    font-size: 40px;
+}
+
+h2
+{
+    font-size: 32px;
+}
+
+h3
+{
+    font-size: 24px;
 }
 
 a
@@ -294,7 +322,7 @@ li
 /* Footer text */
 #c
 {
-    font-size: 10px;
+    font-size: 14px;
 }
 
 /* Images/Video embeds */
