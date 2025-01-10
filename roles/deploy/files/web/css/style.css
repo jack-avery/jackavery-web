@@ -40,7 +40,7 @@ html
 body
 {
     width: 90%;
-    max-width: 1200px;
+    max-width: 1000px;
     /* border-radius: 20px; */
     background-color: rgb(14, 14, 14);
     background-size: 50vh 100vh;
