@@ -4,18 +4,28 @@
 
 - name: Delete old web content
   file:
-    path: /home/web/data/web
+    path: /home/web/data/public
     state: absent
 
-- name: Create web folder
+- name: Delete old generated public content
   file:
-    path: /home/web/data/web
-    state: directory
-    mode: 0755
+    path: "{{ role_path }}/files/hugo/public"
+    state: absent
+  delegate_to: localhost
+
+- name: Delete old generated resources
+  file:
+    path: "{{ role_path }}/files/hugo/resources"
+    state: absent
+  delegate_to: localhost
+
+- name: Generate static content (Hugo)
+  shell: "cd {{ role_path }}/files/hugo && hugo build --ignoreCache --buildDrafts --buildFuture --buildExpired"
+  delegate_to: localhost
 
 - name: Transfer web content
   ansible.posix.synchronize:
-    src: "{{ role_path }}/files/web"
+    src: "{{ role_path }}/files/hugo/public"
     dest: /home/web/data
 
 - name: Transfer docker-compose.yml
@@ -24,17 +34,17 @@
 - name: Transfer nginx.conf
   copy: src=nginx.conf dest=~/data/nginx.conf mode=0755
 
-- name: Create back-end config directory
-  ansible.builtin.file:
-    path: ~/back
-    state: directory
-    mode: 0755
+# - name: Create back-end config directory
+#   ansible.builtin.file:
+#     path: ~/back
+#     state: directory
+#     mode: 0755
 
-- name: Create config.yml
-  ansible.builtin.template:
-    src: config.yml.j2
-    dest: ~/back/config.yml
-    mode: 0755
+# - name: Create config.yml
+#   ansible.builtin.template:
+#     src: config.yml.j2
+#     dest: ~/back/config.yml
+#     mode: 0755
 
 - name: Compose down
   shell: docker-compose down

@@ -1,5 +1,6 @@
 # ?
 .vscode
+.gitmodules
 
 # secrets
 .vault_pass.sh
@@ -10,6 +11,11 @@ roles/back/files/Cargo.lock
 
 # local config.yml, for testing
 roles/back/files/config.yml
+
+# hugo generated
+roles/deploy/files/hugo/public
+roles/deploy/files/hugo/resources
+roles/deploy/files/hugo/.hugo_build.lock
 
 # these could eventually include larger files, so i'm gitignoring it
 roles/media/files

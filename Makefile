@@ -7,4 +7,4 @@ deploy:
 	@ansible-playbook playbooks/deploy.yml
 
 dev:
-	cd roles/back/files && cargo run
+	cd roles/deploy/files/hugo && hugo server --disableFastRender
